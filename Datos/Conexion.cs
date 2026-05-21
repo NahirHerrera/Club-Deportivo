@@ -7,6 +7,9 @@ namespace Club_Deportivo.Datos
 {
     internal class Conexion
     {
+        // Clase Conexion
+
+        // Atributos para la conexión a la base de datos
 
         private string baseDatos;
         private string servidor;
@@ -15,6 +18,7 @@ namespace Club_Deportivo.Datos
         private string clave;
         private static Conexion? con = null;
 
+        // Constructor privado para implementar el patrón Singleton
         private Conexion()
         {
             this.baseDatos = "club_deportivo";
@@ -24,6 +28,7 @@ namespace Club_Deportivo.Datos
             this.clave = "1234";
         }
 
+        // Método para crear y retornar una conexión a la base de datos
         public MySqlConnection CrearConexion()
         {
 
@@ -31,6 +36,8 @@ namespace Club_Deportivo.Datos
 
             try
             {
+                // Configurar la cadena de conexión con los parámetros definidos
+
                 cadena.ConnectionString = "datasource=" + this.servidor +
                                           ";port=" + this.puerto +
                                           ";username=" + this.usuario +
@@ -38,6 +45,9 @@ namespace Club_Deportivo.Datos
                                           ";Database=" + this.baseDatos;
             }
             catch(Exception ex) {
+
+                // En caso de error, mostrar el mensaje y establecer la cadena a null
+
                 cadena = null;
                 throw;
             }
@@ -46,6 +56,8 @@ namespace Club_Deportivo.Datos
 
         public static Conexion getInstancia()
         {
+            // Si la instancia no existe, crearla. De lo contrario, retornar la instancia existente
+
             if (con == null)
             {
                 con = new Conexion();

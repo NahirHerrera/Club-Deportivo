@@ -1,45 +1,45 @@
-﻿using MySql.Data.MySqlClient;
-using System;
+﻿using Club_Deportivo.Entidades;
+using MySql.Data.MySqlClient;
 using System.Data;
 
 namespace Club_Deportivo.Datos
 {
     internal class Usuarios
     {
-        // Método que retorna una tabla con la información del login
-        public DataTable Log_Usu(string L_Usu, string P_Usu)
+        public E_Usuario Log_Usu(string usu, string pass)
         {
-            MySqlDataReader resultado;
-            DataTable tabla = new DataTable();
-            MySqlConnection sqlCon = new MySqlConnection();
-
-            try
+            // Establecer la conexión a la base de datos utilizando la clase Conexion
+            using (MySqlConnection cn = Conexion.getInstancia().CrearConexion())
             {
-                sqlCon = Conexion.getInstancia().CrearConexion();
 
-                MySqlCommand comando = new MySqlCommand("IngresoLogin", sqlCon);
-                comando.CommandType = CommandType.StoredProcedure;
+                // Abrir la conexión
+                cn.Open();
+                MySqlCommand cmd = new MySqlCommand("IngresoLogin", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("Usu", usu);
+                cmd.Parameters.AddWithValue("Pass", pass);
 
-                comando.Parameters.Add("Usu", MySqlDbType.VarChar).Value = L_Usu;
-                comando.Parameters.Add("Pass", MySqlDbType.VarChar).Value = P_Usu;
+                // Ejecutar el comando y obtener el resultado
 
-                sqlCon.Open();
-                resultado = comando.ExecuteReader();
-                tabla.Load(resultado);
-
-                return tabla;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Error en Log_Usu: " + ex.Message);
-            }
-            finally
-            {
-                if (sqlCon.State == ConnectionState.Open)
+                using (MySqlDataReader dr = cmd.ExecuteReader())
                 {
-                    sqlCon.Close();
+                    // Verificar si se obtuvo un resultado y mapearlo a un objeto E_Usuario
+                    if (dr.Read())
+                    {
+
+                        // Crear y retornar un nuevo objeto E_Usuario con los datos obtenidos
+                        return new E_Usuario
+                        {
+                            IdUsuario = dr.GetInt32("IdUsuario"),
+                            Usuario = dr.GetString("Usuario"),
+                            Password = dr.GetString("Password")
+                        };
+                    }
                 }
             }
+
+            // Si no se encontró un usuario válido, retornar null
+            return null;
         }
     }
 }
