@@ -39,9 +39,12 @@ namespace Club_Deportivo
                 string query;
                 cadena = Conexion.getInstancia().CrearConexion();
                 query = "SELECT s.IdSocio, s.Nombre, s.Apellido, SUM(c.Monto) AS TotalCuota " +
-                        "FROM Socios s INNER JOIN Inscripcion i ON s.IdSocio = i.IdSocio " +
-                        "WHERE c.Estado = 'Pendiente' AND c.FechaVencimiento < CURDATE() " +
-                        "ORDER BY c.FechaVencimiento ASC;";
+                        "FROM Socios s " +
+                        "INNER JOIN Inscripcion i ON s.IdSocio = i.IdSocio " +
+                        "INNER JOIN Actividad a ON i.IdActividad = a.IdActividad " +
+                        "INNER JOIN Cuota c ON a.IdCuota = c.IdCuota " +
+                        "WHERE s.IdSocio = s.IdSocioBuscado " +
+                        "ORDER BY s.IdSocio, s.Nombre, s.Apellido ";
 
                 MySqlCommand comando = new MySqlCommand(query, cadena);
                 comando.CommandType = CommandType.Text;
@@ -52,7 +55,7 @@ namespace Club_Deportivo
                 if (reader.HasRows)
                 {
                     reader.Read();
-                    doc.numero_f = Convert.ToInt32(reader.GetString(0));
+                    doc.IdSocio = Convert.ToInt32(reader.GetString(0));
                     doc.curso_f = reader.GetString(1);
                     doc.alumno_f = reader.GetString(2);
                     doc.monto_f = (float)Convert.ToDouble(reader.GetString(3));
