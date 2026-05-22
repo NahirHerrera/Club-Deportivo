@@ -13,7 +13,7 @@ namespace Club_Deportivo
 {
     public partial class Cuota : Form
     {
-        public Comprobante doc = new Comprobante();
+        public DatosComprobante doc;
         public Cuota()
         {
             InitializeComponent();
@@ -24,13 +24,6 @@ namespace Club_Deportivo
             home.Show();
             this.Hide();
         }
-
-        private void btn_Comprobante_Click(object sender, EventArgs e)
-        {
-            doc.Show();
-            this.Hide();
-        }
-
         private void btn_Pagar_Click(object sender, EventArgs e)
         {
             MySqlConnection? cadena = new MySqlConnection();
@@ -48,6 +41,7 @@ namespace Club_Deportivo
 
                 MySqlCommand comando = new MySqlCommand(query, cadena);
                 comando.CommandType = CommandType.Text;
+                comando.Parameters.AddWithValue("@Documento", "32456741");
                 cadena.Open();
                 MySqlDataReader reader;
                 reader = comando.ExecuteReader();
@@ -55,30 +49,32 @@ namespace Club_Deportivo
                 if (reader.HasRows)
                 {
                     reader.Read();
-                    doc.IdSocio = Convert.ToInt32(reader.GetString(0));
-                    doc.curso_f = reader.GetString(1);
-                    doc.alumno_f = reader.GetString(2);
-                    doc.monto_f = (float)Convert.ToDouble(reader.GetString(3));
-                    doc.fecha_f = (DateTime)Convert.ToDateTime(reader.GetString(4));
 
+                    doc = new DatosComprobante();
 
-                    if (opt.Efvo.Checked == true)
+                    doc.NSocio = reader.GetInt32(0);
+                    doc.nombre = reader.GetString(1);
+                    doc.apellido = reader.GetString(2);
+                    doc.monto = (float)reader.GetDecimal(3);
+                    doc.periodo = reader.GetDateTime(4);
+
+                    if (rbEfectivo.Checked)
                     {
-                        doc.forma_f = "Efectivo";
-                        doc.monto_f = (float)(doc.monto_f * 0.90);
+                        doc.forma_pago = "Efectivo";
+                        doc.monto = (float)(doc.monto * 0.90);
                     }
-
                     else
                     {
-                        doc.forma_f = "Tarjeta";
+                        doc.forma_pago = "Tarjeta de crédito";
                     }
 
-                    btn_Comprobante.Enabled = true;
-
+                    MessageBox.Show("¡El pago se realizo con éxito!", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    btn_Carnet.Enabled = true;
+                    Comprobante ventanacomprobante = new Comprobante(doc);
+                    ventanacomprobante.Show();
                 }
                 else
                 {
-
                     MessageBox.Show("Número de socio inexistente", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
@@ -86,14 +82,18 @@ namespace Club_Deportivo
             {
                 MessageBox.Show(ex.Message, "MENSAJE DEL CATCH", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
             finally
             {
                 if (cadena.State == ConnectionState.Open)
-                { cadena.Close(); }
+                {
+                    cadena.Close();
+                }
             }
         }
 
+        private void Cuota_Load(object sender, EventArgs e)
+        {
+            btn_Carnet.Enabled = false;
+        }
     }
-}
 }
