@@ -1,5 +1,6 @@
 ﻿using Club_Deportivo;
 using Club_Deportivo.Datos;
+using Club_Deportivo.Vistas;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -24,6 +25,13 @@ namespace Club_Deportivo
             home.Show();
             this.Hide();
         }
+
+        private void btn_Carnet_Click(object sender, EventArgs e)
+        {
+            Carnet carnet = new Carnet();
+            carnet.Show();
+        }
+
         private void btn_Pagar_Click(object sender, EventArgs e)
         {
             MySqlConnection? cadena = new MySqlConnection();
