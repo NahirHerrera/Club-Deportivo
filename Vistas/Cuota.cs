@@ -8,6 +8,7 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using Club_Deportivo.Vistas;
 
 namespace Club_Deportivo
 {
@@ -92,6 +93,12 @@ namespace Club_Deportivo
         private void Cuota_Load(object sender, EventArgs e)
         {
             btn_Carnet.Enabled = false;
+        }
+
+        private void btn_Carnet_Click(object sender, EventArgs e)
+        {
+            Carnet carnet = new Carnet();
+            carnet.Show();
         }
     }
 }
