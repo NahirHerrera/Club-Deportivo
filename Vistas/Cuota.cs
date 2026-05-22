@@ -31,17 +31,15 @@ namespace Club_Deportivo
             {
                 string query;
                 cadena = Conexion.getInstancia().CrearConexion();
-                query = "SELECT s.IdSocio, s.Nombre, s.Apellido, SUM(c.Monto) AS TotalCuota " +
-                        "FROM Socios s " +
-                        "INNER JOIN Inscripcion i ON s.IdSocio = i.IdSocio " +
-                        "INNER JOIN Actividad a ON i.IdActividad = a.IdActividad " +
-                        "INNER JOIN Cuota c ON a.IdCuota = c.IdCuota " +
-                        "WHERE s.IdSocio = s.IdSocioBuscado " +
-                        "ORDER BY s.IdSocio, s.Nombre, s.Apellido ";
+                query = "SELECT s.IdSocio, s.Nombre, s.Apellido, SUM(c.Monto) AS TotalCuota, MAX(c.FechaPago) AS FechaPago " +
+                        "FROM club_deportivo.socios s " +
+                        "INNER JOIN club_deportivo.cuota c ON s.IdSocio = c.IdSocio " +
+                        "WHERE s.Documento = @Documento " +
+                        "GROUP BY s.IdSocio, s.Nombre, s.Apellido ";
 
                 MySqlCommand comando = new MySqlCommand(query, cadena);
                 comando.CommandType = CommandType.Text;
-                comando.Parameters.AddWithValue("@Documento", "32456741");
+                comando.Parameters.AddWithValue("@Documento", txt_DNI.Text);
                 cadena.Open();
                 MySqlDataReader reader;
                 reader = comando.ExecuteReader();
@@ -70,6 +68,7 @@ namespace Club_Deportivo
 
                     MessageBox.Show("¡El pago se realizo con éxito!", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     btn_Carnet.Enabled = true;
+
                     Comprobante ventanacomprobante = new Comprobante(doc);
                     ventanacomprobante.Show();
                 }
@@ -90,7 +89,6 @@ namespace Club_Deportivo
                 }
             }
         }
-
         private void Cuota_Load(object sender, EventArgs e)
         {
             btn_Carnet.Enabled = false;
