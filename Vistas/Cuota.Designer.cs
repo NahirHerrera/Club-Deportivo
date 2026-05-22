@@ -31,7 +31,7 @@
             textBox1 = new TextBox();
             lbl_socio = new Label();
             btn_Pagar = new Button();
-            btn_Comprobante = new Button();
+            btn_Carnet = new Button();
             groupBox1 = new GroupBox();
             checkBox2 = new CheckBox();
             checkBox1 = new CheckBox();
@@ -66,16 +66,15 @@
             btn_Pagar.UseVisualStyleBackColor = true;
             btn_Pagar.Click += btn_Pagar_Click;
             // 
-            // btn_Comprobante
+            // btn_Carnet
             // 
-            btn_Comprobante.ForeColor = Color.SaddleBrown;
-            btn_Comprobante.Location = new Point(72, 308);
-            btn_Comprobante.Name = "btn_Comprobante";
-            btn_Comprobante.Size = new Size(258, 72);
-            btn_Comprobante.TabIndex = 3;
-            btn_Comprobante.Text = "COMPROBANTE";
-            btn_Comprobante.UseVisualStyleBackColor = true;
-            btn_Comprobante.Click += btn_Comprobante_Click;
+            btn_Carnet.ForeColor = Color.SaddleBrown;
+            btn_Carnet.Location = new Point(72, 308);
+            btn_Carnet.Name = "btn_Carnet";
+            btn_Carnet.Size = new Size(258, 72);
+            btn_Carnet.TabIndex = 3;
+            btn_Carnet.Text = "OBTENER CARNET";
+            btn_Carnet.UseVisualStyleBackColor = true;
             // 
             // groupBox1
             // 
@@ -126,7 +125,7 @@
             ClientSize = new Size(800, 450);
             Controls.Add(btn_Volver);
             Controls.Add(groupBox1);
-            Controls.Add(btn_Comprobante);
+            Controls.Add(btn_Carnet);
             Controls.Add(btn_Pagar);
             Controls.Add(lbl_socio);
             Controls.Add(textBox1);
@@ -143,7 +142,7 @@
         private TextBox textBox1;
         private Label lbl_socio;
         private Button btn_Pagar;
-        private Button btn_Comprobante;
+        private Button btn_Carnet;
         private GroupBox groupBox1;
         private CheckBox checkBox2;
         private CheckBox checkBox1;

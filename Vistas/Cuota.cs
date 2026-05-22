@@ -1,5 +1,6 @@
 ﻿using Club_Deportivo;
 using Club_Deportivo.Datos;
+using Club_Deportivo.Vistas;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -25,10 +26,10 @@ namespace Club_Deportivo
             this.Hide();
         }
 
-        private void btn_Comprobante_Click(object sender, EventArgs e)
+        private void btn_Carnet_Click(object sender, EventArgs e)
         {
-            doc.Show();
-            this.Hide();
+            Carnet carnet = new Carnet();
+            carnet.Show();
         }
 
         private void btn_Pagar_Click(object sender, EventArgs e)
@@ -70,7 +71,7 @@ namespace Club_Deportivo
                         doc.forma_f = "Tarjeta";
                     }
 
-                    btn_Comprobante.Enabled = true;
+                    btn_Carnet.Enabled = true;
 
                 }
                 else
