@@ -24,14 +24,6 @@ namespace Club_Deportivo
             home.Show();
             this.Hide();
         }
-
-        private void btn_Comprobante_Click(object sender, EventArgs e)
-        {
-            Comprobante ventanacomprobante = new Comprobante(doc);
-            ventanacomprobante.Show();
-            this.Hide();
-        }
-
         private void btn_Pagar_Click(object sender, EventArgs e)
         {
             MySqlConnection? cadena = new MySqlConnection();
@@ -56,7 +48,7 @@ namespace Club_Deportivo
                 reader = comando.ExecuteReader();
 
                 if (reader.HasRows)
-                { 
+                {
                     reader.Read();
 
                     doc = new DatosComprobante();
@@ -66,29 +58,24 @@ namespace Club_Deportivo
                     doc.apellido = reader.GetString(2);
                     doc.monto = (float)reader.GetDecimal(3);
                     doc.periodo = reader.GetDateTime(4);
-                    doc.forma_pago = optEfvo.Checked ? "Efectivo" : "Tarjeta débito/crédito";
 
-                    if (optEfvo.Checked == true)
+                    if (rbEfectivo.Checked)
                     {
                         doc.forma_pago = "Efectivo";
                         doc.monto = (float)(doc.monto * 0.90);
                     }
-
                     else
                     {
-                        doc.forma_pago = "Tarjeta débito/crédito";
+                        doc.forma_pago = "Tarjeta de crédito";
                     }
 
+                    MessageBox.Show("¡El pago se realizo con éxito!", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    btn_Carnet.Enabled = true;
                     Comprobante ventanacomprobante = new Comprobante(doc);
                     ventanacomprobante.Show();
-                    this.Hide();
-
-                    btn_Comprobante.Enabled = true;
-
                 }
                 else
                 {
-
                     MessageBox.Show("Número de socio inexistente", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
@@ -96,13 +83,18 @@ namespace Club_Deportivo
             {
                 MessageBox.Show(ex.Message, "MENSAJE DEL CATCH", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
             finally
             {
                 if (cadena.State == ConnectionState.Open)
-                { cadena.Close(); }
+                {
+                    cadena.Close();
+                }
             }
         }
 
+        private void Cuota_Load(object sender, EventArgs e)
+        {
+            btn_Carnet.Enabled = false;
+        }
     }
 }

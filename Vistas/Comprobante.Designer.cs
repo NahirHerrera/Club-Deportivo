@@ -50,6 +50,7 @@
             label5 = new Label();
             panel2 = new Panel();
             label11 = new Label();
+            btnImprimir = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
@@ -81,9 +82,9 @@
             panel1.Controls.Add(label8);
             panel1.Controls.Add(label7);
             panel1.Controls.Add(lbl);
-            panel1.Location = new Point(38, 223);
+            panel1.Location = new Point(22, 207);
             panel1.Name = "panel1";
-            panel1.Size = new Size(731, 193);
+            panel1.Size = new Size(757, 188);
             panel1.TabIndex = 2;
             // 
             // lbl_FormaPago
@@ -274,12 +275,23 @@
             label11.TabIndex = 0;
             label11.Text = "COMPROBANTE DE PAGO";
             // 
+            // btnImprimir
+            // 
+            btnImprimir.Location = new Point(654, 409);
+            btnImprimir.Name = "btnImprimir";
+            btnImprimir.Size = new Size(94, 29);
+            btnImprimir.TabIndex = 11;
+            btnImprimir.Text = "Imprimir";
+            btnImprimir.UseVisualStyleBackColor = true;
+            btnImprimir.Click += btnImprimir_Click;
+            // 
             // Comprobante
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Khaki;
             ClientSize = new Size(800, 450);
+            Controls.Add(btnImprimir);
             Controls.Add(panel2);
             Controls.Add(label5);
             Controls.Add(label4);
@@ -321,5 +333,6 @@
         private Label label10;
         private Panel panel2;
         private Label label11;
+        private Button btnImprimir;
     }
 }
