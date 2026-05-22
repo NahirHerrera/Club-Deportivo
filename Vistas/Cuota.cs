@@ -13,7 +13,7 @@ namespace Club_Deportivo
 {
     public partial class Cuota : Form
     {
-        public Comprobante doc = new Comprobante();
+        public DatosComprobante doc;
         public Cuota()
         {
             InitializeComponent();
@@ -27,7 +27,8 @@ namespace Club_Deportivo
 
         private void btn_Comprobante_Click(object sender, EventArgs e)
         {
-            doc.Show();
+            Comprobante ventanacomprobante = new Comprobante(doc);
+            ventanacomprobante.Show();
             this.Hide();
         }
 
@@ -38,37 +39,49 @@ namespace Club_Deportivo
             {
                 string query;
                 cadena = Conexion.getInstancia().CrearConexion();
-                query = "SELECT s.IdSocio, s.Nombre, s.Apellido, SUM(c.Monto) AS TotalCuota " +
-                        "FROM Socios s INNER JOIN Inscripcion i ON s.IdSocio = i.IdSocio " +
-                        "WHERE c.Estado = 'Pendiente' AND c.FechaVencimiento < CURDATE() " +
-                        "ORDER BY c.FechaVencimiento ASC;";
+                query = "SELECT s.IdSocio, s.Nombre, s.Apellido, SUM(c.Monto) AS TotalCuota, MAX(c.FechaPago) AS FechaPago " +
+                        "FROM Socios s " +
+                        "INNER JOIN Inscripcion i ON s.IdSocio = i.IdSocio " +
+                        "INNER JOIN Cuota c ON s.IdSocio = i.IdSocio " +
+                        "WHERE s.Documento = @Documento " +
+                        "AND c.Estado = 'Pendiente' " +
+                        "GROUP BY s.IdSocio, s.Nombre, s.Apellido " +
+                        "ORDER BY s.Apellido ASC;";
 
                 MySqlCommand comando = new MySqlCommand(query, cadena);
                 comando.CommandType = CommandType.Text;
+                comando.Parameters.AddWithValue("@Documento", "32456741");
                 cadena.Open();
                 MySqlDataReader reader;
                 reader = comando.ExecuteReader();
 
                 if (reader.HasRows)
-                {
+                { 
                     reader.Read();
-                    doc.numero_f = Convert.ToInt32(reader.GetString(0));
-                    doc.curso_f = reader.GetString(1);
-                    doc.alumno_f = reader.GetString(2);
-                    doc.monto_f = (float)Convert.ToDouble(reader.GetString(3));
-                    doc.fecha_f = (DateTime)Convert.ToDateTime(reader.GetString(4));
 
+                    doc = new DatosComprobante();
 
-                    if (opt.Efvo.Checked == true)
+                    doc.NSocio = reader.GetInt32(0);
+                    doc.nombre = reader.GetString(1);
+                    doc.apellido = reader.GetString(2);
+                    doc.monto = (float)reader.GetDecimal(3);
+                    doc.periodo = reader.GetDateTime(4);
+                    doc.forma_pago = optEfvo.Checked ? "Efectivo" : "Tarjeta débito/crédito";
+
+                    if (optEfvo.Checked == true)
                     {
-                        doc.forma_f = "Efectivo";
-                        doc.monto_f = (float)(doc.monto_f * 0.90);
+                        doc.forma_pago = "Efectivo";
+                        doc.monto = (float)(doc.monto * 0.90);
                     }
 
                     else
                     {
-                        doc.forma_f = "Tarjeta";
+                        doc.forma_pago = "Tarjeta débito/crédito";
                     }
+
+                    Comprobante ventanacomprobante = new Comprobante(doc);
+                    ventanacomprobante.Show();
+                    this.Hide();
 
                     btn_Comprobante.Enabled = true;
 
@@ -92,5 +105,4 @@ namespace Club_Deportivo
         }
 
     }
-}
 }
