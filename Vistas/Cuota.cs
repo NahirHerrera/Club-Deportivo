@@ -31,14 +31,13 @@ namespace Club_Deportivo
             {
                 string query;
                 cadena = Conexion.getInstancia().CrearConexion();
-                query = "SELECT s.IdSocio, s.Nombre, s.Apellido, SUM(c.Monto) AS TotalCuota, MAX(c.FechaPago) AS FechaPago " +
+                query = "SELECT s.IdSocio, s.Nombre, s.Apellido, SUM(c.Monto) AS TotalCuota " +
                         "FROM Socios s " +
                         "INNER JOIN Inscripcion i ON s.IdSocio = i.IdSocio " +
-                        "INNER JOIN Cuota c ON s.IdSocio = i.IdSocio " +
-                        "WHERE s.Documento = @Documento " +
-                        "AND c.Estado = 'Pendiente' " +
-                        "GROUP BY s.IdSocio, s.Nombre, s.Apellido " +
-                        "ORDER BY s.Apellido ASC;";
+                        "INNER JOIN Actividad a ON i.IdActividad = a.IdActividad " +
+                        "INNER JOIN Cuota c ON a.IdCuota = c.IdCuota " +
+                        "WHERE s.IdSocio = s.IdSocioBuscado " +
+                        "ORDER BY s.IdSocio, s.Nombre, s.Apellido ";
 
                 MySqlCommand comando = new MySqlCommand(query, cadena);
                 comando.CommandType = CommandType.Text;
