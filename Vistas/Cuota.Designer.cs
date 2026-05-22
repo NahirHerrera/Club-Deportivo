@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            textBox1 = new TextBox();
+            txt_DNI = new TextBox();
             lbl_socio = new Label();
             btn_Pagar = new Button();
             btn_Carnet = new Button();
@@ -39,14 +39,14 @@
             groupBox1.SuspendLayout();
             SuspendLayout();
             // 
-            // textBox1
+            // txt_DNI
             // 
-            textBox1.Location = new Point(90, 115);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(224, 27);
-            textBox1.TabIndex = 0;
-            textBox1.Text = "32456741";
-            textBox1.TextAlign = HorizontalAlignment.Center;
+            txt_DNI.Location = new Point(90, 115);
+            txt_DNI.Name = "txt_DNI";
+            txt_DNI.Size = new Size(224, 27);
+            txt_DNI.TabIndex = 0;
+            txt_DNI.Text = "32456741";
+            txt_DNI.TextAlign = HorizontalAlignment.Center;
             // 
             // lbl_socio
             // 
@@ -132,7 +132,7 @@
             Controls.Add(btn_Carnet);
             Controls.Add(btn_Pagar);
             Controls.Add(lbl_socio);
-            Controls.Add(textBox1);
+            Controls.Add(txt_DNI);
             Name = "Cuota";
             Text = "Cobrar Cuota";
             Load += Cuota_Load;
@@ -144,7 +144,7 @@
 
         #endregion
 
-        private TextBox textBox1;
+        private TextBox txt_DNI;
         private Label lbl_socio;
         private Button btn_Pagar;
         private Button btn_Carnet;
