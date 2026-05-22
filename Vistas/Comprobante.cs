@@ -27,7 +27,6 @@ public partial class Comprobante : Form
             pd.Print();
         }
     }
-
     private void LineasImpresion(object sender, PrintPageEventArgs e)
     {
         Bitmap bmp = new Bitmap(this.Width, this.Height);

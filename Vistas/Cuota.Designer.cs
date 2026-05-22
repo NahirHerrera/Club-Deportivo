@@ -31,11 +31,11 @@
             textBox1 = new TextBox();
             lbl_socio = new Label();
             btn_Pagar = new Button();
-            btn_Comprobante = new Button();
+            btn_Carnet = new Button();
             groupBox1 = new GroupBox();
-            btn_Volver = new Button();
-            rbEfectivo = new RadioButton();
             rbTarjeta = new RadioButton();
+            rbEfectivo = new RadioButton();
+            btn_Volver = new Button();
             groupBox1.SuspendLayout();
             SuspendLayout();
             // 
@@ -68,16 +68,15 @@
             btn_Pagar.UseVisualStyleBackColor = true;
             btn_Pagar.Click += btn_Pagar_Click;
             // 
-            // btn_Comprobante
+            // btn_Carnet
             // 
-            btn_Comprobante.ForeColor = Color.SaddleBrown;
-            btn_Comprobante.Location = new Point(72, 308);
-            btn_Comprobante.Name = "btn_Comprobante";
-            btn_Comprobante.Size = new Size(258, 72);
-            btn_Comprobante.TabIndex = 3;
-            btn_Comprobante.Text = "COMPROBANTE";
-            btn_Comprobante.UseVisualStyleBackColor = true;
-            btn_Comprobante.Click += btn_Comprobante_Click;
+            btn_Carnet.ForeColor = Color.SaddleBrown;
+            btn_Carnet.Location = new Point(72, 308);
+            btn_Carnet.Name = "btn_Carnet";
+            btn_Carnet.Size = new Size(258, 72);
+            btn_Carnet.TabIndex = 3;
+            btn_Carnet.Text = "OBTENER CARNET";
+            btn_Carnet.UseVisualStyleBackColor = true;
             // 
             // groupBox1
             // 
@@ -90,15 +89,16 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Forma de Pago";
             // 
-            // btn_Volver
+            // rbTarjeta
             // 
-            btn_Volver.Location = new Point(455, 308);
-            btn_Volver.Name = "btn_Volver";
-            btn_Volver.Size = new Size(255, 72);
-            btn_Volver.TabIndex = 5;
-            btn_Volver.Text = "VOLVER";
-            btn_Volver.UseVisualStyleBackColor = true;
-            btn_Volver.Click += btn_Volver_Click;
+            rbTarjeta.AutoSize = true;
+            rbTarjeta.Location = new Point(21, 93);
+            rbTarjeta.Name = "rbTarjeta";
+            rbTarjeta.Size = new Size(146, 24);
+            rbTarjeta.TabIndex = 7;
+            rbTarjeta.TabStop = true;
+            rbTarjeta.Text = "Tarjeta de crédito";
+            rbTarjeta.UseVisualStyleBackColor = true;
             // 
             // rbEfectivo
             // 
@@ -111,16 +111,15 @@
             rbEfectivo.Text = "Efectivo";
             rbEfectivo.UseVisualStyleBackColor = true;
             // 
-            // rbTarjeta
+            // btn_Volver
             // 
-            rbTarjeta.AutoSize = true;
-            rbTarjeta.Location = new Point(21, 93);
-            rbTarjeta.Name = "rbTarjeta";
-            rbTarjeta.Size = new Size(146, 24);
-            rbTarjeta.TabIndex = 7;
-            rbTarjeta.TabStop = true;
-            rbTarjeta.Text = "Tarjeta de crédito";
-            rbTarjeta.UseVisualStyleBackColor = true;
+            btn_Volver.Location = new Point(455, 308);
+            btn_Volver.Name = "btn_Volver";
+            btn_Volver.Size = new Size(255, 72);
+            btn_Volver.TabIndex = 5;
+            btn_Volver.Text = "VOLVER";
+            btn_Volver.UseVisualStyleBackColor = true;
+            btn_Volver.Click += btn_Volver_Click;
             // 
             // Cuota
             // 
@@ -130,12 +129,13 @@
             ClientSize = new Size(800, 450);
             Controls.Add(btn_Volver);
             Controls.Add(groupBox1);
-            Controls.Add(btn_Comprobante);
+            Controls.Add(btn_Carnet);
             Controls.Add(btn_Pagar);
             Controls.Add(lbl_socio);
             Controls.Add(textBox1);
             Name = "Cuota";
             Text = "Cobrar Cuota";
+            Load += Cuota_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             ResumeLayout(false);
@@ -147,7 +147,7 @@
         private TextBox textBox1;
         private Label lbl_socio;
         private Button btn_Pagar;
-        private Button btn_Comprobante;
+        private Button btn_Carnet;
         private GroupBox groupBox1;
         private Button btn_Volver;
         private RadioButton rbEfectivo;
