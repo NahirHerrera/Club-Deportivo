@@ -77,6 +77,7 @@
             btn_Carnet.TabIndex = 3;
             btn_Carnet.Text = "OBTENER CARNET";
             btn_Carnet.UseVisualStyleBackColor = true;
+            btn_Carnet.Click += btn_Carnet_Click;
             // 
             // groupBox1
             // 
