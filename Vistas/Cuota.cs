@@ -56,7 +56,7 @@ namespace Club_Deportivo
                 reader = comando.ExecuteReader();
 
                 if (reader.HasRows)
-                { 
+                {
                     reader.Read();
 
                     doc = new DatosComprobante();
@@ -66,9 +66,9 @@ namespace Club_Deportivo
                     doc.apellido = reader.GetString(2);
                     doc.monto = (float)reader.GetDecimal(3);
                     doc.periodo = reader.GetDateTime(4);
-                    doc.forma_pago = optEfvo.Checked ? "Efectivo" : "Tarjeta débito/crédito";
+                    doc.forma_pago = rbEfectivo.Checked ? "Efectivo" : "Tarjeta débito/crédito";
 
-                    if (optEfvo.Checked == true)
+                    if (rbEfectivo.Checked == true)
                     {
                         doc.forma_pago = "Efectivo";
                         doc.monto = (float)(doc.monto * 0.90);
@@ -103,6 +103,5 @@ namespace Club_Deportivo
                 { cadena.Close(); }
             }
         }
-
     }
 }

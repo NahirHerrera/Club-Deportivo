@@ -33,9 +33,9 @@
             btn_Pagar = new Button();
             btn_Comprobante = new Button();
             groupBox1 = new GroupBox();
-            checkBox2 = new CheckBox();
-            optEfvo = new CheckBox();
             btn_Volver = new Button();
+            rbEfectivo = new RadioButton();
+            rbTarjeta = new RadioButton();
             groupBox1.SuspendLayout();
             SuspendLayout();
             // 
@@ -81,34 +81,14 @@
             // 
             // groupBox1
             // 
-            groupBox1.Controls.Add(checkBox2);
-            groupBox1.Controls.Add(optEfvo);
+            groupBox1.Controls.Add(rbTarjeta);
+            groupBox1.Controls.Add(rbEfectivo);
             groupBox1.Location = new Point(455, 83);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(255, 153);
             groupBox1.TabIndex = 4;
             groupBox1.TabStop = false;
             groupBox1.Text = "Forma de Pago";
-            // 
-            // checkBox2
-            // 
-            checkBox2.AutoSize = true;
-            checkBox2.Location = new Point(21, 96);
-            checkBox2.Name = "checkBox2";
-            checkBox2.Size = new Size(176, 24);
-            checkBox2.TabIndex = 6;
-            checkBox2.Text = "Tarjeta débito/crédito";
-            checkBox2.UseVisualStyleBackColor = true;
-            // 
-            // optEfvo
-            // 
-            optEfvo.AutoSize = true;
-            optEfvo.Location = new Point(21, 45);
-            optEfvo.Name = "optEfvo";
-            optEfvo.Size = new Size(84, 24);
-            optEfvo.TabIndex = 5;
-            optEfvo.Text = "Efectivo";
-            optEfvo.UseVisualStyleBackColor = true;
             // 
             // btn_Volver
             // 
@@ -119,6 +99,28 @@
             btn_Volver.Text = "VOLVER";
             btn_Volver.UseVisualStyleBackColor = true;
             btn_Volver.Click += btn_Volver_Click;
+            // 
+            // rbEfectivo
+            // 
+            rbEfectivo.AutoSize = true;
+            rbEfectivo.Location = new Point(21, 45);
+            rbEfectivo.Name = "rbEfectivo";
+            rbEfectivo.Size = new Size(83, 24);
+            rbEfectivo.TabIndex = 6;
+            rbEfectivo.TabStop = true;
+            rbEfectivo.Text = "Efectivo";
+            rbEfectivo.UseVisualStyleBackColor = true;
+            // 
+            // rbTarjeta
+            // 
+            rbTarjeta.AutoSize = true;
+            rbTarjeta.Location = new Point(21, 93);
+            rbTarjeta.Name = "rbTarjeta";
+            rbTarjeta.Size = new Size(146, 24);
+            rbTarjeta.TabIndex = 7;
+            rbTarjeta.TabStop = true;
+            rbTarjeta.Text = "Tarjeta de crédito";
+            rbTarjeta.UseVisualStyleBackColor = true;
             // 
             // Cuota
             // 
@@ -147,8 +149,8 @@
         private Button btn_Pagar;
         private Button btn_Comprobante;
         private GroupBox groupBox1;
-        private CheckBox checkBox2;
-        private CheckBox optEfvo;
         private Button btn_Volver;
+        private RadioButton rbEfectivo;
+        private RadioButton rbTarjeta;
     }
 }
