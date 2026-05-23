@@ -26,7 +26,6 @@ namespace Club_Deportivo
             home.Show();
             this.Hide();
         }
-
         private void btn_Carnet_Click(object sender, EventArgs e)
         {
             Carnet carnet = new Carnet();
@@ -115,12 +114,6 @@ namespace Club_Deportivo
         private void Cuota_Load(object sender, EventArgs e)
         {
             btn_Carnet.Enabled = false;
-        }
-
-        private void btn_Carnet_Click(object sender, EventArgs e)
-        {
-            Carnet carnet = new Carnet();
-            carnet.Show();
         }
     }
 }
