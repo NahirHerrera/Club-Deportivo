@@ -11,6 +11,10 @@ namespace Club_Deportivo
 {
     public partial class Home : Form
     {
+        public Home()
+        {
+            InitializeComponent();
+        }
         public Home(string nombre)
         {
             InitializeComponent();
@@ -57,6 +61,5 @@ namespace Club_Deportivo
             listado.Show();
             this.Hide();
         }
-
     }
 }

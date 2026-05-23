@@ -33,9 +33,10 @@
             btn_Pagar = new Button();
             btn_Carnet = new Button();
             groupBox1 = new GroupBox();
-            rbTarjeta = new RadioButton();
+            rbTarjeta3 = new RadioButton();
             rbEfectivo = new RadioButton();
             btn_Volver = new Button();
+            rbTarjeta6 = new RadioButton();
             groupBox1.SuspendLayout();
             SuspendLayout();
             // 
@@ -77,39 +78,40 @@
             btn_Carnet.TabIndex = 3;
             btn_Carnet.Text = "OBTENER CARNET";
             btn_Carnet.UseVisualStyleBackColor = true;
-            btn_Carnet.Click += new EventHandler(btn_Carnet_Click);
+            btn_Carnet.Click += btn_Carnet_Click;
             // 
             // groupBox1
             // 
-            groupBox1.Controls.Add(rbTarjeta);
+            groupBox1.Controls.Add(rbTarjeta6);
+            groupBox1.Controls.Add(rbTarjeta3);
             groupBox1.Controls.Add(rbEfectivo);
             groupBox1.Location = new Point(455, 83);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(255, 153);
+            groupBox1.Size = new Size(301, 195);
             groupBox1.TabIndex = 4;
             groupBox1.TabStop = false;
             groupBox1.Text = "Forma de Pago";
             // 
-            // rbTarjeta
+            // rbTarjeta3
             // 
-            rbTarjeta.AutoSize = true;
-            rbTarjeta.Location = new Point(21, 93);
-            rbTarjeta.Name = "rbTarjeta";
-            rbTarjeta.Size = new Size(146, 24);
-            rbTarjeta.TabIndex = 7;
-            rbTarjeta.TabStop = true;
-            rbTarjeta.Text = "Tarjeta de crédito";
-            rbTarjeta.UseVisualStyleBackColor = true;
+            rbTarjeta3.AutoSize = true;
+            rbTarjeta3.Location = new Point(21, 93);
+            rbTarjeta3.Name = "rbTarjeta3";
+            rbTarjeta3.Size = new Size(257, 24);
+            rbTarjeta3.TabIndex = 7;
+            rbTarjeta3.TabStop = true;
+            rbTarjeta3.Text = "Tarj de crédito: 3 cuotas sin interes";
+            rbTarjeta3.UseVisualStyleBackColor = true;
             // 
             // rbEfectivo
             // 
             rbEfectivo.AutoSize = true;
             rbEfectivo.Location = new Point(21, 45);
             rbEfectivo.Name = "rbEfectivo";
-            rbEfectivo.Size = new Size(83, 24);
+            rbEfectivo.Size = new Size(197, 24);
             rbEfectivo.TabIndex = 6;
             rbEfectivo.TabStop = true;
-            rbEfectivo.Text = "Efectivo";
+            rbEfectivo.Text = "Efectivo (10% descuento)";
             rbEfectivo.UseVisualStyleBackColor = true;
             // 
             // btn_Volver
@@ -121,6 +123,17 @@
             btn_Volver.Text = "VOLVER";
             btn_Volver.UseVisualStyleBackColor = true;
             btn_Volver.Click += btn_Volver_Click;
+            // 
+            // rbTarjeta6
+            // 
+            rbTarjeta6.AutoSize = true;
+            rbTarjeta6.Location = new Point(21, 146);
+            rbTarjeta6.Name = "rbTarjeta6";
+            rbTarjeta6.Size = new Size(257, 24);
+            rbTarjeta6.TabIndex = 8;
+            rbTarjeta6.TabStop = true;
+            rbTarjeta6.Text = "Tarj de crédito: 6 cuotas sin interes";
+            rbTarjeta6.UseVisualStyleBackColor = true;
             // 
             // Cuota
             // 
@@ -152,6 +165,7 @@
         private GroupBox groupBox1;
         private Button btn_Volver;
         private RadioButton rbEfectivo;
-        private RadioButton rbTarjeta;
+        private RadioButton rbTarjeta3;
+        private RadioButton rbTarjeta6;
     }
 }

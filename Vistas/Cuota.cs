@@ -59,15 +59,29 @@ namespace Club_Deportivo
 
                     if (rbEfectivo.Checked)
                     {
-                        doc.forma_pago = "Efectivo";
+                        doc.forma_pago = "Efectivo: 10% off";
                         doc.monto = (float)(doc.monto * 0.90);
+                        MessageBox.Show ("¡El pago se realizó con éxito!" + Environment.NewLine +
+                        $"Forma de pago: {doc.forma_pago}" + Environment.NewLine +
+                        $"Total cobrado: ${doc.monto}", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
-                    else
+                    else if (rbTarjeta3.Checked)
                     {
-                        doc.forma_pago = "Tarjeta de crédito";
+                        doc.forma_pago = "Tarj.Crédito: 3 cuotas s/interés)";
+                        float valorCuota = doc.monto / 3;
+                        MessageBox.Show("¡El pago se realizó con éxito!" + Environment.NewLine +
+                        $"Forma de pago: {doc.forma_pago}" + Environment.NewLine +
+                        $"Total cobrado: ${doc.monto} (3 cuotas de: ${doc.monto / 3})", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else if (rbTarjeta6.Checked)
+                    {
+                        doc.forma_pago = "Tarj.Crédito: 6 cuotas s/interés)";
+                        float valorCuota = doc.monto / 6;
+                        MessageBox.Show("¡El pago se realizó con éxito!" + Environment.NewLine +
+                        $"Forma de pago: {doc.forma_pago}" + Environment.NewLine +
+                        $"Total cobrado: ${doc.monto} (6 cuotas de: ${doc.monto / 6})", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
 
-                    MessageBox.Show("¡El pago se realizo con éxito!", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     btn_Carnet.Enabled = true;
 
                     Comprobante ventanacomprobante = new Comprobante(doc);
