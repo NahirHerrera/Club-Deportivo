@@ -67,5 +67,11 @@ namespace Club_Deportivo
                 ;
             }
         }
+        private void btnVolverListado_Click(object sender, EventArgs e)
+        {
+            Home home = new Home();
+            home.Show();
+            this.Hide();
+        }
     }
 }
