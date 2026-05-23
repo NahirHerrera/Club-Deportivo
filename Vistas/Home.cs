@@ -29,7 +29,7 @@ namespace Club_Deportivo
         {
 
             // Abrir el formulario de inscripción
-            Inscripcion inscripcion = new Inscripcion();
+            chkAptoFisico inscripcion = new chkAptoFisico();
             inscripcion.Show();
             this.Hide();
         }

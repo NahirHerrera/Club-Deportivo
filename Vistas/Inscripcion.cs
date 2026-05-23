@@ -4,9 +4,9 @@ using System.Windows.Forms;
 
 namespace Club_Deportivo.Vistas
 {
-    public partial class Inscripcion : Form
+    public partial class chkAptoFisico : Form
     {
-        public Inscripcion()
+        public chkAptoFisico()
         {
             InitializeComponent();
         }
@@ -24,6 +24,11 @@ namespace Club_Deportivo.Vistas
                                 "AVISO DEL SISTEMA",
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Error);
+            }
+                //Validar que presente apto físico antes del registro
+            else if (!chkAF.Checked)
+            {
+                MessageBox.Show("No se puede acceder al registro. El apto físico es un requisito excluyente.", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
