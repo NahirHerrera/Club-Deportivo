@@ -4,14 +4,18 @@ using System.Text;
 
 namespace Club_Deportivo.Entidades
 {
-    internal class E_Socio
+    internal class E_Socio : E_Usuario
     {
-        // Clase Socio
+        public string EstadoCuota { get; set; }
 
-        public string Nombre { get; set; }
-        public string Apellido { get; set; }
+        public override string ObtenerRol()
+        {
+            return "SOCIO";
+        }
 
-        public string TipoDoc { get; set; }
-        public string Documento { get; set; }
+        public bool PuedeRealizarActividad()
+        {
+            return EstadoCuota == "Pagado";
+        }
     }
 }

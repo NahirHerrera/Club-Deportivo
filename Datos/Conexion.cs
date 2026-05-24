@@ -25,7 +25,7 @@ namespace Club_Deportivo.Datos
             this.servidor = "localhost";
             this.puerto = "3306";
             this.usuario = "root";
-            this.clave = "1234";
+            this.clave = "gaston123";
         }
 
         // Método para crear y retornar una conexión a la base de datos

@@ -1,4 +1,5 @@
-﻿using Club_Deportivo.Entidades;
+﻿using Club_Deportivo.Datos;
+using Club_Deportivo.Entidades;
 using System;
 using System.Windows.Forms;
 

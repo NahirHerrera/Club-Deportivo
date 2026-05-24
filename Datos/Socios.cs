@@ -63,5 +63,40 @@ namespace Club_Deportivo.Datos
 
             return salida;
         }
+        public string ObtenerEstadoCuota(int idSocio)
+        {
+            string estado = "";
+
+            MySqlConnection sqlCon = new MySqlConnection();
+
+            try
+            {
+                sqlCon = Conexion.getInstancia().CrearConexion();
+
+                string query = @"SELECT Estado FROM cuota WHERE IdSocio=@IdSocio";
+
+                MySqlCommand cmd = new MySqlCommand(query, sqlCon);
+
+                cmd.Parameters.AddWithValue( "@IdSocio", idSocio);
+
+                sqlCon.Open();
+
+                object resultado = cmd.ExecuteScalar();
+
+                if (resultado != null)
+                {
+                    estado = resultado.ToString();
+                }
+            }
+
+            finally
+            {
+                if (sqlCon.State == ConnectionState.Open)
+                {
+                    sqlCon.Close();
+                }
+            }
+            return estado;
+        }
     }
 }
