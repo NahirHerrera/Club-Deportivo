@@ -34,6 +34,21 @@ namespace Club_Deportivo
 
         private void btn_Pagar_Click(object sender, EventArgs e)
         {
+            // VALIDACION DE LA FORMA DE PAGO
+
+            if (!rbEfectivo.Checked &&
+                !rbTarjeta3.Checked &&
+                !rbTarjeta6.Checked)
+            {
+                MessageBox.Show(
+                    "Seleccione una forma de pago",
+                    "AVISO DEL SISTEMA",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+
+                return;
+            }
+
             MySqlConnection? cadena = new MySqlConnection();
             try
             {
@@ -96,7 +111,7 @@ namespace Club_Deportivo
                 }
                 else
                 {
-                    MessageBox.Show("Número de socio inexistente", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("DNI inexistente", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)

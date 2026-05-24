@@ -65,6 +65,7 @@ DROP PROCEDURE IF EXISTS RegistroSocio;
 DROP PROCEDURE IF EXISTS IngresoLogin;
 
 DELIMITER //
+
 CREATE PROCEDURE RegistroSocio(
     IN Nom VARCHAR(50),
     IN Ape VARCHAR(50),
@@ -72,26 +73,58 @@ CREATE PROCEDURE RegistroSocio(
     IN Doc VARCHAR(20),
     OUT rta INT
 )
+
 BEGIN
+
     DECLARE filas INT DEFAULT 0;
     DECLARE existe INT DEFAULT 0;
 
-    SET filas = (SELECT COUNT(*) FROM Socios);
+    SET filaRegistroSocios = (SELECT COUNT(*) FROM Socios);
 
     IF filas = 0 THEN
         SET filas = 1000;
     ELSE
-        SET filas = (SELECT MAX(IdSocio) + 1 FROM Socios);
-        SET existe = (SELECT COUNT(*) FROM Socios WHERE TipoDoc = TDoc AND Documento = Doc);
+        SET filas = (
+            SELECT MAX(IdSocio) + 1
+            FROM Socios
+        );
+
+        SET existe = (
+            SELECT COUNT(*)
+            FROM Socios
+            WHERE TipoDoc = TDoc
+            AND Documento = Doc
+			);
     END IF;
 
-    IF existe = 0 THEN
-        INSERT INTO Socios VALUES(filas, Nom, Ape, TDoc, Doc);
+    IF existe = 0 THEN INSERT INTO Socios VALUES(
+            filas,
+            Nom,
+            Ape,
+            TDoc,
+            Doc
+			);
+
+        -- CREAR CUOTA AUTOMÁTICA
+        INSERT INTO Cuota(
+            Monto,
+            FechaPago,
+            FechaVencimiento,
+            Estado,
+            IdSocio
+			)
+
+        VALUES(
+			40000,
+            NOW(),
+            DATE_ADD(NOW(), INTERVAL 1 MONTH),'Pendiente', filas
+            );
         SET rta = filas;
     ELSE
         SET rta = 1;
     END IF;
 END //
+
 DELIMITER ;
 
 --
