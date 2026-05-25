@@ -71,13 +71,29 @@ namespace Club_Deportivo
                 {
                     reader.Read();
 
-                    doc = new DatosComprobante();
+                    int idSocio = reader.GetInt32(0);
+                    string nombre = reader.GetString(1);
+                    string apellido = reader.GetString(2);
+                    float monto = (float)reader.GetDecimal(3);
+                    DateTime periodo = reader.GetDateTime(4);
+                    reader.Close();
 
-                    doc.NSocio = reader.GetInt32(0);
-                    doc.nombre = reader.GetString(1);
-                    doc.apellido = reader.GetString(2);
-                    doc.monto = (float)reader.GetDecimal(3);
-                    doc.periodo = reader.GetDateTime(4);
+                    // UPDATE CUOTA
+
+                    string update =
+                    @"UPDATE cuota SET Estado='Pagado' WHERE IdSocio=@IdSocio";
+                    MySqlCommand cmdUpdate = new MySqlCommand(update, cadena);
+                    cmdUpdate.Parameters.AddWithValue("@IdSocio", idSocio);
+                    cmdUpdate.ExecuteNonQuery();
+
+                    // DATOS COMPROBANTE
+
+                    doc = new DatosComprobante();
+                    doc.NSocio = idSocio;
+                    doc.nombre = nombre;
+                    doc.apellido = apellido;
+                    doc.monto = monto;
+                    doc.periodo = periodo;
 
                     if (rbEfectivo.Checked)
                     {
