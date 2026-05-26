@@ -4,9 +4,15 @@ using System.Text;
 
 namespace Club_Deportivo.Entidades
 {
-    internal class E_Admin : E_Usuario
+    internal class E_Admin
     {
-        public override string ObtenerRol()
+        public int IdUsuario { get; set; }
+
+        public string Usuario { get; set; }
+
+        public string Password { get; set; }
+
+        public string ObtenerRol()
         {
             return "ADMIN";
         }

@@ -4,11 +4,11 @@ using System.Text;
 
 namespace Club_Deportivo.Entidades
 {
-    internal class E_Socio : E_Usuario
+    internal class E_Socio : E_Cliente
     {
         public string EstadoCuota { get; set; }
 
-        public override string ObtenerRol()
+        public override string ObtenerTipoCliente()
         {
             return "SOCIO";
         }
@@ -17,5 +17,6 @@ namespace Club_Deportivo.Entidades
         {
             return EstadoCuota == "Pagado";
         }
+
     }
 }

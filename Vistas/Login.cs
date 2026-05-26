@@ -59,7 +59,7 @@ namespace Club_Deportivo
 
             // Validar que los campos no estén vacíos
             Usuarios user = new Usuarios();
-            E_Usuario usuario = user.Log_Usu(usuarioBox.Text, contraseniaBox.Text);
+            E_Admin usuario = user.Log_Usu(usuarioBox.Text, contraseniaBox.Text);
 
 
             // Verificar si el usuario es válido
