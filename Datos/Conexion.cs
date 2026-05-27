@@ -21,11 +21,11 @@ namespace Club_Deportivo.Datos
         // Constructor privado para implementar el patrón Singleton
         private Conexion()
         {
-            this.baseDatos = "club_deportivo";
+            this.baseDatos = "club_deportivo_modif";
             this.servidor = "localhost";
             this.puerto = "3306";
             this.usuario = "root";
-            this.clave = "gaston123";
+            this.clave = "1234";
         }
 
         // Método para crear y retornar una conexión a la base de datos

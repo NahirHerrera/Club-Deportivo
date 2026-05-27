@@ -14,7 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Datos\" />
     <Folder Include="Recursos\" />
   </ItemGroup>
 

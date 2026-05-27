@@ -5,19 +5,36 @@ using System.Windows.Forms;
 
 namespace Club_Deportivo.Vistas
 {
-    public partial class chkAptoFisico : Form
+    public partial class Inscripcion : Form
     {
-        public chkAptoFisico()
+        public Inscripcion()
         {
             InitializeComponent();
         }
-
-        private void button1_Click(object sender, EventArgs e)
+        private void btn_Volver_Click(object sender, EventArgs e)
         {
+            Home home = new Home(nombreInput.Text);
+            home.Show();
+            this.Hide();
+        }
+        private void btn_Limpiar_Click(object sender, EventArgs e)
+        {
+            nombreInput.Text = "";
+            apellidoInput.Text = "";
+            documentoInput.Text = "";
+            cmbTipoDoc.Text = "";
+            cmbTipoCliente.Text = "";
+            nombreInput.Focus();
+        }
 
+        private void btnRegistrarCliente_Click(object sender, EventArgs e)
+        {
             //VALIDACION DE CAMPOS REQUERIDOS
-            if (nombreInput.Text == "" || apellidoInput.Text == "" ||
-                documentoInput.Text == "" || tipoBox.Text == "")
+            if (string.IsNullOrWhiteSpace(nombreInput.Text) ||
+                string.IsNullOrWhiteSpace(apellidoInput.Text) ||
+                string.IsNullOrWhiteSpace(documentoInput.Text) ||
+                cmbTipoDoc.SelectedIndex == -1 ||
+                cmbTipoCliente.SelectedIndex == -1)
             {
 
                 // Mostrar mensaje de error si algún campo requerido está vacío
@@ -34,29 +51,37 @@ namespace Club_Deportivo.Vistas
             else
             {
 
-                // Crear un nuevo objeto E_Socio y asignar los valores de los campos de entrada
+                // Crear un nuevo objeto E_Cliente y asignar los valores de los campos de entrada
                 string respuesta;
-                E_Socio socio = new E_Socio();
-                socio.Nombre = nombreInput.Text;
-                socio.Apellido = apellidoInput.Text;
-                socio.Documento = documentoInput.Text;
-                socio.TipoDoc = tipoBox.Text;
+
+                E_Clientes cliente = new E_Clientes();
+                cliente.nombre = nombreInput.Text.Trim();
+                cliente.apellido = apellidoInput.Text.Trim();
+                cliente.tipoDoc = cmbTipoDoc.Text.Trim();
+                cliente.dni = documentoInput.Text.Trim();
+
+                bool esSocio = (cmbTipoCliente.Text == "Socio");
 
                 // Llamar al método Nuevo_Socio de la clase Socios para guardar el nuevo socio en la base de datos
 
-                Datos.Socios socios = new Datos.Socios();
-                respuesta = socios.Nuevo_Socio(socio);
+                Datos.Clientes objetoDatos = new Datos.Clientes();
+                respuesta = objetoDatos.RegistrarCliente(
+                    cliente.nombre,
+                    cliente.apellido,
+                    cliente.tipoDoc,
+                    cliente.dni,
+                    chkAF.Checked,
+                    true,
+                    1
+                );
 
                 // Validar la respuesta del método Nuevo_Socio para mostrar el mensaje correspondiente al usuario
-
-                bool esnumero = int.TryParse(respuesta, out int codigo);
-                if (esnumero)
+                if (int.TryParse(respuesta, out int codigo))
                 {
-
-                    // Si el código es 1, significa que el socio ya existe en la base de datos
+                    // Si el código es 1, significa que el cliente ya existe en la base de datos
                     if (codigo == 1)
                     {
-                        MessageBox.Show("SOCIO YA EXISTE",
+                        MessageBox.Show("¡Este cliente ya se encuentra registrado!",
                                         "AVISO DEL SISTEMA",
                                         MessageBoxButtons.OK,
                                         MessageBoxIcon.Error);
@@ -65,7 +90,8 @@ namespace Club_Deportivo.Vistas
                     {
 
                         // Si el código es diferente de 1, significa que el socio se almacenó con éxito en la base de datos
-                        MessageBox.Show("Se almacenó con éxito el socio con el código Nro " + respuesta,
+                        string tipo = esSocio ? "Socio" : "No Socio";
+                        MessageBox.Show($"Se almacenó con éxito el {tipo} con el código Nro " + respuesta,
                                         "AVISO DEL SISTEMA",
                                         MessageBoxButtons.OK,
                                         MessageBoxIcon.Information);
@@ -73,47 +99,10 @@ namespace Club_Deportivo.Vistas
                         // Abrir la ventana Home y cerrar la ventana Inscripcion
                         Home home = new Home(nombreInput.Text);
                         home.Show();
-                        this.Hide();
+                        this.Close();
                     }
                 }
             }
-        }
-
-
-        private void documentoInput_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void apellidoInput_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tipoBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void nombreInput_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            Home home = new Home(nombreInput.Text);
-            home.Show();
-            this.Hide();
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            nombreInput.Text = "";
-            apellidoInput.Text = "";
-            documentoInput.Text = "";
-            tipoBox.Text = "";
-            nombreInput.Focus();
         }
     }
 }

@@ -4,7 +4,7 @@ using System.Data;
 
 namespace Club_Deportivo.Datos
 {
-    internal class Usuarios
+    public class Usuarios
     {
         public E_Usuario Log_Usu(string usu, string pass)
         {
@@ -30,14 +30,13 @@ namespace Club_Deportivo.Datos
                         // Crear y retornar un nuevo objeto E_Usuario con los datos obtenidos
                         return new E_Usuario
                         {
-                            IdUsuario = dr.GetInt32("IdUsuario"),
+                            idUsuario = dr.GetInt32("IdUsuario"),
                             Usuario = dr.GetString("Usuario"),
                             Password = dr.GetString("Password")
                         };
                     }
                 }
             }
-
             // Si no se encontró un usuario válido, retornar null
             return null;
         }
