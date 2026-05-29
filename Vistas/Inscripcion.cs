@@ -60,7 +60,7 @@ namespace Club_Deportivo.Vistas
                 cliente.tipoDoc = cmbTipoDoc.Text.Trim();
                 cliente.dni = documentoInput.Text.Trim();
 
-                bool esSocio = (cmbTipoCliente.Text == "Socio");
+                bool esSocio = (cmbTipoCliente.Text == "Socios");
 
                 // Llamar al método Nuevo_Socio de la clase Socios para guardar el nuevo socio en la base de datos
 
@@ -71,7 +71,7 @@ namespace Club_Deportivo.Vistas
                     cliente.tipoDoc,
                     cliente.dni,
                     chkAF.Checked,
-                    true,
+                    esSocio,
                     1
                 );
 

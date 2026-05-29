@@ -1,4 +1,4 @@
-DROP DATABASE club_deportivo_modif;
+
 CREATE DATABASE club_deportivo_modif;
 USE club_deportivo_modif;
 
@@ -120,6 +120,9 @@ BEGIN
              
              INSERT INTO Socios (idClientes, nroCarnet, fecha_vencimiento_cuota)
              VALUES (v_idClientes, v_nroCarnet, DATE_ADD(NOW(), INTERVAL 1 MONTH));
+             
+             INSERT INTO Cuota (idClientes, Monto, fechaVencimiento, Estado)
+			 VALUES(v_idClientes,40000,DATE_ADD(NOW(), INTERVAL 1 MONTH),'Pendiente');
              
              SET rta = v_nroCarnet;
 	    ELSE
