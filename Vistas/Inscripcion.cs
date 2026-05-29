@@ -66,7 +66,6 @@ namespace Club_Deportivo.Vistas
                         documentoInput.Text.Trim(),
                         chkAF.Checked
                     );
-
                 }
                 else
                 {
