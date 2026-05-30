@@ -210,9 +210,14 @@ namespace Club_Deportivo.Vistas
 
         private void btn_Volver_Click(object sender, EventArgs e)
         {
-           Home home = new Home();
-           home.Show();
-           this.Hide();
+            Home home = new Home();
+            home.Show();
+            this.Hide();
+        }
+
+        private void dgvActividades_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

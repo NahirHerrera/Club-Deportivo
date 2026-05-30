@@ -1,4 +1,4 @@
-
+DROP DATABASE club_deportivo_modif;
 CREATE DATABASE club_deportivo_modif;
 USE club_deportivo_modif;
 
@@ -96,6 +96,7 @@ CREATE TABLE socio_actividad(
 
 DROP PROCEDURE IF EXISTS RegistrarCliente;
 DROP PROCEDURE IF EXISTS IngresoLogin;
+DROP PROCEDURE IF EXISTS ObtenerSocios;
 
 DELIMITER //
 CREATE PROCEDURE RegistrarCliente(
@@ -161,6 +162,33 @@ BEGIN
     FROM Usuarios
     WHERE Usuario = Usu
       AND Password = Pass;
+END //
+DELIMITER ;
+
+
+--
+-- OBTENER LISTADO CLIENTES
+--
+
+
+DELIMITER //
+CREATE PROCEDURE ObtenerSocios(
+	IN p_dni VARCHAR(30)
+)
+BEGIN
+    SELECT
+        c.idClientes,
+        c.nombre,
+        c.apellido,
+        c.dni,
+        a.idActividades,
+        a.nombreActividad,
+        sa.fechaInscripcion
+    FROM Clientes c
+    LEFT JOIN socio_actividad sa ON sa.idCliente = c.idClientes
+    LEFT JOIN Actividades a ON a.idActividades = sa.idActividad
+    WHERE (p_dni IS NULL OR c.dni = p_dni)
+    ORDER BY c.idClientes, a.nombreActividad;
 END //
 DELIMITER ;
 

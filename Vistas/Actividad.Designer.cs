@@ -42,26 +42,27 @@
             // 
             lbl_DNI.AutoSize = true;
             lbl_DNI.Font = new Font("Segoe UI", 12F);
-            lbl_DNI.Location = new Point(18, 17);
+            lbl_DNI.Location = new Point(21, 23);
             lbl_DNI.Name = "lbl_DNI";
-            lbl_DNI.Size = new Size(37, 21);
+            lbl_DNI.Size = new Size(46, 28);
             lbl_DNI.TabIndex = 0;
             lbl_DNI.Text = "DNI";
             // 
             // txt_DNI
             // 
-            txt_DNI.Location = new Point(61, 15);
+            txt_DNI.Location = new Point(70, 20);
+            txt_DNI.Margin = new Padding(3, 4, 3, 4);
             txt_DNI.Name = "txt_DNI";
-            txt_DNI.Size = new Size(141, 23);
+            txt_DNI.Size = new Size(161, 27);
             txt_DNI.TabIndex = 1;
             // 
             // lbl_Actividad
             // 
             lbl_Actividad.AutoSize = true;
             lbl_Actividad.Font = new Font("Segoe UI", 10F);
-            lbl_Actividad.Location = new Point(18, 52);
+            lbl_Actividad.Location = new Point(21, 69);
             lbl_Actividad.Name = "lbl_Actividad";
-            lbl_Actividad.Size = new Size(80, 19);
+            lbl_Actividad.Size = new Size(97, 23);
             lbl_Actividad.TabIndex = 2;
             lbl_Actividad.Text = "ACTIVIDAD";
             // 
@@ -71,16 +72,20 @@
             dgvActividades.AllowUserToDeleteRows = false;
             dgvActividades.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvActividades.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvActividades.Location = new Point(18, 74);
+            dgvActividades.Location = new Point(21, 99);
+            dgvActividades.Margin = new Padding(3, 4, 3, 4);
             dgvActividades.Name = "dgvActividades";
-            dgvActividades.Size = new Size(670, 120);
+            dgvActividades.RowHeadersWidth = 51;
+            dgvActividades.Size = new Size(766, 160);
             dgvActividades.TabIndex = 3;
+            dgvActividades.CellContentClick += dgvActividades_CellContentClick;
             // 
             // btn_Inscribir
             // 
-            btn_Inscribir.Location = new Point(286, 213);
+            btn_Inscribir.Location = new Point(327, 284);
+            btn_Inscribir.Margin = new Padding(3, 4, 3, 4);
             btn_Inscribir.Name = "btn_Inscribir";
-            btn_Inscribir.Size = new Size(134, 38);
+            btn_Inscribir.Size = new Size(153, 51);
             btn_Inscribir.TabIndex = 4;
             btn_Inscribir.Text = "Inscribir";
             btn_Inscribir.UseVisualStyleBackColor = true;
@@ -88,9 +93,10 @@
             // 
             // btn_Volver
             // 
-            btn_Volver.Location = new Point(286, 273);
+            btn_Volver.Location = new Point(327, 364);
+            btn_Volver.Margin = new Padding(3, 4, 3, 4);
             btn_Volver.Name = "btn_Volver";
-            btn_Volver.Size = new Size(134, 38);
+            btn_Volver.Size = new Size(153, 51);
             btn_Volver.TabIndex = 5;
             btn_Volver.Text = "Volver";
             btn_Volver.UseVisualStyleBackColor = true;
@@ -98,9 +104,10 @@
             // 
             // btn_Buscar
             // 
-            btn_Buscar.Location = new Point(227, 14);
+            btn_Buscar.Location = new Point(259, 19);
+            btn_Buscar.Margin = new Padding(3, 4, 3, 4);
             btn_Buscar.Name = "btn_Buscar";
-            btn_Buscar.Size = new Size(95, 25);
+            btn_Buscar.Size = new Size(109, 33);
             btn_Buscar.TabIndex = 6;
             btn_Buscar.Text = "BUSCAR";
             btn_Buscar.UseVisualStyleBackColor = true;
@@ -108,10 +115,10 @@
             // 
             // Actividad
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.DarkKhaki;
-            ClientSize = new Size(700, 338);
+            ClientSize = new Size(800, 451);
             Controls.Add(btn_Buscar);
             Controls.Add(btn_Volver);
             Controls.Add(btn_Inscribir);
@@ -119,6 +126,7 @@
             Controls.Add(lbl_Actividad);
             Controls.Add(txt_DNI);
             Controls.Add(lbl_DNI);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "Actividad";
             Text = "Actividad";
             Load += Actividad_Load;
