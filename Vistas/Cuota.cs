@@ -54,11 +54,11 @@ namespace Club_Deportivo
             {
                 string query;
                 cadena = Conexion.getInstancia().CrearConexion();
-                query = "SELECT s.IdSocio, s.Nombre, s.Apellido, SUM(c.Monto) AS TotalCuota, MAX(c.FechaPago) AS FechaPago " +
-                        "FROM club_deportivo.socios s " +
-                        "INNER JOIN club_deportivo.cuota c ON s.IdSocio = c.IdSocio " +
-                        "WHERE s.Documento = @Documento " +
-                        "GROUP BY s.IdSocio, s.Nombre, s.Apellido ";
+                query = @"SELECT c.idClientes, c.nombre, c.apellido, q.idCuota, q.Monto, q.fechaVencimiento
+                        FROM clientes c
+                        INNER JOIN cuota q ON c.idClientes = q.idClientes
+                        WHERE c.dni = @Documento
+                        AND q.Estado = 'Pendiente'";
 
                 MySqlCommand comando = new MySqlCommand(query, cadena);
                 comando.CommandType = CommandType.Text;
@@ -71,25 +71,45 @@ namespace Club_Deportivo
                 {
                     reader.Read();
 
-                    int idSocio = reader.GetInt32(0);
-                    string nombre = reader.GetString(1);
-                    string apellido = reader.GetString(2);
-                    float monto = (float)reader.GetDecimal(3);
-                    DateTime periodo = reader.GetDateTime(4);
+                    int idCliente = reader.GetInt32("idClientes");
+                    string nombre = reader.GetString("nombre");
+                    string apellido = reader.GetString("apellido");
+
+                    int idCuota = reader.GetInt32("idCuota");
+
+                    float monto =
+                        Convert.ToSingle(reader.GetDecimal("Monto"));
+
+                    DateTime periodo =
+                        reader.GetDateTime("fechaVencimiento");
+
                     reader.Close();
 
                     // UPDATE CUOTA
 
-                    string update =
-                    @"UPDATE cuota SET Estado='Pagado' WHERE IdSocio=@IdSocio";
+                    string update = @"UPDATE cuota SET Estado='Pagado' WHERE idCuota=@idCuota";
                     MySqlCommand cmdUpdate = new MySqlCommand(update, cadena);
-                    cmdUpdate.Parameters.AddWithValue("@IdSocio", idSocio);
+                    cmdUpdate.Parameters.AddWithValue("@idCuota",idCuota);
                     cmdUpdate.ExecuteNonQuery();
+
+                    // UPDATE PAGO
+                    Random rnd = new Random();
+                    int nroComprobante = rnd.Next(100000, 999999);
+
+                    string insertPago = @"INSERT INTO pagos(idCuota, idClientes, Monto, fechaPago, nroComprobante)
+                                        VALUES(@idCuota, @idCliente, @Monto, NOW(), @Comprobante)";
+
+                    MySqlCommand cmdPago = new MySqlCommand(insertPago, cadena);
+                    cmdPago.Parameters.AddWithValue("@idCuota", idCuota);
+                    cmdPago.Parameters.AddWithValue("@idCliente", idCliente);
+                    cmdPago.Parameters.AddWithValue("@Monto", monto);
+                    cmdPago.Parameters.AddWithValue("@Comprobante", nroComprobante);
+                    cmdPago.ExecuteNonQuery();
 
                     // DATOS COMPROBANTE
 
                     doc = new DatosComprobante();
-                    doc.NSocio = idSocio;
+                    doc.NSocio = idCliente;
                     doc.nombre = nombre;
                     doc.apellido = apellido;
                     doc.monto = monto;
@@ -127,7 +147,7 @@ namespace Club_Deportivo
                 }
                 else
                 {
-                    MessageBox.Show("DNI inexistente", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("No se encontraron cuotas pendientes para ese DNI", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
@@ -136,7 +156,7 @@ namespace Club_Deportivo
             }
             finally
             {
-                if (cadena.State == ConnectionState.Open)
+                if (cadena != null && cadena.State == ConnectionState.Open)
                 {
                     cadena.Close();
                 }

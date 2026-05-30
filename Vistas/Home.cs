@@ -29,7 +29,7 @@ namespace Club_Deportivo
         {
 
             // Abrir el formulario de inscripción
-            chkAptoFisico inscripcion = new chkAptoFisico();
+            Inscripcion inscripcion = new Inscripcion();
             inscripcion.Show();
             this.Hide();
         }
@@ -59,6 +59,25 @@ namespace Club_Deportivo
             // Abrir el formulario de inscripción
             Listado listado = new Listado();
             listado.Show();
+            this.Hide();
+        }
+
+        private void btn_Actividad_Click(object sender, EventArgs e)
+        {
+            Actividad actividad = new Actividad();
+            actividad.Show();
+            this.Hide();
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            ListadoSocios listadoSocios = new ListadoSocios();
+            listadoSocios.Show();
             this.Hide();
         }
     }

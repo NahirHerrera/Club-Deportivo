@@ -1,38 +1,40 @@
-﻿using Club_Deportivo.Entidades;
-using MySql.Data.MySqlClient;
+﻿using System;
 using System.Data;
+using MySql.Data.MySqlClient;
 
 namespace Club_Deportivo.Datos
 {
-    internal class Socios
+    public class Clientes
     {
-        // Método para registrar un nuevo socio en la base de datos
-        public string Nuevo_Socio(E_Socio socio)
+        // Método para registrar un nuevo cliente en la base de datos
+        public string RegistrarCliente(string nom, string ape, string tDoc, string doc, bool apto, bool esSocio, int idActividad)
         {
 
             // Variable para almacenar la respuesta del procedimiento almacenado o el mensaje de error
-            string salida;
+            string salida = "";
             MySqlConnection sqlCon = new MySqlConnection();
 
-            
             try
             {
                 // Crear la conexión a la base de datos utilizando la clase Conexion
 
                 sqlCon = Conexion.getInstancia().CrearConexion();
-                MySqlCommand comando = new MySqlCommand("RegistroSocio", sqlCon);
+                MySqlCommand comando = new MySqlCommand("RegistrarCliente", sqlCon);
                 comando.CommandType = CommandType.StoredProcedure;
 
                 // Agregar los parámetros necesarios para el procedimiento almacenado
 
-                comando.Parameters.Add("Nom", MySqlDbType.VarChar).Value = socio.Nombre;
-                comando.Parameters.Add("Ape", MySqlDbType.VarChar).Value = socio.Apellido;
-                comando.Parameters.Add("TDoc", MySqlDbType.VarChar).Value = socio.TipoDoc;
-                comando.Parameters.Add("Doc", MySqlDbType.VarChar).Value = socio.Documento;
+                comando.Parameters.AddWithValue("Nom", nom);
+                comando.Parameters.AddWithValue("Ape", ape);
+                comando.Parameters.AddWithValue("tDoc", tDoc);
+                comando.Parameters.AddWithValue("Doc", doc);
+                comando.Parameters.AddWithValue("Apto", apto);
+                comando.Parameters.AddWithValue("EsSocio", esSocio);
+                comando.Parameters.AddWithValue("IdActividad", idActividad);
 
                 // Definir un parámetro de salida para capturar la respuesta del procedimiento almacenado
 
-                MySqlParameter ParCodigo = new MySqlParameter();
+                MySqlParameter ParCodigo= new MySqlParameter();
                 ParCodigo.ParameterName = "rta";
                 ParCodigo.MySqlDbType = MySqlDbType.Int32;
                 ParCodigo.Direction = ParameterDirection.Output;
@@ -50,6 +52,7 @@ namespace Club_Deportivo.Datos
             {
                 // En caso de una excepción, asignar el mensaje de error a la variable de salida
                 salida = ex.Message;
+                MessageBox.Show(ex.Message, "ERROR");
             }
             finally
             {
@@ -60,43 +63,7 @@ namespace Club_Deportivo.Datos
                     sqlCon.Close();
                 }
             }
-
             return salida;
-        }
-        public string ObtenerEstadoCuota(int idSocio)
-        {
-            string estado = "";
-
-            MySqlConnection sqlCon = new MySqlConnection();
-
-            try
-            {
-                sqlCon = Conexion.getInstancia().CrearConexion();
-
-                string query = @"SELECT Estado FROM cuota WHERE IdSocio=@IdSocio";
-
-                MySqlCommand cmd = new MySqlCommand(query, sqlCon);
-
-                cmd.Parameters.AddWithValue( "@IdSocio", idSocio);
-
-                sqlCon.Open();
-
-                object resultado = cmd.ExecuteScalar();
-
-                if (resultado != null)
-                {
-                    estado = resultado.ToString();
-                }
-            }
-
-            finally
-            {
-                if (sqlCon.State == ConnectionState.Open)
-                {
-                    sqlCon.Close();
-                }
-            }
-            return estado;
         }
     }
 }
