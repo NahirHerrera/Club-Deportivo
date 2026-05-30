@@ -28,10 +28,12 @@ namespace Club_Deportivo
             {
                 string query;
                 cadena = Conexion.getInstancia().CrearConexion();
-                query = "SELECT s.Nombre, s.Apellido, s.Documento, c.Monto, c.FechaVencimiento " +
-                        "FROM Cuota c INNER JOIN Socios s ON s.IdSocio = c.IdSocio " +
-                        "WHERE c.Estado = 'Pendiente' AND c.FechaVencimiento < CURDATE() " +
-                        "ORDER BY c.FechaVencimiento ASC;";
+                query = @"SELECT cl.nombre, cl.apellido, cl.dni, c.Monto, c.fechaVencimiento
+                        FROM cuota c
+                        INNER JOIN clientes cl
+                        ON cl.idClientes = c.idClientes
+                        WHERE c.Estado = 'Pendiente'
+                        ORDER BY c.fechaVencimiento ASC";
 
                 MySqlCommand comando = new MySqlCommand(query, cadena);
                 comando.CommandType = CommandType.Text;

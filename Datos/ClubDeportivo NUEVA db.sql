@@ -77,6 +77,15 @@ CREATE TABLE Carnet (
     FOREIGN KEY (idClientes) REFERENCES Clientes (idClientes)
 );
 
+CREATE TABLE socio_actividad(
+    idCliente INT,
+    idActividad INT,
+    fechaInscripcion DATETIME,
+    PRIMARY KEY(idCliente,idActividad),
+    FOREIGN KEY(idCliente) REFERENCES clientes(idClientes),
+    FOREIGN KEY(idActividad) REFERENCES actividades(idActividades)
+);
+
 --
 -- PROCEDURES
 --
