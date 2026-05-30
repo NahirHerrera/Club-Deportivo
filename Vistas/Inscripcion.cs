@@ -54,13 +54,31 @@ namespace Club_Deportivo.Vistas
                 // Crear un nuevo objeto E_Cliente y asignar los valores de los campos de entrada
                 string respuesta;
 
-                E_Clientes cliente = new E_Clientes();
-                cliente.nombre = nombreInput.Text.Trim();
-                cliente.apellido = apellidoInput.Text.Trim();
-                cliente.tipoDoc = cmbTipoDoc.Text.Trim();
-                cliente.dni = documentoInput.Text.Trim();
-
-                bool esSocio = (cmbTipoCliente.Text == "Socios");
+                E_Clientes cliente;
+                
+                if (cmbTipoCliente.Text.Trim() == "Socios")
+                {
+                    cliente = new E_Socios(
+                        0,
+                        nombreInput.Text.Trim(),
+                        apellidoInput.Text.Trim(),
+                        cmbTipoDoc.Text.Trim(),
+                        documentoInput.Text.Trim(),
+                        chkAF.Checked
+                    );
+                }
+                else
+                {
+                    cliente = new E_NoSocios(
+                        0,
+                        nombreInput.Text.Trim(),
+                        apellidoInput.Text.Trim(),
+                        cmbTipoDoc.Text.Trim(),
+                        documentoInput.Text.Trim(),
+                        chkAF.Checked
+                    );
+                }
+                bool esSocio = cmbTipoCliente.Text.Trim() == "Socios";
 
                 // Llamar al método Nuevo_Socio de la clase Socios para guardar el nuevo socio en la base de datos
 
@@ -90,7 +108,7 @@ namespace Club_Deportivo.Vistas
                     {
 
                         // Si el código es diferente de 1, significa que el socio se almacenó con éxito en la base de datos
-                        string tipo = esSocio ? "Socio" : "No Socio";
+                        string tipo = esSocio ? "Socios" : "No Socios";
                         MessageBox.Show($"Se almacenó con éxito el {tipo} con el código Nro " + respuesta,
                                         "AVISO DEL SISTEMA",
                                         MessageBoxButtons.OK,
