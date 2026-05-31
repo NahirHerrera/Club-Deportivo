@@ -25,13 +25,119 @@ namespace Club_Deportivo.Vistas
             InitializeComponent();
         }
 
+        // ***************************************************************************************************
+        // ********************* METODOS AUXILIARES DEL FORMULARIO ACTIVIDAD *********************************
+        // ***************************************************************************************************
+
+        // Metodo que Oculta los controles relacionados con las actividades y la inscripción, mostrando solo el campo de búsqueda por DNI.
+        private void OcultarControles()
+        {
+            dgvActividades.Visible = false;
+
+            btn_Inscribir.Visible = false;
+            btn_PagarInscribir.Visible = false;
+            btn_Inscripcion.Visible = false;
+
+            groupBox1.Visible = false;
+        }
+
+        // Método que obtiene la forma de pago seleccionada por el usuario, verificando cuál de las opciones de pago está marcada.
+        private string ObtenerFormaPago()
+        {
+            if (rd_Efectivo.Checked)
+                return "Efectivo";
+
+            if (rd_Tarjeta.Checked)
+                return "Tarjeta";
+
+            if (rd_Transferencia.Checked)
+                return "Transferencia";
+
+            return "";
+        }
+
+        // Método que registra la inscripción del cliente a las actividades seleccionadas,
+        // insertando un registro en la tabla de inscripciones para cada actividad marcada.
+        private bool RegistrarInscripcion(string formaPago, bool socio)
+        {
+            MySqlConnection cadena = null; 
+            bool seInserto = false;
+
+            try
+            {
+                cadena = Conexion.getInstancia().CrearConexion();
+                cadena.Open();
+
+                // Recorre cada fila del DataGridView de actividades para verificar cuáles han sido seleccionadas por el usuario.
+                foreach (DataGridViewRow fila in dgvActividades.Rows)
+                {
+                    if (fila.Cells["Seleccionar"].Value != null && Convert.ToBoolean(fila.Cells["Seleccionar"].Value))
+                    {
+                        int idActividad = Convert.ToInt32(fila.Cells["idActividades"].Value);
+                        decimal monto = socio ? 0: Convert.ToDecimal(fila.Cells["costo_pase_diario"].Value);
+
+                        // Consulta de inserción para registrar la inscripción del cliente a la actividad seleccionada,
+                        // incluyendo la forma de pago y el monto correspondiente.
+                        string query = @"INSERT INTO inscripcion_actividad(idCliente, idActividad, formaPago, monto, fechaInscripcion)
+                                        VALUES (@idCliente, @idActividad, @formaPago, @monto, NOW())";
+
+                        MySqlCommand comando = new MySqlCommand(query, cadena);
+
+                        comando.Parameters.AddWithValue("@idCliente", idClienteActual);
+                        comando.Parameters.AddWithValue("@idActividad", idActividad);
+                        comando.Parameters.AddWithValue("@formaPago", formaPago);
+                        comando.Parameters.AddWithValue("@monto", monto);
+
+                        // Se intenta ejecutar la inserción, y se maneja la excepción específica de clave duplicada (1062)
+                        try
+                        {
+                            comando.ExecuteNonQuery();
+                            seInserto = true;
+                        }
+                        catch (MySqlException ex)
+                        {
+                            if (ex.Number == 1062)
+                            {
+                                MessageBox.Show("El cliente ya está inscripto en esta actividad");
+                            }
+                            else
+                            {
+                                throw;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                if (cadena != null && cadena.State == ConnectionState.Open)
+                {
+                    cadena.Close();
+                }
+            }
+
+            return seInserto;
+        }
+
+        // ***************************************************************************************************
+        // **************************** FIN DEL BLOQUE DE METODOS ********************************************
+        // ***************************************************************************************************
+
+
+
+
         // Al iniciar el formulario se ocultan las actividades
         // y se deshabilita la inscripción hasta validar un cliente.
         private void Actividad_Load(object sender, EventArgs e)
         {
-            dgvActividades.Visible = false;
-            btn_Inscribir.Enabled = false;
+            OcultarControles();
         }
+
+
 
         // Obtiene las actividades registradas en la base de datos
         // y las carga en el DataGridView.
@@ -43,6 +149,7 @@ namespace Club_Deportivo.Vistas
             {
                 cadena = Conexion.getInstancia().CrearConexion();
 
+
                 // Consulta las actividades disponibles, mostrando su ID, nombre y costo diario.
                 string query = "SELECT idActividades, nombreActividad, costo_pase_diario FROM actividades";
                 MySqlDataAdapter adapter = new MySqlDataAdapter(query, cadena);
@@ -50,14 +157,13 @@ namespace Club_Deportivo.Vistas
                 adapter.Fill(tabla);
                 dgvActividades.DataSource = tabla;
 
-                // Agrega una columna de selección si no existe, para permitir marcar las actividades a inscribir.
+
+                // Agrega una columna de selección de CHECK si no existe, para permitir marcar las actividades a inscribir.
                 if (!dgvActividades.Columns.Contains("Seleccionar"))
                 {
                     DataGridViewCheckBoxColumn chk = new DataGridViewCheckBoxColumn();
-
                     chk.Name = "Seleccionar";
                     chk.HeaderText = "Seleccionar";
-
                     dgvActividades.Columns.Insert(0, chk);
                 }
             }
@@ -140,10 +246,12 @@ namespace Club_Deportivo.Vistas
                         // De lo contrario, se muestra un mensaje indicando que tiene cuotas pendientes.
                         if (estado != null && estado.ToString() == "Pagado")
                         {
-                            MessageBox.Show("Socio con cuota al día");
-
-                            dgvActividades.Visible = true;
                             btn_Inscribir.Enabled = true;
+                            dgvActividades.Visible = true;
+                            btn_Inscribir.Visible = true;
+                            btn_PagarInscribir.Visible = false;
+                            groupBox1.Visible = false;
+                            btn_Inscripcion.Visible = false;
 
                             CargarActividades();
                         }
@@ -151,7 +259,7 @@ namespace Club_Deportivo.Vistas
                         {
                             MessageBox.Show("El socio posee cuotas pendientes");
 
-                            dgvActividades.Visible = false;
+                            OcultarControles();
                             btn_Inscribir.Enabled = false;
                         }
                     }
@@ -160,8 +268,10 @@ namespace Club_Deportivo.Vistas
                     // mostrando las actividades disponibles.
                     else
                     {
+                        OcultarControles();
+
                         dgvActividades.Visible = true;
-                        btn_Inscribir.Enabled = true;
+                        btn_PagarInscribir.Visible = true;
 
                         CargarActividades();
                     }
@@ -174,8 +284,7 @@ namespace Club_Deportivo.Vistas
                 else
                 {
                     MessageBox.Show("DNI inexistente");
-
-                    dgvActividades.Visible = false;
+                    OcultarControles();
                     btn_Inscribir.Enabled = false;
                 }
 
@@ -193,49 +302,15 @@ namespace Club_Deportivo.Vistas
             }
         }
 
-        // Inscribe al cliente a las actividades seleccionadas, insertando registros en la tabla de socio_actividad.
+        // Registra la inscripción del socio a las actividades seleccionadas,
+        // sin necesidad de procesar un pago, ya que los socios no pagan por las actividades.
         private void btn_Inscribir_Click(object sender, EventArgs e)
         {
-            MySqlConnection cadena = null;
+            bool resultado = RegistrarInscripcion("Socio", true);
 
-            // Recorre las filas del DataGridView para identificar las actividades seleccionadas por el cliente.
-            try
+            if (resultado)
             {
-                cadena = Conexion.getInstancia().CrearConexion();
-                cadena.Open();
-                foreach (DataGridViewRow fila in dgvActividades.Rows)
-                {
-
-                    // Verifica si la fila tiene la columna "Seleccionar" marcada, indicando que el cliente desea inscribirse a esa actividad.
-                    if (fila.Cells["Seleccionar"].Value != null && Convert.ToBoolean(fila.Cells["Seleccionar"].Value))
-                    {
-                        int idActividad = Convert.ToInt32(fila.Cells["idActividades"].Value);
-
-                        // Inserta un nuevo registro en la tabla socio_actividad para asociar al cliente
-                        // con la actividad seleccionada, utilizando la fecha actual para la inscripción.
-                        string query = @"INSERT INTO socio_actividad (idCliente, idActividad, fechaInscripcion)
-                                        VALUES (@idCliente, @idActividad, NOW())";
-
-                        // Se utiliza un comando parametrizado para evitar inyecciones SQL y asegurar la integridad de los datos.
-                        MySqlCommand comando = new MySqlCommand(query, cadena);
-                        comando.Parameters.AddWithValue("@idCliente", idClienteActual);
-                        comando.Parameters.AddWithValue("@idActividad", idActividad);
-                        comando.ExecuteNonQuery();
-                    }
-                }
-
                 MessageBox.Show("Inscripción realizada correctamente");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                if (cadena != null && cadena.State == ConnectionState.Open)
-                {
-                    cadena.Close();
-                }
             }
         }
 
@@ -249,6 +324,62 @@ namespace Club_Deportivo.Vistas
         private void dgvActividades_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        // Calcula el total a pagar por las actividades seleccionadas, sumando el costo diario de cada una para los NO SOCIOS
+        private decimal CalcularTotal()
+        {
+            decimal total = 0;
+
+            foreach (DataGridViewRow fila in dgvActividades.Rows)
+            {
+                if (fila.Cells["Seleccionar"].Value != null && Convert.ToBoolean(fila.Cells["Seleccionar"].Value))
+                {
+                    total += Convert.ToDecimal(fila.Cells["costo_pase_diario"].Value);
+                }
+            }
+
+            return total;
+        }
+
+        // Muestra el total a pagar por las actividades seleccionadas y
+        // habilita el grupo de opciones de pago para que el cliente pueda elegir su forma de pago.
+        private void btn_PagarInscribir_Click(object sender, EventArgs e)
+        {
+            decimal total = CalcularTotal();
+
+            if (total == 0)
+            {
+                MessageBox.Show( "Debe seleccionar al menos una actividad");
+                return;
+            }
+
+            lbl_Total.Text = "TOTAL A PAGAR: $" + total;
+            groupBox1.Visible = true;
+            btn_Inscripcion.Visible = true;
+        }
+
+        // Registra la inscripción del cliente a las actividades seleccionadas,
+        // insertando registros en la tabla de inscripciones con la forma de pago y el monto correspondiente para los NO SOCIOS.
+        private void btn_Inscripcion_Click(object sender, EventArgs e)
+        {
+
+            // Verifica que el cliente haya seleccionado una forma de pago antes de registrar la inscripción.
+            if (!rd_Efectivo.Checked &&
+                !rd_Tarjeta.Checked &&
+                !rd_Transferencia.Checked)
+            {
+                MessageBox.Show("Seleccione una forma de pago");
+                return;
+            }
+
+            string formaPago = ObtenerFormaPago();
+            bool resultado = RegistrarInscripcion(formaPago, false);
+
+            if (resultado)
+            {
+                MessageBox.Show("Pago e inscripción realizados correctamente");
+            }
         }
     }
 }
