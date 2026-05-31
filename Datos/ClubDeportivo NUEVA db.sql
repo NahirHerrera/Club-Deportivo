@@ -77,13 +77,24 @@ CREATE TABLE Carnet (
     FOREIGN KEY (idClientes) REFERENCES Clientes (idClientes)
 );
 
-CREATE TABLE socio_actividad(
-    idCliente INT,
-    idActividad INT,
-    fechaInscripcion DATETIME,
-    PRIMARY KEY(idCliente,idActividad),
-    FOREIGN KEY(idCliente) REFERENCES clientes(idClientes),
-    FOREIGN KEY(idActividad) REFERENCES actividades(idActividades)
+CREATE TABLE inscripcion_actividad (
+    idInscripcion INT AUTO_INCREMENT PRIMARY KEY,
+    idCliente INT NOT NULL,
+    idActividad INT NOT NULL,
+    formaPago VARCHAR(30) NOT NULL,
+    monto DECIMAL(10,2) NOT NULL,
+    fechaInscripcion DATETIME NOT NULL,
+
+    CONSTRAINT fk_inscripcion_cliente
+        FOREIGN KEY (idCliente)
+        REFERENCES clientes(idClientes),
+
+    CONSTRAINT fk_inscripcion_actividad
+        FOREIGN KEY (idActividad)
+        REFERENCES actividades(idActividades),
+
+    CONSTRAINT uq_cliente_actividad
+        UNIQUE (idCliente, idActividad)
 );
 
 --
@@ -177,20 +188,15 @@ DELIMITER ;
 
 DELIMITER //
 CREATE PROCEDURE ObtenerSocios(
-	IN p_dni VARCHAR(30)
+    IN p_dni VARCHAR(30)
 )
 BEGIN
-    SELECT
-        c.idClientes,
-        c.nombre,
-        c.apellido,
-        c.dni,
-        a.idActividades,
-        a.nombreActividad,
-        sa.fechaInscripcion
+    SELECT c.idClientes, c.nombre, c.apellido, c.dni, a.idActividades, a.nombreActividad, ia.fechaInscripcion
     FROM Clientes c
-    LEFT JOIN socio_actividad sa ON sa.idCliente = c.idClientes
-    LEFT JOIN Actividades a ON a.idActividades = sa.idActividad
+    LEFT JOIN inscripcion_actividad ia
+        ON ia.idCliente = c.idClientes
+    LEFT JOIN Actividades a
+        ON a.idActividades = ia.idActividad
     WHERE (p_dni IS NULL OR c.dni = p_dni)
     ORDER BY c.idClientes, a.nombreActividad;
 END //
@@ -239,11 +245,11 @@ INSERT INTO Carnet (nroCarnet, fechaEmision, idClientes) VALUES
 (0001, '2026-04-10 14:45:00',1),
 (0002, '2025-05-10 10:15:00',2);
 
-UPDATE club_deportivo.Inscripcion
+UPDATE Inscripcion
 SET IdClientes = 1
 WHERE IdInscripcion = 1;
 
 SELECT c.IdCuota, c.Monto, c.Estado, c.FechaVencimiento, c.IdClientes
-FROM club_deportivo.cuota c
-INNER JOIN club_deportivo.clientes p ON p.IdClientes = c.IdClientes
-WHERE p.dni = "32456741";
+FROM cuota c
+INNER JOIN clientes p ON p.IdClientes = c.IdClientes
+WHERE p.dni = '32456741';
