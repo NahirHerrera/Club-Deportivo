@@ -34,8 +34,6 @@ CREATE TABLE Actividades (
     costo_pase_diario DECIMAL(10,2)
 );
 
-ALTER TABLE Actividades ADD COLUMN horario VARCHAR(50);
-
 CREATE TABLE NoSocios (
     idClientes INT NOT NULL PRIMARY KEY,
     idActividades INT, 
@@ -54,7 +52,7 @@ CREATE TABLE Inscripcion (
 CREATE TABLE Cuota (
     idCuota INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     idClientes INT NOT NULL, 
-    Monto DECIMAL(10,2),  
+    Monto DECIMAL(10,2),
     fechaVencimiento DATETIME(6),
     Estado VARCHAR(20),
     FOREIGN KEY (idClientes) REFERENCES Socios (idClientes)
@@ -79,6 +77,15 @@ CREATE TABLE Carnet (
     FOREIGN KEY (idClientes) REFERENCES Clientes (idClientes)
 );
 
+CREATE TABLE socio_actividad(
+    idCliente INT,
+    idActividad INT,
+    fechaInscripcion DATETIME,
+    PRIMARY KEY(idCliente,idActividad),
+    FOREIGN KEY(idCliente) REFERENCES clientes(idClientes),
+    FOREIGN KEY(idActividad) REFERENCES actividades(idActividades)
+);
+
 --
 -- PROCEDURES
 --
@@ -89,6 +96,7 @@ CREATE TABLE Carnet (
 
 DROP PROCEDURE IF EXISTS RegistrarCliente;
 DROP PROCEDURE IF EXISTS IngresoLogin;
+DROP PROCEDURE IF EXISTS ObtenerSocios;
 
 DELIMITER //
 CREATE PROCEDURE RegistrarCliente(
@@ -122,6 +130,13 @@ BEGIN
              
              INSERT INTO Socios (idClientes, nroCarnet, fecha_vencimiento_cuota)
              VALUES (v_idClientes, v_nroCarnet, DATE_ADD(NOW(), INTERVAL 1 MONTH));
+
+             --
+             -- EL SOCIO SE REGISTRA YA CON UNA CUOTA
+             --
+
+             INSERT INTO Cuota (idClientes, Monto, fechaVencimiento, Estado)
+			 VALUES(v_idClientes,40000,DATE_ADD(NOW(), INTERVAL 1 MONTH),'Pendiente');
              
              SET rta = v_nroCarnet;
 	    ELSE
@@ -154,7 +169,36 @@ BEGIN
 END //
 DELIMITER ;
 
+
+--
+-- OBTENER LISTADO CLIENTES
+--
+
+
+DELIMITER //
+CREATE PROCEDURE ObtenerSocios(
+	IN p_dni VARCHAR(30)
+)
+BEGIN
+    SELECT
+        c.idClientes,
+        c.nombre,
+        c.apellido,
+        c.dni,
+        a.idActividades,
+        a.nombreActividad,
+        sa.fechaInscripcion
+    FROM Clientes c
+    LEFT JOIN socio_actividad sa ON sa.idCliente = c.idClientes
+    LEFT JOIN Actividades a ON a.idActividades = sa.idActividad
+    WHERE (p_dni IS NULL OR c.dni = p_dni)
+    ORDER BY c.idClientes, a.nombreActividad;
+END //
+DELIMITER ;
+
+--
 -- TEST
+--
 
 INSERT INTO Usuarios (Usuario, Password) VALUES 
 ('admin', '1234');
