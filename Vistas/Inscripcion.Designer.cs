@@ -211,7 +211,7 @@
             // 
             // btnRegistrarCliente
             // 
-            btnRegistrarCliente.Location = new Point(474, 368);
+            btnRegistrarCliente.Location = new Point(464, 368);
             btnRegistrarCliente.Name = "btnRegistrarCliente";
             btnRegistrarCliente.Size = new Size(153, 51);
             btnRegistrarCliente.TabIndex = 18;
@@ -231,7 +231,7 @@
             // 
             // btn_Volver
             // 
-            btn_Volver.Location = new Point(315, 368);
+            btn_Volver.Location = new Point(294, 368);
             btn_Volver.Name = "btn_Volver";
             btn_Volver.Size = new Size(153, 51);
             btn_Volver.TabIndex = 20;

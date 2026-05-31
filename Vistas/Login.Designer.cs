@@ -86,7 +86,7 @@
             // pictureBox1
             // 
             pictureBox1.Image = Properties.Resources.login;
-            pictureBox1.Location = new Point(43, 57);
+            pictureBox1.Location = new Point(62, 51);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(237, 181);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
