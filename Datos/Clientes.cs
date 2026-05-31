@@ -7,6 +7,8 @@ namespace Club_Deportivo.Datos
     public class Clientes
     {
         // Método para registrar un nuevo cliente en la base de datos
+        // Registra un cliente (socio o no socio) mediante el procedimiento almacenado RegistrarCliente.
+        // Devuelve el código de respuesta generado por la base de datos.
         public string RegistrarCliente(string nom, string ape, string tDoc, string doc, bool apto, bool esSocio, int idActividad)
         {
 

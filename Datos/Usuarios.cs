@@ -4,6 +4,8 @@ using System.Data;
 
 namespace Club_Deportivo.Datos
 {
+    // Valida las credenciales ingresadas por el usuario y devuelve
+    // un objeto E_Usuario si el login es correcto.
     public class Usuarios
     {
         public E_Usuario Log_Usu(string usu, string pass)

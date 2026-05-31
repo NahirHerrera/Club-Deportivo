@@ -130,7 +130,11 @@ BEGIN
              
              INSERT INTO Socios (idClientes, nroCarnet, fecha_vencimiento_cuota)
              VALUES (v_idClientes, v_nroCarnet, DATE_ADD(NOW(), INTERVAL 1 MONTH));
-             
+
+             --
+             -- EL SOCIO SE REGISTRA YA CON UNA CUOTA
+             --
+
              INSERT INTO Cuota (idClientes, Monto, fechaVencimiento, Estado)
 			 VALUES(v_idClientes,40000,DATE_ADD(NOW(), INTERVAL 1 MONTH),'Pendiente');
              
@@ -192,7 +196,9 @@ BEGIN
 END //
 DELIMITER ;
 
+--
 -- TEST
+--
 
 INSERT INTO Usuarios (Usuario, Password) VALUES 
 ('admin', '1234');

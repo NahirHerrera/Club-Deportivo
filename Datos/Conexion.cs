@@ -19,13 +19,15 @@ namespace Club_Deportivo.Datos
         private static Conexion? con = null;
 
         // Constructor privado para implementar el patrón Singleton
+        // Clase encargada de administrar la conexión con MySQL.
+        // Implementa el patrón Singleton para garantizar una única instancia.
         private Conexion()
         {
             this.baseDatos = "club_deportivo_modif";
             this.servidor = "localhost";
             this.puerto = "3306";
             this.usuario = "root";
-            this.clave = "0f1c1n4.12";
+            this.clave = "1234";
         }
 
         // Método para crear y retornar una conexión a la base de datos

@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 namespace Club_Deportivo.Vistas
 {
+    // Formulario para mostrar el listado de socios
     public partial class ListadoSocios : Form
     {
         public ListadoSocios()
@@ -18,6 +19,7 @@ namespace Club_Deportivo.Vistas
             this.Load += ListadoSocios_Load;
         }
 
+        // Configura las columnas del DataGridView para mostrar los datos de los socios
         private void ConfigurarGrilla()
         {
             dataGridView2.Columns.Clear();
@@ -38,10 +40,12 @@ namespace Club_Deportivo.Vistas
             CargaGrilla(null);
         }
 
+        // Carga los datos de los socios en el DataGridView, filtrando por DNI si se proporciona
         public void CargaGrilla(string dni = null)
         {
             try
             {
+                // Se utiliza un bloque using para asegurar que la conexión y el comando se cierren correctamente
                 using (MySqlConnection sqlCon = Conexion.getInstancia().CrearConexion())
                 using (MySqlCommand cmd = new MySqlCommand("ObtenerSocios", sqlCon))
                 {
@@ -62,6 +66,7 @@ namespace Club_Deportivo.Vistas
             }
         }
 
+        // Evento del botón para filtrar el listado de socios por DNI
         private void button1_Click(object sender, EventArgs e)
         {
             string dni = string.IsNullOrWhiteSpace(textBox1.Text) ? null : textBox1.Text.Trim();

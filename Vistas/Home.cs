@@ -9,6 +9,7 @@ using System.Windows.Forms;
 
 namespace Club_Deportivo
 {
+    // Formulario principal del sistema
     public partial class Home : Form
     {
         public Home()
