@@ -6,10 +6,24 @@ namespace Club_Deportivo.Entidades
 {
     public class E_Socios : E_Clientes
     {
-        public int nroCarnet {  get; set; }
-        public DateTime fecha_vencimiento_cuota {  get; set; } 
-        public double montoCuota { get; set; }
-
+        private int nroCarnet;
+        private DateTime fecha_vencimiento_cuota;
+        private double montoCuota;
+        public int NroCarnet
+        {
+            get { return nroCarnet; }
+            set { nroCarnet = value; }
+        }
+        public DateTime Fecha_vencimiento_cuota
+        {
+            get { return fecha_vencimiento_cuota; }
+            set { fecha_vencimiento_cuota = value; }
+        }
+        public double MontoCuota
+        {
+            get { return montoCuota; }
+            set { montoCuota = value; }
+        }
         public E_Socios(int id, string nombre, string apellido, string tipoDoc, string dni, bool aptoFisico) : base(id, nombre, apellido, tipoDoc, dni, aptoFisico) { }
         public override string generarInscripcion()
         {

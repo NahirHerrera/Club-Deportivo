@@ -6,13 +6,42 @@ namespace Club_Deportivo.Entidades
 {
     public class E_Clientes
     {
-        public int idClientes {  get; set; }
-        public string? nombre { get; set; }
-        public string? apellido { get; set; }
-        public string? tipoDoc {  get; set; }
-        public string? dni { get; set; } 
-        public bool aptoFisico { get; set; }
-
+        private int idClientes;
+        private string? nombre;
+        private string? apellido;
+        private string? tipoDoc;
+        private string? dni;
+        private bool aptoFisico;
+        public int IdClientes
+        {
+            get { return idClientes; }
+            set { idClientes = value; }
+        }
+        public string? Nombre
+        {
+            get { return nombre; }
+            set { nombre = value; }
+        }
+        public string? Apellido
+        {
+            get { return apellido; }
+            set { apellido = value; }
+        }
+        public string? TipoDoc
+        {
+            get { return tipoDoc; }
+            set { tipoDoc = value; }
+        }
+        public string? Dni
+        {
+            get { return dni; }
+            set { dni = value; }
+        }
+        public bool AptoFisico
+        {
+            get { return aptoFisico; }
+            set { aptoFisico = value; }
+        }
         public E_Clientes (int id, string nombre, string apellido, string tipoDoc, string dni, bool aptoFisico)
         {
             this.idClientes = id;

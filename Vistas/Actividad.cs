@@ -27,7 +27,7 @@ namespace Club_Deportivo.Vistas
 
         private void CargarActividades()
         {
-            MySqlConnection cadena = null;
+            MySqlConnection? cadena = null;
 
             try
             {
@@ -63,7 +63,7 @@ namespace Club_Deportivo.Vistas
 
         private void btn_Buscar_Click(object sender, EventArgs e)
         {
-            MySqlConnection cadena = null;
+            MySqlConnection? cadena = null;
 
             try
             {
@@ -82,7 +82,8 @@ namespace Club_Deportivo.Vistas
 
                     MessageBox.Show("Cliente encontrado: " +
                         reader["nombre"].ToString() + " " +
-                        reader["apellido"].ToString());
+                        reader["apellido"].ToString(),
+                        "MENSAJES DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     reader.Close();
 
@@ -97,12 +98,12 @@ namespace Club_Deportivo.Vistas
                     if (readerSocio.Read())
                     {
                         esSocioActual = true;
-                        MessageBox.Show("ES SOCIO");
+                        MessageBox.Show("Es Socio", "MENSAJES DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else
                     {
                         esSocioActual = false;
-                        MessageBox.Show("ES NO SOCIO");
+                        MessageBox.Show("Es No Socio", "MENSAJES DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
 
                     readerSocio.Close();
@@ -171,7 +172,7 @@ namespace Club_Deportivo.Vistas
 
         private void btn_Inscribir_Click(object sender, EventArgs e)
         {
-            MySqlConnection cadena = null;
+            MySqlConnection? cadena = null;
 
             try
             {
@@ -183,17 +184,20 @@ namespace Club_Deportivo.Vistas
                     {
                         int idActividad = Convert.ToInt32(fila.Cells["idActividades"].Value);
 
-                        string query = @"INSERT INTO socio_actividad (idCliente, idActividad, fechaInscripcion)
-                                        VALUES (@idCliente, @idActividad, NOW())";
+                        string query = @"INSERT INTO Inscripcion (idClientes, Fecha)
+                                        VALUES (@idClientes, NOW())";
 
                         MySqlCommand comando = new MySqlCommand(query, cadena);
-                        comando.Parameters.AddWithValue("@idCliente", idClienteActual);
-                        comando.Parameters.AddWithValue("@idActividad", idActividad);
+                        comando.Parameters.AddWithValue("@idClientes", idClienteActual);
                         comando.ExecuteNonQuery();
                     }
                 }
 
-                MessageBox.Show("Inscripción realizada correctamente");
+                MessageBox.Show("Inscripción realizada correctamente en las actividades abonadas.", "MENSAJES DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                
+                Home home = new Home();
+                home.Show();
+                this.Close();
             }
             catch (Exception ex)
             {
@@ -210,9 +214,60 @@ namespace Club_Deportivo.Vistas
 
         private void btn_Volver_Click(object sender, EventArgs e)
         {
-           Home home = new Home();
-           home.Show();
-           this.Hide();
+            Home home = new Home();
+            home.Show();
+            this.Hide();
+        }
+        private void pagarAct_Click(object sender, EventArgs e)
+        {
+            double costo = 0;
+            foreach (DataGridViewRow fila in dgvActividades.Rows)
+            {
+                if (fila.Cells["Seleccionar"].Value is bool seleccionado && seleccionado)
+                {
+                    costo += Convert.ToDouble(fila.Cells["costo_pase_diario"].Value);
+                }
+            }
+            if (costo == 0)
+            {
+                MessageBox.Show("Por favor, seleccione una actividad de la lista.", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            double montoFinal = costo;
+            string formaPago;
+            string mensajeCuotas = "";
+
+            if (rbEfectivo.Checked)
+            {
+                montoFinal = costo * 0.90;
+                formaPago = "Efectivo: 10% off";
+            }
+            else if (rbTarjeta3.Checked)
+            {
+                montoFinal = costo;
+                formaPago = "Tarj. Crédito: 3 cuotas s/ interés";
+                double valorCuota = montoFinal / 3;
+                mensajeCuotas = $"\n(3 cuotas de: ${valorCuota:F2})";
+            }
+            else if (rbTarjeta3.Checked)
+            {
+                montoFinal = costo;
+                formaPago = "Tarj. Crédito: 6 cuotas s/ interés";
+                double valorCuota = montoFinal / 6;
+                mensajeCuotas = $"\n(6 cuotas de: ${valorCuota:F2})";
+            }
+            else
+            {
+                MessageBox.Show("Por favor, seleccione una forma de pago.", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            MessageBox.Show(
+                $"Forma de pago: {formaPago}\n" +
+                $"Total a pagar: $ {montoFinal:F2}" +
+                mensajeCuotas,
+                "Pago"
+                );
         }
     }
 }

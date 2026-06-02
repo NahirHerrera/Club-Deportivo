@@ -84,10 +84,10 @@ namespace Club_Deportivo.Vistas
 
                 Datos.Clientes objetoDatos = new Datos.Clientes();
                 respuesta = objetoDatos.RegistrarCliente(
-                    cliente.nombre,
-                    cliente.apellido,
-                    cliente.tipoDoc,
-                    cliente.dni,
+                    cliente.Nombre,
+                    cliente.Apellido,
+                    cliente.TipoDoc,
+                    cliente.Dni,
                     chkAF.Checked,
                     esSocio,
                     1

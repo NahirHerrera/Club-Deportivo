@@ -31,7 +31,6 @@ namespace Club_Deportivo
             Carnet carnet = new Carnet();
             carnet.Show();
         }
-
         private void btn_Pagar_Click(object sender, EventArgs e)
         {
             // VALIDACION DE LA FORMA DE PAGO

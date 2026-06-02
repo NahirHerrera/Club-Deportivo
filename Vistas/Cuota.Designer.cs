@@ -33,10 +33,10 @@
             btn_Pagar = new Button();
             btn_Carnet = new Button();
             groupBox1 = new GroupBox();
+            rbTarjeta6 = new RadioButton();
             rbTarjeta3 = new RadioButton();
             rbEfectivo = new RadioButton();
             btn_Volver = new Button();
-            rbTarjeta6 = new RadioButton();
             groupBox1.SuspendLayout();
             SuspendLayout();
             // 
@@ -65,7 +65,7 @@
             btn_Pagar.Name = "btn_Pagar";
             btn_Pagar.Size = new Size(258, 73);
             btn_Pagar.TabIndex = 2;
-            btn_Pagar.Text = "PAGAR";
+            btn_Pagar.Text = "Pagar Cuota";
             btn_Pagar.UseVisualStyleBackColor = true;
             btn_Pagar.Click += btn_Pagar_Click;
             // 
@@ -76,7 +76,7 @@
             btn_Carnet.Name = "btn_Carnet";
             btn_Carnet.Size = new Size(258, 72);
             btn_Carnet.TabIndex = 3;
-            btn_Carnet.Text = "OBTENER CARNET";
+            btn_Carnet.Text = "Obtener Carnet";
             btn_Carnet.UseVisualStyleBackColor = true;
             btn_Carnet.Click += btn_Carnet_Click;
             // 
@@ -91,6 +91,17 @@
             groupBox1.TabIndex = 4;
             groupBox1.TabStop = false;
             groupBox1.Text = "Forma de Pago";
+            // 
+            // rbTarjeta6
+            // 
+            rbTarjeta6.AutoSize = true;
+            rbTarjeta6.Location = new Point(21, 146);
+            rbTarjeta6.Name = "rbTarjeta6";
+            rbTarjeta6.Size = new Size(257, 24);
+            rbTarjeta6.TabIndex = 8;
+            rbTarjeta6.TabStop = true;
+            rbTarjeta6.Text = "Tarj de crédito: 6 cuotas sin interes";
+            rbTarjeta6.UseVisualStyleBackColor = true;
             // 
             // rbTarjeta3
             // 
@@ -120,20 +131,9 @@
             btn_Volver.Name = "btn_Volver";
             btn_Volver.Size = new Size(255, 72);
             btn_Volver.TabIndex = 5;
-            btn_Volver.Text = "VOLVER";
+            btn_Volver.Text = "Volver";
             btn_Volver.UseVisualStyleBackColor = true;
             btn_Volver.Click += btn_Volver_Click;
-            // 
-            // rbTarjeta6
-            // 
-            rbTarjeta6.AutoSize = true;
-            rbTarjeta6.Location = new Point(21, 146);
-            rbTarjeta6.Name = "rbTarjeta6";
-            rbTarjeta6.Size = new Size(257, 24);
-            rbTarjeta6.TabIndex = 8;
-            rbTarjeta6.TabStop = true;
-            rbTarjeta6.Text = "Tarj de crédito: 6 cuotas sin interes";
-            rbTarjeta6.UseVisualStyleBackColor = true;
             // 
             // Cuota
             // 
