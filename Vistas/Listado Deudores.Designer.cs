@@ -28,12 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle11 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle12 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
             dtgvCuota = new DataGridView();
             Nombre = new DataGridViewTextBoxColumn();
             Apellido = new DataGridViewTextBoxColumn();
@@ -46,26 +46,26 @@
             // 
             // dtgvCuota
             // 
-            dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle7.BackColor = SystemColors.Control;
-            dataGridViewCellStyle7.Font = new Font("Tahoma", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle7.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle7.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = DataGridViewTriState.True;
-            dtgvCuota.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = SystemColors.Control;
+            dataGridViewCellStyle1.Font = new Font("Tahoma", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            dtgvCuota.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dtgvCuota.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dtgvCuota.Columns.AddRange(new DataGridViewColumn[] { Nombre, Apellido, Documento, Monto, Vencimiento });
             dtgvCuota.Location = new Point(54, 32);
             dtgvCuota.Name = "dtgvCuota";
             dtgvCuota.RowHeadersWidth = 51;
-            dtgvCuota.Size = new Size(672, 172);
+            dtgvCuota.Size = new Size(682, 172);
             dtgvCuota.TabIndex = 0;
             // 
             // Nombre
             // 
-            dataGridViewCellStyle8.Font = new Font("Microsoft Tai Le", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Nombre.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle2.Font = new Font("Microsoft Tai Le", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Nombre.DefaultCellStyle = dataGridViewCellStyle2;
             Nombre.HeaderText = "Nombre";
             Nombre.MinimumWidth = 6;
             Nombre.Name = "Nombre";
@@ -73,8 +73,8 @@
             // 
             // Apellido
             // 
-            dataGridViewCellStyle9.Font = new Font("Microsoft Tai Le", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Apellido.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle3.Font = new Font("Microsoft Tai Le", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Apellido.DefaultCellStyle = dataGridViewCellStyle3;
             Apellido.HeaderText = "Apellido";
             Apellido.MinimumWidth = 6;
             Apellido.Name = "Apellido";
@@ -82,8 +82,8 @@
             // 
             // Documento
             // 
-            dataGridViewCellStyle10.Font = new Font("Microsoft Tai Le", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Documento.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle4.Font = new Font("Microsoft Tai Le", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Documento.DefaultCellStyle = dataGridViewCellStyle4;
             Documento.HeaderText = "Documento";
             Documento.MinimumWidth = 6;
             Documento.Name = "Documento";
@@ -91,8 +91,8 @@
             // 
             // Monto
             // 
-            dataGridViewCellStyle11.Font = new Font("Microsoft Tai Le", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Monto.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle5.Font = new Font("Microsoft Tai Le", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Monto.DefaultCellStyle = dataGridViewCellStyle5;
             Monto.HeaderText = "Monto";
             Monto.MinimumWidth = 6;
             Monto.Name = "Monto";
@@ -101,8 +101,8 @@
             // Vencimiento
             // 
             Vencimiento.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle12.Font = new Font("Microsoft Tai Le", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Vencimiento.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle6.Font = new Font("Microsoft Tai Le", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Vencimiento.DefaultCellStyle = dataGridViewCellStyle6;
             Vencimiento.HeaderText = "Vencimiento";
             Vencimiento.MinimumWidth = 6;
             Vencimiento.Name = "Vencimiento";
@@ -110,9 +110,9 @@
             // 
             // btnVolverListado
             // 
-            btnVolverListado.Location = new Point(573, 339);
+            btnVolverListado.Location = new Point(54, 334);
             btnVolverListado.Name = "btnVolverListado";
-            btnVolverListado.Size = new Size(153, 51);
+            btnVolverListado.Size = new Size(143, 47);
             btnVolverListado.TabIndex = 9;
             btnVolverListado.Text = "Volver";
             btnVolverListado.UseVisualStyleBackColor = true;

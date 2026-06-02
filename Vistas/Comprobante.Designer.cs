@@ -277,7 +277,7 @@
             // 
             // btnImprimir
             // 
-            btnImprimir.Location = new Point(654, 409);
+            btnImprimir.Location = new Point(666, 409);
             btnImprimir.Name = "btnImprimir";
             btnImprimir.Size = new Size(94, 29);
             btnImprimir.TabIndex = 11;

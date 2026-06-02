@@ -44,13 +44,13 @@ namespace Club_Deportivo.Vistas
         // Método que obtiene la forma de pago seleccionada por el usuario, verificando cuál de las opciones de pago está marcada.
         private string ObtenerFormaPago()
         {
-            if (rd_Efectivo.Checked)
+            if (rbEfectivo.Checked)
                 return "Efectivo";
 
-            if (rd_Tarjeta.Checked)
+            if (rbTarjeta3.Checked)
                 return "Tarjeta";
 
-            if (rd_Transferencia.Checked)
+            if (rbTarjeta6.Checked)
                 return "Transferencia";
 
             return "";
@@ -346,15 +346,42 @@ namespace Club_Deportivo.Vistas
         // habilita el grupo de opciones de pago para que el cliente pueda elegir su forma de pago.
         private void btn_PagarInscribir_Click(object sender, EventArgs e)
         {
-            decimal total = CalcularTotal();
+            double costo = 3000;
+            double montoFinal = costo;
+            string formaPago;
+            string mensajeCuotas = "";
 
-            if (total == 0)
+            if (rbEfectivo.Checked)
             {
-                MessageBox.Show( "Debe seleccionar al menos una actividad");
+                montoFinal = costo * 0.90;
+                formaPago = "Efectivo: 10% off";
+            }
+            else if (rbTarjeta3.Checked)
+            {
+                montoFinal = costo;
+                formaPago = "Tarj. Crédito: 3 cuotas s/ interés";
+                double valorCuota = montoFinal / 3;
+                mensajeCuotas = $"\n(3 cuotas de: ${valorCuota:F2})";
+            }
+            else if (rbTarjeta3.Checked)
+            {
+                montoFinal = costo;
+                formaPago = "Tarj. Crédito: 6 cuotas s/ interés";
+                double valorCuota = montoFinal / 6;
+                mensajeCuotas = $"\n(6 cuotas de: ${valorCuota:F2})";
+            }
+            else
+            {
+                MessageBox.Show("Por favor, seleccione una forma de pago.", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+            MessageBox.Show(
+                $"Forma de pago: {formaPago}\n" +
+                $"Total a pagar: $ {montoFinal:F2}" +
+                mensajeCuotas,
+                "Pago"
+                );
 
-            lbl_Total.Text = "TOTAL A PAGAR: $" + total;
             groupBox1.Visible = true;
             btn_Inscripcion.Visible = true;
         }
@@ -365,9 +392,9 @@ namespace Club_Deportivo.Vistas
         {
 
             // Verifica que el cliente haya seleccionado una forma de pago antes de registrar la inscripción.
-            if (!rd_Efectivo.Checked &&
-                !rd_Tarjeta.Checked &&
-                !rd_Transferencia.Checked)
+            if (!rbEfectivo.Checked &&
+                !rbTarjeta3.Checked &&
+                !rbTarjeta6.Checked)
             {
                 MessageBox.Show("Seleccione una forma de pago");
                 return;

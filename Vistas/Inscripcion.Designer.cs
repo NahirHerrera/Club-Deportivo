@@ -277,7 +277,7 @@
             Controls.Add(label2);
             Controls.Add(label1);
             Name = "Inscripcion";
-            Text = "Inscripcion";
+            Text = "Registrar Cliente";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();

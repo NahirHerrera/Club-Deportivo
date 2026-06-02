@@ -39,7 +39,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(70, 39);
+            label1.Location = new Point(53, 39);
             label1.Name = "label1";
             label1.Size = new Size(35, 20);
             label1.TabIndex = 0;
@@ -48,7 +48,7 @@
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(129, 39);
+            textBox1.Location = new Point(94, 35);
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(161, 27);
             textBox1.TabIndex = 1;
@@ -56,7 +56,7 @@
             // 
             // button1
             // 
-            button1.Location = new Point(341, 39);
+            button1.Location = new Point(299, 35);
             button1.Name = "button1";
             button1.Size = new Size(94, 29);
             button1.TabIndex = 2;
@@ -76,11 +76,11 @@
             // 
             // button2
             // 
-            button2.Location = new Point(314, 382);
+            button2.Location = new Point(53, 384);
             button2.Name = "button2";
-            button2.Size = new Size(139, 29);
+            button2.Size = new Size(152, 42);
             button2.TabIndex = 4;
-            button2.Text = "VOLVER";
+            button2.Text = "Volver";
             button2.UseVisualStyleBackColor = true;
             button2.Click += button2_Click;
             // 
@@ -96,7 +96,7 @@
             Controls.Add(textBox1);
             Controls.Add(label1);
             Name = "ListadoSocios";
-            Text = "Form1";
+            Text = "Listado de Socios";
             ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
             ResumeLayout(false);
             PerformLayout();
