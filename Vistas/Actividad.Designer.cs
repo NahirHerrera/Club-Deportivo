@@ -34,12 +34,13 @@
             dgvActividades = new DataGridView();
             btn_Volver = new Button();
             btn_Buscar = new Button();
+            btn_PagarInscribir = new Button();
             groupBox1 = new GroupBox();
-            rbTarjeta6 = new RadioButton();
-            rbTarjeta3 = new RadioButton();
-            rbEfectivo = new RadioButton();
-            pagarAct = new Button();
-            btn_Inscribir = new Button();
+            lbl_Total = new Label();
+            rd_Transferencia = new RadioButton();
+            rd_Tarjeta = new RadioButton();
+            rd_Efectivo = new RadioButton();
+            btn_Inscripcion = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvActividades).BeginInit();
             groupBox1.SuspendLayout();
             SuspendLayout();
@@ -83,13 +84,23 @@
             dgvActividades.Margin = new Padding(3, 4, 3, 4);
             dgvActividades.Name = "dgvActividades";
             dgvActividades.RowHeadersWidth = 51;
-            dgvActividades.Size = new Size(750, 147);
+            dgvActividades.Size = new Size(670, 120);
             dgvActividades.TabIndex = 3;
+            dgvActividades.CellContentClick += dgvActividades_CellContentClick;
+            // 
+            // btn_Inscribir
+            // 
+            btn_Inscribir.Location = new Point(18, 200);
+            btn_Inscribir.Name = "btn_Inscribir";
+            btn_Inscribir.Size = new Size(134, 38);
+            btn_Inscribir.TabIndex = 4;
+            btn_Inscribir.Text = "Inscribir";
+            btn_Inscribir.UseVisualStyleBackColor = true;
+            btn_Inscribir.Click += btn_Inscribir_Click;
             // 
             // btn_Volver
             // 
-            btn_Volver.Location = new Point(537, 383);
-            btn_Volver.Margin = new Padding(3, 4, 3, 4);
+            btn_Volver.Location = new Point(18, 276);
             btn_Volver.Name = "btn_Volver";
             btn_Volver.Size = new Size(153, 55);
             btn_Volver.TabIndex = 5;
@@ -108,83 +119,90 @@
             btn_Buscar.UseVisualStyleBackColor = true;
             btn_Buscar.Click += btn_Buscar_Click;
             // 
+            // btn_PagarInscribir
+            // 
+            btn_PagarInscribir.Location = new Point(554, 200);
+            btn_PagarInscribir.Name = "btn_PagarInscribir";
+            btn_PagarInscribir.Size = new Size(134, 38);
+            btn_PagarInscribir.TabIndex = 7;
+            btn_PagarInscribir.Text = "Ir a Pagar";
+            btn_PagarInscribir.UseVisualStyleBackColor = true;
+            btn_PagarInscribir.Click += btn_PagarInscribir_Click;
+            // 
             // groupBox1
             // 
-            groupBox1.Controls.Add(rbTarjeta6);
-            groupBox1.Controls.Add(rbTarjeta3);
-            groupBox1.Controls.Add(rbEfectivo);
-            groupBox1.Location = new Point(103, 279);
+            groupBox1.Controls.Add(lbl_Total);
+            groupBox1.Controls.Add(rd_Transferencia);
+            groupBox1.Controls.Add(rd_Tarjeta);
+            groupBox1.Controls.Add(rd_Efectivo);
+            groupBox1.Location = new Point(281, 200);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(295, 114);
-            groupBox1.TabIndex = 7;
+            groupBox1.Size = new Size(246, 100);
+            groupBox1.TabIndex = 8;
             groupBox1.TabStop = false;
             groupBox1.Text = "Forma de Pago";
             // 
-            // rbTarjeta6
+            // lbl_Total
             // 
-            rbTarjeta6.AutoSize = true;
-            rbTarjeta6.Location = new Point(21, 87);
-            rbTarjeta6.Name = "rbTarjeta6";
-            rbTarjeta6.Size = new Size(257, 24);
-            rbTarjeta6.TabIndex = 8;
-            rbTarjeta6.TabStop = true;
-            rbTarjeta6.Text = "Tarj de crédito: 6 cuotas sin interes";
-            rbTarjeta6.UseVisualStyleBackColor = true;
+            lbl_Total.AutoSize = true;
+            lbl_Total.Location = new Point(38, 23);
+            lbl_Total.Name = "lbl_Total";
+            lbl_Total.Size = new Size(19, 15);
+            lbl_Total.TabIndex = 3;
+            lbl_Total.Text = "$0";
             // 
-            // rbTarjeta3
+            // rd_Transferencia
             // 
-            rbTarjeta3.AutoSize = true;
-            rbTarjeta3.Location = new Point(21, 57);
-            rbTarjeta3.Name = "rbTarjeta3";
-            rbTarjeta3.Size = new Size(257, 24);
-            rbTarjeta3.TabIndex = 7;
-            rbTarjeta3.TabStop = true;
-            rbTarjeta3.Text = "Tarj de crédito: 3 cuotas sin interes";
-            rbTarjeta3.UseVisualStyleBackColor = true;
+            rd_Transferencia.AutoSize = true;
+            rd_Transferencia.Location = new Point(143, 52);
+            rd_Transferencia.Name = "rd_Transferencia";
+            rd_Transferencia.Size = new Size(95, 19);
+            rd_Transferencia.TabIndex = 2;
+            rd_Transferencia.TabStop = true;
+            rd_Transferencia.Text = "Transferencia";
+            rd_Transferencia.UseVisualStyleBackColor = true;
             // 
-            // rbEfectivo
+            // rd_Tarjeta
             // 
-            rbEfectivo.AutoSize = true;
-            rbEfectivo.Location = new Point(21, 27);
-            rbEfectivo.Name = "rbEfectivo";
-            rbEfectivo.Size = new Size(197, 24);
-            rbEfectivo.TabIndex = 6;
-            rbEfectivo.TabStop = true;
-            rbEfectivo.Text = "Efectivo (10% descuento)";
-            rbEfectivo.UseVisualStyleBackColor = true;
+            rd_Tarjeta.AutoSize = true;
+            rd_Tarjeta.Location = new Point(77, 52);
+            rd_Tarjeta.Name = "rd_Tarjeta";
+            rd_Tarjeta.Size = new Size(60, 19);
+            rd_Tarjeta.TabIndex = 1;
+            rd_Tarjeta.TabStop = true;
+            rd_Tarjeta.Text = "Tarjeta";
+            rd_Tarjeta.UseVisualStyleBackColor = true;
             // 
-            // pagarAct
+            // rd_Efectivo
             // 
-            pagarAct.ForeColor = Color.Red;
-            pagarAct.Location = new Point(537, 263);
-            pagarAct.Margin = new Padding(3, 4, 3, 4);
-            pagarAct.Name = "pagarAct";
-            pagarAct.Size = new Size(153, 51);
-            pagarAct.TabIndex = 8;
-            pagarAct.Text = "Pagar Actividad";
-            pagarAct.UseVisualStyleBackColor = true;
-            pagarAct.Click += pagarAct_Click;
+            rd_Efectivo.AutoSize = true;
+            rd_Efectivo.Location = new Point(4, 52);
+            rd_Efectivo.Name = "rd_Efectivo";
+            rd_Efectivo.Size = new Size(67, 19);
+            rd_Efectivo.TabIndex = 0;
+            rd_Efectivo.TabStop = true;
+            rd_Efectivo.Text = "Efectivo";
+            rd_Efectivo.UseVisualStyleBackColor = true;
             // 
-            // btn_Inscribir
+            // btn_Inscripcion
             // 
-            btn_Inscribir.Location = new Point(537, 323);
-            btn_Inscribir.Margin = new Padding(3, 4, 3, 4);
-            btn_Inscribir.Name = "btn_Inscribir";
-            btn_Inscribir.Size = new Size(153, 51);
-            btn_Inscribir.TabIndex = 9;
-            btn_Inscribir.Text = "Inscribir";
-            btn_Inscribir.UseVisualStyleBackColor = true;
-            btn_Inscribir.Click += btn_Inscribir_Click;
+            btn_Inscripcion.Location = new Point(319, 306);
+            btn_Inscripcion.Name = "btn_Inscripcion";
+            btn_Inscripcion.Size = new Size(129, 23);
+            btn_Inscripcion.TabIndex = 9;
+            btn_Inscripcion.Text = "Inscribir";
+            btn_Inscripcion.UseVisualStyleBackColor = true;
+            btn_Inscripcion.Click += btn_Inscripcion_Click;
             // 
             // Actividad
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.DarkKhaki;
-            ClientSize = new Size(800, 451);
-            Controls.Add(btn_Inscribir);
-            Controls.Add(pagarAct);
+            ClientSize = new Size(700, 338);
+            Controls.Add(btn_Inscripcion);
             Controls.Add(groupBox1);
+            Controls.Add(btn_PagarInscribir);
             Controls.Add(btn_Buscar);
             Controls.Add(btn_Volver);
             Controls.Add(dgvActividades);
@@ -210,11 +228,12 @@
         private DataGridView dgvActividades;
         private Button btn_Volver;
         private Button btn_Buscar;
+        private Button btn_PagarInscribir;
         private GroupBox groupBox1;
-        private RadioButton rbTarjeta6;
-        private RadioButton rbTarjeta3;
-        private RadioButton rbEfectivo;
-        private Button pagarAct;
-        private Button btn_Inscribir;
+        private RadioButton rd_Transferencia;
+        private RadioButton rd_Tarjeta;
+        private RadioButton rd_Efectivo;
+        private Button btn_Inscripcion;
+        private Label lbl_Total;
     }
 }

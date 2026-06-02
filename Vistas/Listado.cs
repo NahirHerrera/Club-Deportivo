@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 namespace Club_Deportivo
 {
+    // Formulario para mostrar el listado de deudores
     public partial class Listado : Form
     {
         public Listado()
@@ -22,10 +23,10 @@ namespace Club_Deportivo
         }
         public void CargaGrilla()
         {
-
             MySqlConnection? cadena = new MySqlConnection();
             try
             {
+                // Consulta SQL para obtener los datos de los clientes con cuotas pendientes
                 string query;
                 cadena = Conexion.getInstancia().CrearConexion();
                 query = @"SELECT cl.nombre, cl.apellido, cl.dni, c.Monto, c.fechaVencimiento
@@ -39,10 +40,12 @@ namespace Club_Deportivo
                 comando.CommandType = CommandType.Text;
                 cadena.Open();
 
+                // Ejecutar la consulta y cargar los datos en el DataGridView
                 MySqlDataReader reader;
                 reader = comando.ExecuteReader();
                 if (reader.HasRows)
                 {
+                    // Limpiar el DataGridView antes de cargar los nuevos datos
                     while (reader.Read())
                     {
                         int renglon = dtgvCuota.Rows.Add();

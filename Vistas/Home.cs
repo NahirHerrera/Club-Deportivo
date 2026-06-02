@@ -9,6 +9,7 @@ using System.Windows.Forms;
 
 namespace Club_Deportivo
 {
+    // Formulario principal del sistema
     public partial class Home : Form
     {
         public Home()
@@ -72,6 +73,13 @@ namespace Club_Deportivo
         private void button1_Click_1(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            ListadoSocios listadoSocios = new ListadoSocios();
+            listadoSocios.Show();
+            this.Hide();
         }
     }
 }

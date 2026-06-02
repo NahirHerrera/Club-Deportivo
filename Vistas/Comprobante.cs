@@ -14,6 +14,7 @@ namespace Club_Deportivo;
 
 public partial class Comprobante : Form
 {
+    // Método para exportar el formulario a PDF utilizando la impresora "Microsoft Print to PDF"
     private void ExportarFormularioAPdf()
     {
         PrintDocument pd = new PrintDocument();
@@ -27,12 +28,16 @@ public partial class Comprobante : Form
             pd.Print();
         }
     }
+
+    // Método para dibujar el formulario en la página de impresión
     private void LineasImpresion(object sender, PrintPageEventArgs e)
     {
         Bitmap bmp = new Bitmap(this.Width, this.Height);
         this.DrawToBitmap(bmp, new Rectangle(0, 0, this.Width, this.Height));
         e.Graphics.DrawImage(bmp, 0, 0);
     }
+
+    //  Constructor que recibe un objeto DatosComprobante para mostrar la información en el formulario
     public Comprobante(DatosComprobante doc)
     {
         InitializeComponent();

@@ -50,11 +50,11 @@
             btn_InscribirSocio.FlatAppearance.MouseDownBackColor = Color.Transparent;
             btn_InscribirSocio.FlatAppearance.MouseOverBackColor = Color.Transparent;
             btn_InscribirSocio.FlatStyle = FlatStyle.Flat;
-            btn_InscribirSocio.Location = new Point(41, 45);
+            btn_InscribirSocio.Location = new Point(41, 37);
             btn_InscribirSocio.Name = "btn_InscribirSocio";
-            btn_InscribirSocio.Size = new Size(228, 47);
+            btn_InscribirSocio.Size = new Size(242, 47);
             btn_InscribirSocio.TabIndex = 0;
-            btn_InscribirSocio.Text = "1. Registrar Cliente";
+            btn_InscribirSocio.Text = "Registrar Cliente";
             btn_InscribirSocio.TextAlign = ContentAlignment.MiddleLeft;
             btn_InscribirSocio.UseVisualStyleBackColor = false;
             btn_InscribirSocio.Click += button1_Click;
@@ -66,11 +66,11 @@
             btn_CobrarCuota.FlatAppearance.MouseDownBackColor = Color.Transparent;
             btn_CobrarCuota.FlatAppearance.MouseOverBackColor = Color.Transparent;
             btn_CobrarCuota.FlatStyle = FlatStyle.Flat;
-            btn_CobrarCuota.Location = new Point(41, 115);
+            btn_CobrarCuota.Location = new Point(41, 114);
             btn_CobrarCuota.Name = "btn_CobrarCuota";
-            btn_CobrarCuota.Size = new Size(228, 47);
+            btn_CobrarCuota.Size = new Size(242, 47);
             btn_CobrarCuota.TabIndex = 2;
-            btn_CobrarCuota.Text = "2. Cobrar Cuota (Socios)";
+            btn_CobrarCuota.Text = "Cobrar Cuota (Socios)";
             btn_CobrarCuota.TextAlign = ContentAlignment.MiddleLeft;
             btn_CobrarCuota.UseVisualStyleBackColor = false;
             btn_CobrarCuota.Click += btn_CobrarCuota_Click;
@@ -82,11 +82,11 @@
             btn_ListadoDeudores.FlatAppearance.MouseDownBackColor = Color.Transparent;
             btn_ListadoDeudores.FlatAppearance.MouseOverBackColor = Color.Transparent;
             btn_ListadoDeudores.FlatStyle = FlatStyle.Flat;
-            btn_ListadoDeudores.Location = new Point(41, 255);
+            btn_ListadoDeudores.Location = new Point(41, 269);
             btn_ListadoDeudores.Name = "btn_ListadoDeudores";
-            btn_ListadoDeudores.Size = new Size(228, 47);
+            btn_ListadoDeudores.Size = new Size(242, 47);
             btn_ListadoDeudores.TabIndex = 3;
-            btn_ListadoDeudores.Text = "3. Emitir listado de deudores";
+            btn_ListadoDeudores.Text = "Emitir listado de deudores";
             btn_ListadoDeudores.TextAlign = ContentAlignment.MiddleLeft;
             btn_ListadoDeudores.UseVisualStyleBackColor = false;
             btn_ListadoDeudores.Click += btn_ListadoDeudores_Click;
@@ -151,12 +151,12 @@
             btn_Actividad.FlatAppearance.MouseDownBackColor = Color.Transparent;
             btn_Actividad.FlatAppearance.MouseOverBackColor = Color.Transparent;
             btn_Actividad.FlatStyle = FlatStyle.Flat;
-            btn_Actividad.Location = new Point(41, 186);
+            btn_Actividad.Location = new Point(41, 191);
             btn_Actividad.Margin = new Padding(3, 4, 3, 4);
             btn_Actividad.Name = "btn_Actividad";
-            btn_Actividad.Size = new Size(228, 49);
+            btn_Actividad.Size = new Size(242, 49);
             btn_Actividad.TabIndex = 12;
-            btn_Actividad.Text = "2. Cobrar Actividad (No Socios)";
+            btn_Actividad.Text = "Inscripcion Actividad (No Socios)";
             btn_Actividad.TextAlign = ContentAlignment.MiddleLeft;
             btn_Actividad.UseVisualStyleBackColor = false;
             btn_Actividad.Click += btn_Actividad_Click;
@@ -164,12 +164,12 @@
             // panel1
             // 
             panel1.Controls.Add(btn_Actividad);
-            panel1.Controls.Add(btn_ListadoDeudores);
-            panel1.Controls.Add(btn_CobrarCuota);
             panel1.Controls.Add(btn_InscribirSocio);
+            panel1.Controls.Add(btn_CobrarCuota);
+            panel1.Controls.Add(btn_ListadoDeudores);
             panel1.Location = new Point(332, 55);
             panel1.Name = "panel1";
-            panel1.Size = new Size(314, 349);
+            panel1.Size = new Size(327, 349);
             panel1.TabIndex = 13;
             // 
             // Home
