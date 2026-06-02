@@ -58,7 +58,7 @@ namespace Club_Deportivo
                 }
                 else
                 {
-                    MessageBox.Show("No hay datos para la carga de la grilla");
+                    MessageBox.Show("No hay datos para la carga de la grilla", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)

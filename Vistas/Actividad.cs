@@ -48,10 +48,10 @@ namespace Club_Deportivo.Vistas
                 return "Efectivo";
 
             if (rbTarjeta3.Checked)
-                return "Tarjeta";
+                return "Tarj.Crédito: 3 cuotas s/interés";
 
             if (rbTarjeta6.Checked)
-                return "Transferencia";
+                return "Tarj.Crédito: 6 cuotas s/interés";
 
             return "";
         }
@@ -98,7 +98,7 @@ namespace Club_Deportivo.Vistas
                         {
                             if (ex.Number == 1062)
                             {
-                                MessageBox.Show("El cliente ya está inscripto en esta actividad");
+                                MessageBox.Show("El cliente ya está inscripto en esta actividad", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
                             else
                             {
@@ -223,12 +223,12 @@ namespace Club_Deportivo.Vistas
                     if (readerSocio.Read())
                     {
                         esSocioActual = true;
-                        MessageBox.Show("ES SOCIO");
+                        MessageBox.Show("ES SOCIO", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else
                     {
                         esSocioActual = false;
-                        MessageBox.Show("ES NO SOCIO");
+                        MessageBox.Show("ES NO SOCIO", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
 
                     readerSocio.Close();
@@ -257,7 +257,7 @@ namespace Club_Deportivo.Vistas
                         }
                         else
                         {
-                            MessageBox.Show("El socio posee cuotas pendientes");
+                            MessageBox.Show("El socio posee cuotas pendientes", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                             OcultarControles();
                             btn_Inscribir.Enabled = false;
@@ -283,7 +283,7 @@ namespace Club_Deportivo.Vistas
                 // indicando que el DNI es inexistente y se ocultan las actividades y se deshabilita la inscripción.
                 else
                 {
-                    MessageBox.Show("DNI inexistente");
+                    MessageBox.Show("DNI inexistente", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     OcultarControles();
                     btn_Inscribir.Enabled = false;
                 }
@@ -310,7 +310,7 @@ namespace Club_Deportivo.Vistas
 
             if (resultado)
             {
-                MessageBox.Show("Inscripción realizada correctamente");
+                MessageBox.Show("Inscripción realizada correctamente", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -396,7 +396,7 @@ namespace Club_Deportivo.Vistas
                 !rbTarjeta3.Checked &&
                 !rbTarjeta6.Checked)
             {
-                MessageBox.Show("Seleccione una forma de pago");
+                MessageBox.Show("Seleccione una forma de pago", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -405,7 +405,7 @@ namespace Club_Deportivo.Vistas
 
             if (resultado)
             {
-                MessageBox.Show("Pago e inscripción realizados correctamente");
+                MessageBox.Show("Pago e inscripción realizados correctamente", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
     }
