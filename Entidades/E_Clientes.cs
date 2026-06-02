@@ -9,7 +9,7 @@ namespace Club_Deportivo.Entidades
     public class E_Clientes
     {
         // Identificador único del cliente
-        public int idClientes {  get; set; }
+        public int idClientes { get; set; }
 
         // Datos personales
         public string? nombre { get; set; }
