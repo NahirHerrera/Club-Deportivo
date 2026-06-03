@@ -20,6 +20,8 @@ namespace Club_Deportivo.Vistas
         // Indica si el cliente encontrado es socio o no, para determinar
         private bool esSocioActual;
 
+        private decimal total = 0;
+
         public Actividad()
         {
             InitializeComponent();
@@ -33,12 +35,10 @@ namespace Club_Deportivo.Vistas
         private void OcultarControles()
         {
             dgvActividades.Visible = false;
-
             btn_Inscribir.Visible = false;
+            groupBox1.Visible = false;
             btn_PagarInscribir.Visible = false;
             btn_Inscripcion.Visible = false;
-
-            groupBox1.Visible = false;
         }
 
         // Método que obtiene la forma de pago seleccionada por el usuario, verificando cuál de las opciones de pago está marcada.
@@ -78,12 +78,12 @@ namespace Club_Deportivo.Vistas
 
                         // Consulta de inserción para registrar la inscripción del cliente a la actividad seleccionada,
                         // incluyendo la forma de pago y el monto correspondiente.
-                        string query = @"INSERT INTO inscripcion_actividad(idCliente, idActividad, formaPago, monto, fechaInscripcion)
-                                        VALUES (@idCliente, @idActividad, @formaPago, @monto, NOW())";
+                        string query = @"INSERT INTO inscripcion_actividad(idClientes, idActividad, formaPago, monto, fechaInscripcion)
+                                        VALUES (@idClientes, @idActividad, @formaPago, @monto, NOW())";
 
                         MySqlCommand comando = new MySqlCommand(query, cadena);
 
-                        comando.Parameters.AddWithValue("@idCliente", idClienteActual);
+                        comando.Parameters.AddWithValue("@idClientes", idClienteActual);
                         comando.Parameters.AddWithValue("@idActividad", idActividad);
                         comando.Parameters.AddWithValue("@formaPago", formaPago);
                         comando.Parameters.AddWithValue("@monto", monto);
@@ -214,21 +214,22 @@ namespace Club_Deportivo.Vistas
                     reader.Close();
 
                     // Consulta para verificar si el cliente es socio, buscando su ID en la tabla de socios.
-                    string querySocio = @"SELECT * FROM socios WHERE idClientes = @idCliente";
+                    string querySocio = @"SELECT * FROM socios WHERE idClientes = @idClientes";
+
                     MySqlCommand cmdSocio = new MySqlCommand(querySocio, cadena);
-                    cmdSocio.Parameters.AddWithValue("@idCliente", idCliente);
+                    cmdSocio.Parameters.AddWithValue("@idClientes", idCliente);
                     MySqlDataReader readerSocio = cmdSocio.ExecuteReader();
 
                     // Si el cliente es socio, se verifica el estado de su última cuota para determinar si puede inscribirse a actividades.
                     if (readerSocio.Read())
                     {
                         esSocioActual = true;
-                        MessageBox.Show("ES SOCIO", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Socio del Club", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else
                     {
                         esSocioActual = false;
-                        MessageBox.Show("ES NO SOCIO", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("No Socio del Club", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
 
                     readerSocio.Close();
@@ -237,9 +238,9 @@ namespace Club_Deportivo.Vistas
                     if (esSocioActual)
                     {
                         // Consulta para obtener el estado de la última cuota del cliente, ordenando por fecha para obtener la más reciente.
-                        string queryCuota = @"SELECT Estado FROM cuota WHERE idClientes = @idCliente ORDER BY idCuota DESC LIMIT 1";
+                        string queryCuota = @"SELECT Estado FROM cuota WHERE idClientes = @idClientes ORDER BY idCuota DESC LIMIT 1";
                         MySqlCommand cmdCuota = new MySqlCommand(queryCuota, cadena);
-                        cmdCuota.Parameters.AddWithValue("@idCliente", idClienteActual);
+                        cmdCuota.Parameters.AddWithValue("@idClientes", idClienteActual);
                         object estado = cmdCuota.ExecuteScalar();
 
                         // Si el estado de la última cuota es "Pagado", se permite al socio inscribirse a actividades.
@@ -249,8 +250,8 @@ namespace Club_Deportivo.Vistas
                             btn_Inscribir.Enabled = true;
                             dgvActividades.Visible = true;
                             btn_Inscribir.Visible = true;
-                            btn_PagarInscribir.Visible = false;
                             groupBox1.Visible = false;
+                            btn_PagarInscribir.Visible = false;
                             btn_Inscripcion.Visible = false;
 
                             CargarActividades();
@@ -271,11 +272,12 @@ namespace Club_Deportivo.Vistas
                         OcultarControles();
 
                         dgvActividades.Visible = true;
+                        groupBox1.Visible = true;
                         btn_PagarInscribir.Visible = true;
+                        btn_Inscripcion.Visible = false;
 
                         CargarActividades();
                     }
-
 
                 }
 
@@ -325,7 +327,7 @@ namespace Club_Deportivo.Vistas
 
         private void dgvActividades_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            dgvActividades.CommitEdit(DataGridViewDataErrorContexts.Commit);
         }
 
         // Calcula el total a pagar por las actividades seleccionadas, sumando el costo diario de cada una para los NO SOCIOS
@@ -357,12 +359,16 @@ namespace Club_Deportivo.Vistas
                     MessageBoxIcon.Warning);
                 return;
             }
+    
+            if (rbEfectivo.Checked)
+                total *= 0.90m;
+            else if (rbTarjeta3.Checked)
+                total /= 3;
+            else if (rbTarjeta6.Checked)
+                total /= 6;
 
-            MessageBox.Show( "Total a pagar: $" + total.ToString("F2"), "Monto",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information);
+            MessageBox.Show("Total a pagar: $" + total.ToString("F2"), "Monto", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            groupBox1.Visible = true;
             btn_Inscripcion.Visible = true;
         }
 
@@ -378,13 +384,6 @@ namespace Club_Deportivo.Vistas
             {
                 MessageBox.Show("Seleccione una forma de pago", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
-            }
-
-            decimal total = CalcularTotal();
-
-            if (rbEfectivo.Checked)
-            {
-                total *= 0.90m;
             }
 
             string formaPago = ObtenerFormaPago();

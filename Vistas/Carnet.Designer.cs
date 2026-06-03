@@ -59,21 +59,23 @@
             // 
             label2.AutoSize = true;
             label2.BackColor = Color.White;
-            label2.Location = new Point(372, 324);
+            label2.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label2.Location = new Point(390, 324);
             label2.Name = "label2";
-            label2.Size = new Size(50, 20);
+            label2.Size = new Size(13, 20);
             label2.TabIndex = 2;
-            label2.Text = "label2";
+            label2.Text = " ";
             // 
             // label3
             // 
             label3.AutoSize = true;
             label3.BackColor = Color.White;
-            label3.Location = new Point(372, 274);
+            label3.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label3.Location = new Point(353, 274);
             label3.Name = "label3";
-            label3.Size = new Size(50, 20);
+            label3.Size = new Size(13, 20);
             label3.TabIndex = 3;
-            label3.Text = "label3";
+            label3.Text = " ";
             // 
             // Carnet
             // 

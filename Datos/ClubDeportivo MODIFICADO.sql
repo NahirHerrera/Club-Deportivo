@@ -79,14 +79,14 @@ CREATE TABLE Carnet (
 
 CREATE TABLE inscripcion_actividad (
     idInscripcion INT AUTO_INCREMENT PRIMARY KEY,
-    idCliente INT NOT NULL,
+    idClientes INT NOT NULL,
     idActividad INT NOT NULL,
     formaPago VARCHAR(100) NOT NULL,
     monto DECIMAL(10,2) NOT NULL,
     fechaInscripcion DATETIME NOT NULL,
 
     CONSTRAINT fk_inscripcion_cliente
-        FOREIGN KEY (idCliente)
+        FOREIGN KEY (idClientes)
         REFERENCES clientes(idClientes),
 
     CONSTRAINT fk_inscripcion_actividad
@@ -94,7 +94,7 @@ CREATE TABLE inscripcion_actividad (
         REFERENCES actividades(idActividades),
 
     CONSTRAINT uq_cliente_actividad
-        UNIQUE (idCliente, idActividad)
+        UNIQUE (idClientes, idActividad)
 );
 
 --
@@ -104,10 +104,6 @@ CREATE TABLE inscripcion_actividad (
 --
 -- PROCEDURE REGISTRO
 --
-
-DROP PROCEDURE IF EXISTS RegistrarCliente;
-DROP PROCEDURE IF EXISTS IngresoLogin;
-DROP PROCEDURE IF EXISTS ObtenerSocios;
 
 DELIMITER //
 CREATE PROCEDURE RegistrarCliente(
@@ -194,7 +190,7 @@ BEGIN
     SELECT c.idClientes, c.nombre, c.apellido, c.dni, a.idActividades, a.nombreActividad, ia.fechaInscripcion
     FROM Clientes c
     LEFT JOIN inscripcion_actividad ia
-        ON ia.idCliente = c.idClientes
+        ON ia.idClientes = c.idClientes
     LEFT JOIN Actividades a
         ON a.idActividades = ia.idActividad
     WHERE (p_dni IS NULL OR c.dni = p_dni)
