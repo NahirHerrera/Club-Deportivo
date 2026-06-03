@@ -310,7 +310,9 @@ namespace Club_Deportivo.Vistas
 
             if (resultado)
             {
-                MessageBox.Show("Inscripción realizada correctamente", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Inscripción realizada correctamente", "AVISO DEL SISTEMA", 
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
             }
         }
 
@@ -346,41 +348,19 @@ namespace Club_Deportivo.Vistas
         // habilita el grupo de opciones de pago para que el cliente pueda elegir su forma de pago.
         private void btn_PagarInscribir_Click(object sender, EventArgs e)
         {
-            double costo = 3000;
-            double montoFinal = costo;
-            string formaPago;
-            string mensajeCuotas = "";
+            decimal total = CalcularTotal();
 
-            if (rbEfectivo.Checked)
+            if (total == 0)
             {
-                montoFinal = costo * 0.90;
-                formaPago = "Efectivo: 10% off";
-            }
-            else if (rbTarjeta3.Checked)
-            {
-                montoFinal = costo;
-                formaPago = "Tarj. Crédito: 3 cuotas s/ interés";
-                double valorCuota = montoFinal / 3;
-                mensajeCuotas = $"\n(3 cuotas de: ${valorCuota:F2})";
-            }
-            else if (rbTarjeta3.Checked)
-            {
-                montoFinal = costo;
-                formaPago = "Tarj. Crédito: 6 cuotas s/ interés";
-                double valorCuota = montoFinal / 6;
-                mensajeCuotas = $"\n(6 cuotas de: ${valorCuota:F2})";
-            }
-            else
-            {
-                MessageBox.Show("Por favor, seleccione una forma de pago.", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Seleccione al menos una actividad.", "AVISO DEL SISTEMA",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
                 return;
             }
-            MessageBox.Show(
-                $"Forma de pago: {formaPago}\n" +
-                $"Total a pagar: $ {montoFinal:F2}" +
-                mensajeCuotas,
-                "Pago"
-                );
+
+            MessageBox.Show( "Total a pagar: $" + total.ToString("F2"), "Monto",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
 
             groupBox1.Visible = true;
             btn_Inscripcion.Visible = true;
@@ -400,12 +380,21 @@ namespace Club_Deportivo.Vistas
                 return;
             }
 
+            decimal total = CalcularTotal();
+
+            if (rbEfectivo.Checked)
+            {
+                total *= 0.90m;
+            }
+
             string formaPago = ObtenerFormaPago();
             bool resultado = RegistrarInscripcion(formaPago, false);
 
             if (resultado)
             {
-                MessageBox.Show("Pago e inscripción realizados correctamente", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Forma de pago: " + formaPago + "\nTotal abonado: $" + total.ToString("F2"), "Pago realizado",
+                                 MessageBoxButtons.OK,
+                                 MessageBoxIcon.Information);
             }
         }
     }

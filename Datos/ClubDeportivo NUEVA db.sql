@@ -81,7 +81,7 @@ CREATE TABLE inscripcion_actividad (
     idInscripcion INT AUTO_INCREMENT PRIMARY KEY,
     idCliente INT NOT NULL,
     idActividad INT NOT NULL,
-    formaPago VARCHAR(30) NOT NULL,
+    formaPago VARCHAR(100) NOT NULL,
     monto DECIMAL(10,2) NOT NULL,
     fechaInscripcion DATETIME NOT NULL,
 
