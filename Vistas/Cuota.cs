@@ -35,8 +35,7 @@ namespace Club_Deportivo
         //Incluye los datos del socio en el carnet
         private void btn_Carnet_Click(object sender, EventArgs e)
         {
-            MessageBox.Show($"Nombre: {doc.nombre} | Apellido: {doc.apellido} | Nsocio: {doc.NSocio}");
-            string nombreCompleto = $"{doc.nombre} {doc.apellido}";
+            string nombreCompleto = $"{doc.nombre}  {doc.apellido}";
             string numeroSocio = doc.NSocio.ToString();
             Carnet carnet = new Carnet(nombreCompleto, numeroSocio);
             carnet.Show();
@@ -52,7 +51,7 @@ namespace Club_Deportivo
             // se muestra un mensaje de advertencia y se detiene el proceso.
             if (!rbEfectivo.Checked &&
                 !rbTarjeta3.Checked &&
-                !rbTarjeta6.Checked)
+                !radioButton1.Checked)
             {
                 MessageBox.Show(
                     "Seleccione una forma de pago",
@@ -144,15 +143,15 @@ namespace Club_Deportivo
                     }
                     else if (rbTarjeta3.Checked)
                     {
-                        doc.forma_pago = "Tarj.Crédito: 3 cuotas s/interés)";
+                        doc.forma_pago = "Tarj.Crédito: 3 cuotas s/interés";
                         float valorCuota = doc.monto / 3;
                         MessageBox.Show("¡El pago se realizó con éxito!" + Environment.NewLine +
                         $"Forma de pago: {doc.forma_pago}" + Environment.NewLine +
                         $"Total cobrado: ${doc.monto} (3 cuotas de: ${doc.monto / 3})", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
-                    else if (rbTarjeta6.Checked)
+                    else if (radioButton1.Checked)
                     {
-                        doc.forma_pago = "Tarj.Crédito: 6 cuotas s/interés)";
+                        doc.forma_pago = "Tarj.Crédito: 6 cuotas s/interés";
                         float valorCuota = doc.monto / 6;
                         MessageBox.Show("¡El pago se realizó con éxito!" + Environment.NewLine +
                         $"Forma de pago: {doc.forma_pago}" + Environment.NewLine +

@@ -71,7 +71,7 @@
             label3.AutoSize = true;
             label3.BackColor = Color.White;
             label3.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3.Location = new Point(353, 274);
+            label3.Location = new Point(341, 274);
             label3.Name = "label3";
             label3.Size = new Size(13, 20);
             label3.TabIndex = 3;

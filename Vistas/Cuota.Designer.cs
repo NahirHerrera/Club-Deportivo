@@ -33,11 +33,11 @@
             btn_Pagar = new Button();
             btn_Carnet = new Button();
             groupBox1 = new GroupBox();
+            radioButton1 = new RadioButton();
             rbTarjeta6 = new RadioButton();
             rbTarjeta3 = new RadioButton();
             rbEfectivo = new RadioButton();
             btn_Volver = new Button();
-            radioButton1 = new RadioButton();
             groupBox1.SuspendLayout();
             SuspendLayout();
             // 
@@ -93,6 +93,17 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Forma de Pago";
             // 
+            // radioButton1
+            // 
+            radioButton1.AutoSize = true;
+            radioButton1.Location = new Point(21, 104);
+            radioButton1.Name = "radioButton1";
+            radioButton1.Size = new Size(257, 24);
+            radioButton1.TabIndex = 9;
+            radioButton1.TabStop = true;
+            radioButton1.Text = "Tarj de crédito: 6 cuotas sin interes";
+            radioButton1.UseVisualStyleBackColor = true;
+            // 
             // rbTarjeta6
             // 
             rbTarjeta6.AutoSize = true;
@@ -135,17 +146,6 @@
             btn_Volver.Text = "Volver";
             btn_Volver.UseVisualStyleBackColor = true;
             btn_Volver.Click += btn_Volver_Click;
-            // 
-            // radioButton1
-            // 
-            radioButton1.AutoSize = true;
-            radioButton1.Location = new Point(21, 104);
-            radioButton1.Name = "radioButton1";
-            radioButton1.Size = new Size(257, 24);
-            radioButton1.TabIndex = 9;
-            radioButton1.TabStop = true;
-            radioButton1.Text = "Tarj de crédito: 6 cuotas sin interes";
-            radioButton1.UseVisualStyleBackColor = true;
             // 
             // Cuota
             // 

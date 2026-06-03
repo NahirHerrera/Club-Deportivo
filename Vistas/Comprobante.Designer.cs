@@ -35,7 +35,6 @@
             label10 = new Label();
             lbl_Periodo = new Label();
             lbl_Monto = new Label();
-            lbl_Apellido = new Label();
             lbl_Nombre = new Label();
             label6 = new Label();
             lbl_NSocio = new Label();
@@ -74,7 +73,6 @@
             panel1.Controls.Add(label10);
             panel1.Controls.Add(lbl_Periodo);
             panel1.Controls.Add(lbl_Monto);
-            panel1.Controls.Add(lbl_Apellido);
             panel1.Controls.Add(lbl_Nombre);
             panel1.Controls.Add(label6);
             panel1.Controls.Add(lbl_NSocio);
@@ -91,7 +89,7 @@
             // 
             lbl_FormaPago.AutoSize = true;
             lbl_FormaPago.Font = new Font("Lucida Fax", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lbl_FormaPago.Location = new Point(481, 103);
+            lbl_FormaPago.Location = new Point(445, 103);
             lbl_FormaPago.Name = "lbl_FormaPago";
             lbl_FormaPago.Size = new Size(16, 21);
             lbl_FormaPago.TabIndex = 21;
@@ -101,7 +99,7 @@
             // 
             label10.AutoSize = true;
             label10.Font = new Font("Lucida Fax", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label10.Location = new Point(338, 103);
+            label10.Location = new Point(297, 103);
             label10.Name = "label10";
             label10.Size = new Size(142, 20);
             label10.TabIndex = 20;
@@ -126,16 +124,6 @@
             lbl_Monto.Size = new Size(15, 20);
             lbl_Monto.TabIndex = 18;
             lbl_Monto.Text = "-";
-            // 
-            // lbl_Apellido
-            // 
-            lbl_Apellido.AutoSize = true;
-            lbl_Apellido.Font = new Font("Lucida Fax", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lbl_Apellido.Location = new Point(269, 60);
-            lbl_Apellido.Name = "lbl_Apellido";
-            lbl_Apellido.Size = new Size(15, 20);
-            lbl_Apellido.TabIndex = 17;
-            lbl_Apellido.Text = "-";
             // 
             // lbl_Nombre
             // 
@@ -328,7 +316,6 @@
         private Label label6;
         private Label lbl_Periodo;
         private Label lbl_Monto;
-        private Label lbl_Apellido;
         private Label lbl_FormaPago;
         private Label label10;
         private Panel panel2;

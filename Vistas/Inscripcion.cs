@@ -109,7 +109,7 @@ namespace Club_Deportivo.Vistas
 
                         // Si el código es diferente de 1, significa que el socio se almacenó con éxito en la base de datos
                         string tipo = esSocio ? "Socios" : "No Socios";
-                        MessageBox.Show($"Se almacenó con éxito el {tipo} con el código Nro " + respuesta,
+                        MessageBox.Show($"Se almacenó con éxito el cliente en la categoria: {tipo}",
                                         "AVISO DEL SISTEMA",
                                         MessageBoxButtons.OK,
                                         MessageBoxIcon.Information);

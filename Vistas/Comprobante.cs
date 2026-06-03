@@ -43,8 +43,7 @@ public partial class Comprobante : Form
         InitializeComponent();
 
         lbl_NSocio.Text = doc.NSocio.ToString();
-        lbl_Nombre.Text = doc.nombre;
-        lbl_Apellido.Text = doc.apellido;
+        lbl_Nombre.Text = $"{doc.nombre} {doc.apellido}"; 
         lbl_Monto.Text = doc.monto.ToString();
         lbl_FormaPago.Text = doc.forma_pago;
         lbl_Periodo.Text = doc.periodo.ToString();
