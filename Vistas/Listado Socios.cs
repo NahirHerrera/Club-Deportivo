@@ -25,12 +25,12 @@ namespace Club_Deportivo.Vistas
             dataGridView2.Columns.Clear();
             dataGridView2.AutoGenerateColumns = false;
 
-            dataGridView2.Columns.Add(new DataGridViewTextBoxColumn { Name = "idClientes", HeaderText = "ID Cliente", DataPropertyName = "idClientes" });
-            dataGridView2.Columns.Add(new DataGridViewTextBoxColumn { Name = "nombre", HeaderText = "Nombre", DataPropertyName = "nombre" });
-            dataGridView2.Columns.Add(new DataGridViewTextBoxColumn { Name = "apellido", HeaderText = "Apellido", DataPropertyName = "apellido" });
-            dataGridView2.Columns.Add(new DataGridViewTextBoxColumn { Name = "dni", HeaderText = "Documento", DataPropertyName = "dni" });
-            dataGridView2.Columns.Add(new DataGridViewTextBoxColumn { Name = "actividad", HeaderText = "Actividad", DataPropertyName = "nombreActividad" });
-            dataGridView2.Columns.Add(new DataGridViewTextBoxColumn { Name = "fechaInscripcion", HeaderText = "Fecha Inscripción", DataPropertyName = "fechaInscripcion" });
+            dataGridView2.Columns.Add(new DataGridViewTextBoxColumn { Name = "idCliente", HeaderText = "ID Cliente", DataPropertyName = "idCliente" });
+            dataGridView2.Columns.Add(new DataGridViewTextBoxColumn { Name = "Nombre", HeaderText = "Nombre", DataPropertyName = "Nombre" });
+            dataGridView2.Columns.Add(new DataGridViewTextBoxColumn { Name = "Apellido", HeaderText = "Apellido", DataPropertyName = "Apellido" });
+            dataGridView2.Columns.Add(new DataGridViewTextBoxColumn { Name = "Documento", HeaderText = "Documento", DataPropertyName = "Documento" });
+            dataGridView2.Columns.Add(new DataGridViewTextBoxColumn { Name = "Actividad", HeaderText = "Actividad", DataPropertyName = "Actividad" });
+            dataGridView2.Columns.Add(new DataGridViewTextBoxColumn { Name = "FechaInscripcion", HeaderText = "Fecha Inscripción", DataPropertyName = "FechaInscripcion" });
         }
 
 
