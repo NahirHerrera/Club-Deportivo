@@ -56,10 +56,6 @@ namespace Club_Deportivo.Vistas
                     {
                         DataTable dt = new DataTable();
                         adapter.Fill(dt);
-                        foreach (DataColumn col in dt.Columns)
-                        {
-                            Console.WriteLine(col.ColumnName);
-                        }
                         dataGridView2.DataSource = dt;
                     }
                 }
