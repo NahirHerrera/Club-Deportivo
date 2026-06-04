@@ -14,24 +14,7 @@ namespace Club_Deportivo
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            try
-            {
-
-                // Prueba de conexión a la base de datos
-                using (MySqlConnection cn = Conexion.getInstancia().CrearConexion())
-                {
-
-                    // Abrir la conexión para verificar que funcione correctamente
-                    cn.Open();
-                    MessageBox.Show("¡Conexión exitosa a la base de datos!");
-                }
-            }
-            catch (Exception ex)
-            {
-
-                // Manejo de errores de conexión
-                MessageBox.Show("Error al conectar: " + ex.Message);
-            }
+            
         }
 
         private void usuarioInput(object sender, EventArgs e)
