@@ -272,7 +272,7 @@ namespace Club_Deportivo.Vistas
                         OcultarControles();
 
                         dgvActividades.Visible = true;
-                        groupBox1.Visible = false;
+                        groupBox1.Visible = true;
                         btn_PagarInscribir.Visible = true;
                         btn_Inscripcion.Visible = false;
 
@@ -364,15 +364,29 @@ namespace Club_Deportivo.Vistas
             groupBox1.Visible = true;
 
             decimal totalfinal = total;
-            
-            if (rbEfectivo.Checked)
-                totalfinal *= 0.90m;
-            else if (rbTarjeta3.Checked)
-                totalfinal /= 3;
-            else if (rbTarjeta6.Checked)
-                totalfinal /= 6;
 
-            MessageBox.Show("Total a pagar: $" + total.ToString("F2"), "Monto", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            if (rbEfectivo.Checked)
+            {
+                totalfinal = total * 0.90m;
+                MessageBox.Show("Forma de pago: Efectivo\n" +
+                                "Descuento aplicado: 10%\n" +
+                                "Total a pagar: $" + totalfinal.ToString("F2"),
+                                "Monto", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else if (rbTarjeta3.Checked)
+            {
+                    MessageBox.Show("Forma de pago: Tarj. de Crédito\n" +
+                                    "Total a pagar: $" + totalfinal.ToString("F2") + "\n" +
+                                    "3 cuotas de: $" + (total/3).ToString("F2"),
+                                    "Monto", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else if (rbTarjeta6.Checked)
+            {
+                    MessageBox.Show("Forma de pago: Tarj. de Crédito\n" +
+                                   "Total a pagar: $" + totalfinal.ToString("F2") + "\n" +
+                                   "6 cuotas de: $" + (total/6).ToString("F2"),
+                                   "Monto", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
 
             btn_Inscripcion.Visible = true;
         }

@@ -10,13 +10,13 @@ using System.Windows.Forms;
 
 namespace Club_Deportivo.Vistas
 {
-    // Formulario para mostrar el listado de socios
-    public partial class ListadoSocios : Form
+    // Formulario para mostrar el listado de clientes
+    public partial class ListadoClientes : Form
     {
-        public ListadoSocios()
+        public ListadoClientes()
         {
             InitializeComponent();
-            this.Load += ListadoSocios_Load;
+            this.Load += ListadoClientes_Load;
         }
 
         // Configura las columnas del DataGridView para mostrar los datos de los socios
@@ -35,7 +35,7 @@ namespace Club_Deportivo.Vistas
         }
 
 
-        private void ListadoSocios_Load(object sender, EventArgs e)
+        private void ListadoClientes_Load(object sender, EventArgs e)
         {
             ConfigurarGrilla();
             CargaGrilla(null);
@@ -72,6 +72,7 @@ namespace Club_Deportivo.Vistas
         private void button1_Click(object sender, EventArgs e)
         {
             string dni = string.IsNullOrWhiteSpace(textBox1.Text) ? null : textBox1.Text.Trim();
+
             CargaGrilla(dni);
         }
 

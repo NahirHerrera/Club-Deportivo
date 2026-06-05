@@ -1,6 +1,6 @@
 ﻿namespace Club_Deportivo.Vistas
 {
-    partial class ListadoSocios
+    partial class ListadoClientes
     {
         /// <summary>
         /// Required designer variable.
@@ -84,7 +84,7 @@
             button2.UseVisualStyleBackColor = true;
             button2.Click += button2_Click;
             // 
-            // ListadoSocios
+            // ListadoClientes
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -95,7 +95,7 @@
             Controls.Add(button1);
             Controls.Add(textBox1);
             Controls.Add(label1);
-            Name = "ListadoSocios";
+            Name = "ListadoClientes";
             Text = "Listado de Clientes";
             ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
             ResumeLayout(false);

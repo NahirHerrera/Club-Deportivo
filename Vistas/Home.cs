@@ -77,7 +77,7 @@ namespace Club_Deportivo
 
         private void button2_Click(object sender, EventArgs e)
         {
-            ListadoSocios listadoSocios = new ListadoSocios();
+            ListadoClientes listadoSocios = new ListadoClientes();
             listadoSocios.Show();
             this.Hide();
         }
