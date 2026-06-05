@@ -49,7 +49,7 @@ namespace Club_Deportivo
                 contraseniaBox.UseSystemPasswordChar = true;
             }
         }
-        private void txtPass_Leave(object sender, EventArgs e)
+        private void contraseniaBox_Leave(object sender, EventArgs e)
         {
             if (contraseniaBox.Text == "")
             {
@@ -58,4 +58,5 @@ namespace Club_Deportivo
             }
         }
     }
+
 }

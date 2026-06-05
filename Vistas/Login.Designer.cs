@@ -50,6 +50,7 @@
             contraseniaBox.Name = "contraseniaBox";
             contraseniaBox.Size = new Size(186, 27);
             contraseniaBox.TabIndex = 1;
+            contraseniaBox.UseSystemPasswordChar = true;
             // 
             // label1
             // 
