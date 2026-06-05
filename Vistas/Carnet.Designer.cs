@@ -69,23 +69,24 @@
             // 
             // label3
             // 
-            label3.AutoSize = true;
+            label3.Anchor = AnchorStyles.None;
             label3.BackColor = Color.White;
             label3.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3.Location = new Point(344, 275);
+            label3.Location = new Point(392, 275);
             label3.Name = "label3";
             label3.Size = new Size(12, 18);
             label3.TabIndex = 3;
             label3.Text = " ";
+            label3.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // btnImprimirCarnet
             // 
             btnImprimirCarnet.BackColor = Color.LightGray;
             btnImprimirCarnet.Font = new Font("Segoe UI", 7F);
-            btnImprimirCarnet.Location = new Point(362, 355);
+            btnImprimirCarnet.Location = new Point(604, 222);
             btnImprimirCarnet.Margin = new Padding(3, 4, 3, 4);
             btnImprimirCarnet.Name = "btnImprimirCarnet";
-            btnImprimirCarnet.Size = new Size(69, 29);
+            btnImprimirCarnet.Size = new Size(111, 36);
             btnImprimirCarnet.TabIndex = 4;
             btnImprimirCarnet.Text = "Imprimir";
             btnImprimirCarnet.UseVisualStyleBackColor = false;
