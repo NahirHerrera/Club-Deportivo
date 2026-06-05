@@ -96,7 +96,7 @@
             Controls.Add(textBox1);
             Controls.Add(label1);
             Name = "ListadoSocios";
-            Text = "Listado de Socios";
+            Text = "Listado de Clientes";
             ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
             ResumeLayout(false);
             PerformLayout();
