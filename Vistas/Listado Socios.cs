@@ -31,6 +31,7 @@ namespace Club_Deportivo.Vistas
             dataGridView2.Columns.Add(new DataGridViewTextBoxColumn { Name = "Documento", HeaderText = "Documento", DataPropertyName = "Documento" });
             dataGridView2.Columns.Add(new DataGridViewTextBoxColumn { Name = "Actividad", HeaderText = "Actividad", DataPropertyName = "Actividad" });
             dataGridView2.Columns.Add(new DataGridViewTextBoxColumn { Name = "FechaInscripcion", HeaderText = "Fecha Inscripción", DataPropertyName = "FechaInscripcion" });
+            dataGridView2.Columns.Add(new DataGridViewTextBoxColumn { Name = "TipoCliente", HeaderText = "Tipo Cliente", DataPropertyName = "TipoCliente" });
         }
 
 
@@ -43,6 +44,7 @@ namespace Club_Deportivo.Vistas
         // Carga los datos de los socios en el DataGridView, filtrando por DNI si se proporciona
         public void CargaGrilla(string dni = null)
         {
+
             try
             {
                 // Se utiliza un bloque using para asegurar que la conexión y el comando se cierren correctamente

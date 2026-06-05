@@ -272,7 +272,7 @@ namespace Club_Deportivo.Vistas
                         OcultarControles();
 
                         dgvActividades.Visible = true;
-                        groupBox1.Visible = true;
+                        groupBox1.Visible = false;
                         btn_PagarInscribir.Visible = true;
                         btn_Inscripcion.Visible = false;
 
@@ -350,22 +350,27 @@ namespace Club_Deportivo.Vistas
         // habilita el grupo de opciones de pago para que el cliente pueda elegir su forma de pago.
         private void btn_PagarInscribir_Click(object sender, EventArgs e)
         {
-            decimal total = CalcularTotal();
+             total = CalcularTotal();
 
             if (total == 0)
             {
-                MessageBox.Show("Seleccione al menos una actividad.", "AVISO DEL SISTEMA",
+                MessageBox.Show("Seleccione al menos una actividad.",
+                    "AVISO DEL SISTEMA",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning);
                 return;
             }
-    
+
+            groupBox1.Visible = true;
+
+            decimal totalfinal = total;
+            
             if (rbEfectivo.Checked)
-                total *= 0.90m;
+                totalfinal *= 0.90m;
             else if (rbTarjeta3.Checked)
-                total /= 3;
+                totalfinal /= 3;
             else if (rbTarjeta6.Checked)
-                total /= 6;
+                totalfinal /= 6;
 
             MessageBox.Show("Total a pagar: $" + total.ToString("F2"), "Monto", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -388,12 +393,27 @@ namespace Club_Deportivo.Vistas
 
             string formaPago = ObtenerFormaPago();
             bool resultado = RegistrarInscripcion(formaPago, false);
-
             if (resultado)
             {
-                MessageBox.Show("Forma de pago: " + formaPago + "\nTotal abonado: $" + total.ToString("F2"), "Pago realizado",
-                                 MessageBoxButtons.OK,
-                                 MessageBoxIcon.Information);
+                if (rbEfectivo.Checked)
+                {
+                    MessageBox.Show(
+                        $"Forma de pago: {formaPago}\n" +
+                        $"Total abonado: ${total * 0.90m:F2}");
+                }
+                else if (rbTarjeta3.Checked)
+                {
+                    MessageBox.Show(
+                        $"Forma de pago: {formaPago}\n" +
+                        $"3 cuotas de ${(total / 3):F2}");
+                }
+                else if (rbTarjeta6.Checked)
+                {
+                    MessageBox.Show(
+                        $"Forma de pago: {formaPago}\n" +
+                        $"6 cuotas de ${(total / 6):F2}");
+
+                }
             }
         }
     }

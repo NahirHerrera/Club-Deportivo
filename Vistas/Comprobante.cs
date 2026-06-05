@@ -46,7 +46,7 @@ public partial class Comprobante : Form
         lbl_Nombre.Text = $"{doc.nombre} {doc.apellido}"; 
         lbl_Monto.Text = doc.monto.ToString();
         lbl_FormaPago.Text = doc.forma_pago;
-        lbl_Periodo.Text = doc.periodo.ToString();
+        lbl_Periodo.Text = doc.fechaPago.ToString("dd/MM/yyyy");
     }
 
     private void btnImprimir_Click(object sender, EventArgs e)

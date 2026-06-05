@@ -46,6 +46,7 @@ namespace Club_Deportivo
         // registra el pago en la base de datos y muestra un comprobante al usuario.
         private void btn_Pagar_Click(object sender, EventArgs e)
         {
+            btn_Carnet.Enabled = false;
 
             // Validación de la forma de pago seleccionada. Si no se ha seleccionado ninguna,
             // se muestra un mensaje de advertencia y se detiene el proceso.
@@ -97,8 +98,6 @@ namespace Club_Deportivo
 
                     float monto = Convert.ToSingle(reader.GetDecimal("Monto"));
 
-                    DateTime periodo = reader.GetDateTime("fechaVencimiento");
-
                     reader.Close();
 
                     // UPDATE CUOTA
@@ -129,7 +128,7 @@ namespace Club_Deportivo
                     doc.nombre = nombre;
                     doc.apellido = apellido;
                     doc.monto = monto;
-                    doc.periodo = periodo;
+                    doc.fechaPago = DateTime.Now;
 
                     // Se determina la forma de pago seleccionada y se calcula el monto final a cobrar,
                     // aplicando descuentos o cuotas según corresponda.
@@ -164,10 +163,42 @@ namespace Club_Deportivo
                     ventanacomprobante.Show();
                 }
 
-                // Si no se encuentran cuotas pendientes para el DNI ingresado, se muestra un mensaje de error al usuario.
+                // Si el socio ya pago su cuota y no posee cuotas pendientes, permite que pueda visualizar su CARNET
+                // Si no se encuentra el DNI, emite un mensaje de error
                 else
                 {
-                    MessageBox.Show("No se encontraron cuotas pendientes para ese DNI", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    reader.Close();
+
+                    string consultaSocio = @"SELECT idClientes, nombre, apellido
+                                            FROM clientes
+                                            WHERE dni = @Documento";
+
+                    MySqlCommand cmdSocio = new MySqlCommand(consultaSocio, cadena);
+
+                    cmdSocio.Parameters.AddWithValue("@Documento", txt_DNI.Text);
+
+                    MySqlDataReader lectorSocio = cmdSocio.ExecuteReader();
+
+                    if (lectorSocio.Read())
+                    {
+                        doc = new DatosComprobante();
+                        doc.NSocio = lectorSocio.GetInt32("idClientes");
+                        doc.nombre = lectorSocio.GetString("nombre");
+                        doc.apellido = lectorSocio.GetString("apellido");
+                        btn_Carnet.Enabled = true;
+
+                        MessageBox.Show( "El socio no posee cuotas pendientes. Puede emitir su carnet.", "AVISO DEL SISTEMA",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show( "No existe ningún socio con ese DNI.", "AVISO DEL SISTEMA",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Error);
+                    }
+
+                    lectorSocio.Close();
                 }
             }
             catch (Exception ex)

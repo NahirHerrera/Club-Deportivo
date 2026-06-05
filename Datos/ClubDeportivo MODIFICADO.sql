@@ -106,58 +106,64 @@ CREATE TABLE inscripcion_actividad (
 --
 
 DELIMITER //
+
 CREATE PROCEDURE RegistrarCliente(
-    IN Nom VARCHAR(30),
-    IN Ape VARCHAR(30),
-    IN tDoc VARCHAR(10),
-    IN Doc VARCHAR(30),
-    IN Apto BOOLEAN,
-    IN esSocio BOOLEAN,
-    IN idActividad INT,
-    OUT rta INT
+	IN Nom VARCHAR(30),
+	IN Ape VARCHAR(30),
+	IN tDoc VARCHAR(10),
+	IN Doc VARCHAR(30),
+	IN Apto BOOLEAN,
+	IN esSocio BOOLEAN,
+	IN idActividad INT,
+	OUT rta INT
 )
 BEGIN
-    DECLARE v_idClientes INT DEFAULT 0;
-    DECLARE v_existe INT;
-    DECLARE v_nroCarnet INT;
-    
-    SET v_existe = (SELECT COUNT(*) FROM Clientes WHERE tipoDoc = tDoc AND Dni = Doc);
+DECLARE v_idClientes INT DEFAULT 0;
+DECLARE v_existe INT;
+DECLARE v_nroCarnet INT;
 
-    IF v_existe = 0 THEN
-        INSERT INTO Clientes (Nombre, Apellido, TipoDoc, Dni, aptoFisico)
-        VALUES (Nom, Ape, tDoc, Doc, Apto);
-        SET v_idClientes = LAST_INSERT_ID();
-        
-        IF esSocio = TRUE THEN
-		     IF (SELECT COUNT(*) FROM Socios) = 0 THEN
-                 SET v_nroCarnet = 1000;
-             ELSE
-                 SET v_nroCarnet = (SELECT MAX(nroCarnet) + 1 FROM Socios);
-			 END IF;
-             
-             INSERT INTO Socios (idClientes, nroCarnet, fecha_vencimiento_cuota)
-             VALUES (v_idClientes, v_nroCarnet, DATE_ADD(NOW(), INTERVAL 1 MONTH));
+SET v_existe = (
+	SELECT COUNT(*)
+    FROM Clientes
+    WHERE tipoDoc = tDoc
+    AND Dni = Doc
+);
 
-             --
-             -- EL SOCIO SE REGISTRA YA CON UNA CUOTA
-             --
+IF v_existe = 0 THEN
 
-             INSERT INTO Cuota (idClientes, Monto, fechaVencimiento, Estado)
-			 VALUES(v_idClientes,40000,DATE_ADD(NOW(), INTERVAL 1 MONTH),'Pendiente');
-             
-             SET rta = v_nroCarnet;
-	    ELSE
-            INSERT INTO NoSocios (idClientes, idActividades, fechaActividad)
-			VALUES (v_idClientes, idActividad, NOW());
-        
-			SET rta = v_idClientes;
-		END IF;
-        
+    INSERT INTO Clientes(Nombre ,Apellido, TipoDoc, Dni, aptoFisico)
+    VALUES(Nom, Ape, tDoc, Doc, Apto);
+
+    SET v_idClientes = LAST_INSERT_ID();
+
+    IF esSocio = TRUE THEN
+
+        IF (SELECT COUNT(*) FROM Socios) = 0 THEN 
+			SET v_nroCarnet = 1000;
+        ELSE
+            SET v_nroCarnet = (SELECT MAX(nroCarnet) + 1 FROM Socios);
+        END IF;
+
+        INSERT INTO Socios(idClientes,nroCarnet,fecha_vencimiento_cuota)
+        VALUES(v_idClientes,v_nroCarnet,DATE_ADD(NOW(), INTERVAL 1 MONTH));
+
+        INSERT INTO Cuota(idClientes,Monto,fechaVencimiento,Estado)
+        VALUES(v_idClientes,40000,CURDATE(),'Pendiente');
+        SET rta = v_nroCarnet;
+
     ELSE
-        SET rta = 1;
+        INSERT INTO NoSocios(idClientes, idActividades, fechaActividad)
+        VALUES(v_idClientes, idActividad, NOW());
+        SET rta = v_idClientes;
     END IF;
+
+ELSE
+    SET rta = 1;
+END IF;
 END //
+
 DELIMITER ;
+
 
 --
 -- PROCEDURE LOGIN
@@ -183,21 +189,43 @@ DELIMITER ;
 
 
 DELIMITER //
+
 CREATE PROCEDURE ObtenerSocios(
     IN p_dni VARCHAR(30)
 )
 BEGIN
-    SELECT c.idClientes, c.nombre, c.apellido, c.dni, a.idActividades, a.nombreActividad, ia.fechaInscripcion
+
+    SELECT
+        c.idClientes AS idCliente,
+        c.nombre AS Nombre,
+        c.apellido AS Apellido,
+        c.dni AS Documento,
+        a.nombreActividad AS Actividad,
+        ia.fechaInscripcion AS FechaInscripcion,
+	
+		CASE
+			WHEN s.idClientes IS NOT NULL THEN 'Socio'
+			ELSE 'No Socio'
+		END AS TipoCliente
+        
     FROM Clientes c
+
     LEFT JOIN inscripcion_actividad ia
         ON ia.idClientes = c.idClientes
+
     LEFT JOIN Actividades a
         ON a.idActividades = ia.idActividad
+        
+	LEFT JOIN Socios s
+		ON s.idClientes = c.idClientes
+        
     WHERE (p_dni IS NULL OR c.dni = p_dni)
-    ORDER BY c.idClientes, a.nombreActividad;
-END //
-DELIMITER ;
 
+    ORDER BY c.idClientes, a.nombreActividad;
+
+END //
+
+DELIMITER ;
 --
 -- TEST
 --

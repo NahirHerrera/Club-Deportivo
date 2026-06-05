@@ -34,6 +34,7 @@ namespace Club_Deportivo
                         INNER JOIN clientes cl
                         ON cl.idClientes = c.idClientes
                         WHERE c.Estado = 'Pendiente'
+                        AND c.fechaVencimiento <= CURDATE()
                         ORDER BY c.fechaVencimiento ASC";
 
                 MySqlCommand comando = new MySqlCommand(query, cadena);

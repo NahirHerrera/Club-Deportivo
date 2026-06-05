@@ -11,6 +11,6 @@ namespace Club_Deportivo.Datos
         public string? apellido;
         public float monto;
         public string? forma_pago;
-        public DateTime periodo;
+        public DateTime fechaPago;
     }
 }
