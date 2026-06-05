@@ -43,7 +43,6 @@
             usuarioBox.Name = "usuarioBox";
             usuarioBox.Size = new Size(186, 27);
             usuarioBox.TabIndex = 0;
-            usuarioBox.TextChanged += usuarioInput;
             // 
             // contraseniaBox
             // 
@@ -51,7 +50,6 @@
             contraseniaBox.Name = "contraseniaBox";
             contraseniaBox.Size = new Size(186, 27);
             contraseniaBox.TabIndex = 1;
-            contraseniaBox.TextChanged += contraseniaInput;
             // 
             // label1
             // 
@@ -61,7 +59,6 @@
             label1.Size = new Size(59, 20);
             label1.TabIndex = 2;
             label1.Text = "Usuario";
-            label1.Click += label1_Click;
             // 
             // label2
             // 
@@ -71,7 +68,6 @@
             label2.Size = new Size(83, 20);
             label2.TabIndex = 3;
             label2.Text = "Contraseña";
-            label2.Click += label2_Click;
             // 
             // button1
             // 
@@ -106,7 +102,6 @@
             Controls.Add(usuarioBox);
             Name = "Login";
             Text = "Login";
-            Load += Form1_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
