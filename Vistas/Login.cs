@@ -10,35 +10,7 @@ namespace Club_Deportivo
         public Login()
         {
             InitializeComponent();
-
-            contraseniaBox.UseSystemPasswordChar = true;
         }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void usuarioInput(object sender, EventArgs e)
-        {
-
-        }
-
-        private void contraseniaInput(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
 
@@ -69,8 +41,21 @@ namespace Club_Deportivo
                 MessageBox.Show("Usuario y/o password incorrecto");
             }
         }
-
-
-
+        private void contraseniaBox_Enter(object sender, EventArgs e)
+        {
+            if (contraseniaBox.Text == "CONTRASEÑA")
+            {
+                contraseniaBox.Text = "";
+                contraseniaBox.UseSystemPasswordChar = true;
+            }
+        }
+        private void txtPass_Leave(object sender, EventArgs e)
+        {
+            if (contraseniaBox.Text == "")
+            {
+                contraseniaBox.Text = "CONTRASEÑA";
+                contraseniaBox.UseSystemPasswordChar = false;
+            }
+        }
     }
 }

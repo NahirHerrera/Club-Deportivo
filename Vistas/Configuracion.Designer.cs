@@ -34,7 +34,7 @@
             label4 = new Label();
             textBox1 = new TextBox();
             textBox2 = new TextBox();
-            textBox3 = new TextBox();
+            txtPass = new TextBox();
             button1 = new Button();
             button2 = new Button();
             SuspendLayout();
@@ -97,13 +97,13 @@
             textBox2.Text = "root";
             textBox2.TextChanged += textBox2_TextChanged;
             // 
-            // textBox3
+            // txtPass
             // 
-            textBox3.Location = new Point(328, 242);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(184, 27);
-            textBox3.TabIndex = 6;
-            textBox3.TextChanged += textBox3_TextChanged;
+            txtPass.Location = new Point(328, 242);
+            txtPass.Name = "txtPass";
+            txtPass.Size = new Size(184, 27);
+            txtPass.TabIndex = 6;
+            txtPass.TextChanged += textBox3_TextChanged;
             // 
             // button1
             // 
@@ -133,7 +133,7 @@
             ClientSize = new Size(800, 450);
             Controls.Add(button2);
             Controls.Add(button1);
-            Controls.Add(textBox3);
+            Controls.Add(txtPass);
             Controls.Add(textBox2);
             Controls.Add(textBox1);
             Controls.Add(label4);
@@ -156,7 +156,7 @@
         private Label label4;
         private TextBox textBox1;
         private TextBox textBox2;
-        private TextBox textBox3;
+        private TextBox txtPass;
         private Button button1;
         private Button button2;
     }

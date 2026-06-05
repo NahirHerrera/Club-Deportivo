@@ -16,7 +16,7 @@ namespace Club_Deportivo.Vistas
         {
             InitializeComponent();
 
-            textBox3.UseSystemPasswordChar = true;
+            txtPass.UseSystemPasswordChar = true;
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -59,7 +59,7 @@ namespace Club_Deportivo.Vistas
 
             string puerto = textBox1.Text.Trim();
             string usuario = textBox2.Text.Trim();
-            string password = textBox3.Text;
+            string password = txtPass.Text;
 
 
             if (string.IsNullOrWhiteSpace(puerto) || string.IsNullOrWhiteSpace(usuario))
@@ -100,7 +100,23 @@ namespace Club_Deportivo.Vistas
         {
             textBox1.Text = "";
             textBox2.Text = "";
-            textBox3.Text = "";
+            txtPass.Text = "";
+        }
+        private void txtPass_Enter(object sender, EventArgs e)
+        {
+            if (txtPass.Text == "CONTRASEÑA")
+            {
+                txtPass.Text = "";
+                txtPass.UseSystemPasswordChar = true;
+            }
+        }
+        private void txtPass_Leave(object sender, EventArgs e)
+        {
+            if (txtPass.Text == "")
+            {
+                txtPass.Text = "CONTRASEÑA";
+                txtPass.UseSystemPasswordChar = false;
+            }
         }
     }
 }

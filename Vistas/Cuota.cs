@@ -35,7 +35,7 @@ namespace Club_Deportivo
         //Incluye los datos del socio en el carnet
         private void btn_Carnet_Click(object sender, EventArgs e)
         {
-            string nombreCompleto = $"{doc.nombre}  {doc.apellido}";
+            string nombreCompleto = $"{doc.nombre} {doc.apellido}";
             string numeroSocio = doc.NSocio.ToString();
             Carnet carnet = new Carnet(nombreCompleto, numeroSocio);
             carnet.Show();
