@@ -24,8 +24,6 @@ namespace Club_Deportivo.Vistas
 
             label3.Text = _nombreSocio;
             label2.Text = _numeroSocio;
-
-            label3.Left = (label3.ClientSize.Width - label3.Width) / 2;
         }
 
         private void ExportarFormularioAPdf()
@@ -48,13 +46,13 @@ namespace Club_Deportivo.Vistas
         }
 
         private void LineasImpresion(object sender, PrintPageEventArgs e)
-        { 
+        {
             this.Refresh();
             Application.DoEvents();
 
-            Bitmap bmp = new Bitmap(this.Width,this.Height);
+            Bitmap bmp = new Bitmap(this.Width, this.Height);
 
-            this.DrawToBitmap(bmp,new Rectangle(0,0,this.Width,this.Height));
+            this.DrawToBitmap(bmp, new Rectangle(0, 0, this.Width, this.Height));
 
             e.Graphics.DrawImage(bmp, 0, 0);
         }
@@ -68,11 +66,6 @@ namespace Club_Deportivo.Vistas
             ExportarFormularioAPdf();
 
             btnImprimirCarnet.Visible = true;
-        }
-
-        private void Carnet_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

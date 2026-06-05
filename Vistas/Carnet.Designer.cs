@@ -61,7 +61,7 @@
             label2.AutoSize = true;
             label2.BackColor = Color.White;
             label2.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label2.Location = new Point(390, 324);
+            label2.Location = new Point(390, 326);
             label2.Name = "label2";
             label2.Size = new Size(12, 18);
             label2.TabIndex = 2;
@@ -72,9 +72,9 @@
             label3.Anchor = AnchorStyles.None;
             label3.BackColor = Color.White;
             label3.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3.Location = new Point(392, 275);
+            label3.Location = new Point(342, 275);
             label3.Name = "label3";
-            label3.Size = new Size(12, 18);
+            label3.Size = new Size(116, 20);
             label3.TabIndex = 3;
             label3.Text = " ";
             label3.TextAlign = ContentAlignment.MiddleCenter;
@@ -83,12 +83,12 @@
             // 
             btnImprimirCarnet.BackColor = Color.LightGray;
             btnImprimirCarnet.Font = new Font("Segoe UI", 7F);
-            btnImprimirCarnet.Location = new Point(604, 222);
+            btnImprimirCarnet.Location = new Point(345, 358);
             btnImprimirCarnet.Margin = new Padding(3, 4, 3, 4);
             btnImprimirCarnet.Name = "btnImprimirCarnet";
-            btnImprimirCarnet.Size = new Size(111, 36);
+            btnImprimirCarnet.Size = new Size(107, 26);
             btnImprimirCarnet.TabIndex = 4;
-            btnImprimirCarnet.Text = "Imprimir";
+            btnImprimirCarnet.Text = "Imprimir Carnet";
             btnImprimirCarnet.UseVisualStyleBackColor = false;
             btnImprimirCarnet.Click += btnImprimirCarnet_Click;
             // 
