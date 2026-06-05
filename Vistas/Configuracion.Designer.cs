@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Configuracion));
             Titulo = new Label();
             label2 = new Label();
             label3 = new Label();
@@ -37,22 +38,26 @@
             txtPass = new TextBox();
             button1 = new Button();
             button2 = new Button();
+            pictureBox1 = new PictureBox();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // Titulo
             // 
             Titulo.AutoSize = true;
-            Titulo.Location = new Point(328, 49);
+            Titulo.Font = new Font("Candara", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Titulo.ForeColor = Color.Maroon;
+            Titulo.Location = new Point(246, 36);
             Titulo.Name = "Titulo";
-            Titulo.Size = new Size(166, 20);
+            Titulo.Size = new Size(295, 35);
             Titulo.TabIndex = 0;
-            Titulo.Text = "Configuración conexion";
+            Titulo.Text = "Configuración conexión";
             Titulo.Click += label1_Click;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(217, 151);
+            label2.Location = new Point(377, 147);
             label2.Name = "label2";
             label2.Size = new Size(52, 20);
             label2.TabIndex = 1;
@@ -62,7 +67,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(217, 199);
+            label3.Location = new Point(377, 192);
             label3.Name = "label3";
             label3.Size = new Size(59, 20);
             label3.TabIndex = 2;
@@ -72,7 +77,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(217, 249);
+            label4.Location = new Point(377, 238);
             label4.Name = "label4";
             label4.Size = new Size(83, 20);
             label4.TabIndex = 3;
@@ -82,7 +87,7 @@
             // textBox1
             // 
             textBox1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            textBox1.Location = new Point(328, 148);
+            textBox1.Location = new Point(474, 144);
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(184, 27);
             textBox1.TabIndex = 4;
@@ -92,7 +97,7 @@
             // textBox2
             // 
             textBox2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            textBox2.Location = new Point(328, 196);
+            textBox2.Location = new Point(474, 189);
             textBox2.Name = "textBox2";
             textBox2.Size = new Size(184, 27);
             textBox2.TabIndex = 5;
@@ -101,7 +106,7 @@
             // 
             // txtPass
             // 
-            txtPass.Location = new Point(328, 242);
+            txtPass.Location = new Point(474, 235);
             txtPass.Name = "txtPass";
             txtPass.Size = new Size(184, 27);
             txtPass.TabIndex = 6;
@@ -109,9 +114,9 @@
             // 
             // button1
             // 
-            button1.Location = new Point(242, 323);
+            button1.Location = new Point(421, 365);
             button1.Name = "button1";
-            button1.Size = new Size(126, 36);
+            button1.Size = new Size(137, 45);
             button1.TabIndex = 7;
             button1.Text = "Ingresar";
             button1.UseVisualStyleBackColor = true;
@@ -119,13 +124,24 @@
             // 
             // button2
             // 
-            button2.Location = new Point(445, 323);
+            button2.Location = new Point(236, 365);
             button2.Name = "button2";
-            button2.Size = new Size(137, 36);
+            button2.Size = new Size(142, 45);
             button2.TabIndex = 8;
             button2.Text = "Limpiar";
             button2.UseVisualStyleBackColor = true;
             button2.Click += button2_Click;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.BackgroundImageLayout = ImageLayout.Zoom;
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(58, 106);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(247, 194);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 9;
+            pictureBox1.TabStop = false;
             // 
             // Configuracion
             // 
@@ -133,6 +149,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.DarkKhaki;
             ClientSize = new Size(800, 450);
+            Controls.Add(pictureBox1);
             Controls.Add(button2);
             Controls.Add(button1);
             Controls.Add(txtPass);
@@ -146,6 +163,7 @@
             FormScreenCaptureMode = ScreenCaptureMode.HideContent;
             Name = "Configuracion";
             Text = "Conexion";
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -161,5 +179,6 @@
         private TextBox txtPass;
         private Button button1;
         private Button button2;
+        private PictureBox pictureBox1;
     }
 }
