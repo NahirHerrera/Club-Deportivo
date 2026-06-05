@@ -49,7 +49,7 @@ namespace Club_Deportivo.Vistas
             {
                 // Se utiliza un bloque using para asegurar que la conexión y el comando se cierren correctamente
                 using (MySqlConnection sqlCon = Conexion.getInstancia().CrearConexion())
-                using (MySqlCommand cmd = new MySqlCommand("ObtenerSocios", sqlCon))
+                using (MySqlCommand cmd = new MySqlCommand("ObtenerClientes", sqlCon))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("p_dni", (object)dni ?? DBNull.Value);
