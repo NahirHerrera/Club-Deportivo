@@ -1,4 +1,3 @@
-DROP DATABASE club_deportivo_modif;
 CREATE DATABASE club_deportivo_modif;
 USE club_deportivo_modif;
 
@@ -106,64 +105,58 @@ CREATE TABLE inscripcion_actividad (
 --
 
 DELIMITER //
-
 CREATE PROCEDURE RegistrarCliente(
-	IN Nom VARCHAR(30),
-	IN Ape VARCHAR(30),
-	IN tDoc VARCHAR(10),
-	IN Doc VARCHAR(30),
-	IN Apto BOOLEAN,
-	IN esSocio BOOLEAN,
-	IN idActividad INT,
-	OUT rta INT
+    IN Nom VARCHAR(30),
+    IN Ape VARCHAR(30),
+    IN tDoc VARCHAR(10),
+    IN Doc VARCHAR(30),
+    IN Apto BOOLEAN,
+    IN esSocio BOOLEAN,
+    IN idActividad INT,
+    OUT rta INT
 )
 BEGIN
-DECLARE v_idClientes INT DEFAULT 0;
-DECLARE v_existe INT;
-DECLARE v_nroCarnet INT;
+    DECLARE v_idClientes INT DEFAULT 0;
+    DECLARE v_existe INT;
+    DECLARE v_nroCarnet INT;
+    
+    SET v_existe = (SELECT COUNT(*) FROM Clientes WHERE tipoDoc = tDoc AND Dni = Doc);
 
-SET v_existe = (
-	SELECT COUNT(*)
-    FROM Clientes
-    WHERE tipoDoc = tDoc
-    AND Dni = Doc
-);
+    IF v_existe = 0 THEN
+        INSERT INTO Clientes (Nombre, Apellido, TipoDoc, Dni, aptoFisico)
+        VALUES (Nom, Ape, tDoc, Doc, Apto);
+        SET v_idClientes = LAST_INSERT_ID();
+        
+        IF esSocio = TRUE THEN
+		     IF (SELECT COUNT(*) FROM Socios) = 0 THEN
+                 SET v_nroCarnet = 1000;
+             ELSE
+                 SET v_nroCarnet = (SELECT MAX(nroCarnet) + 1 FROM Socios);
+			 END IF;
+             
+             INSERT INTO Socios (idClientes, nroCarnet, fecha_vencimiento_cuota)
+             VALUES (v_idClientes, v_nroCarnet, DATE_ADD(NOW(), INTERVAL 1 MONTH));
 
-IF v_existe = 0 THEN
+             --
+             -- EL SOCIO SE REGISTRA YA CON UNA CUOTA
+             --
 
-    INSERT INTO Clientes(Nombre ,Apellido, TipoDoc, Dni, aptoFisico)
-    VALUES(Nom, Ape, tDoc, Doc, Apto);
-
-    SET v_idClientes = LAST_INSERT_ID();
-
-    IF esSocio = TRUE THEN
-
-        IF (SELECT COUNT(*) FROM Socios) = 0 THEN 
-			SET v_nroCarnet = 1000;
-        ELSE
-            SET v_nroCarnet = (SELECT MAX(nroCarnet) + 1 FROM Socios);
-        END IF;
-
-        INSERT INTO Socios(idClientes,nroCarnet,fecha_vencimiento_cuota)
-        VALUES(v_idClientes,v_nroCarnet,DATE_ADD(NOW(), INTERVAL 1 MONTH));
-
-        INSERT INTO Cuota(idClientes,Monto,fechaVencimiento,Estado)
-        VALUES(v_idClientes,40000,CURDATE(),'Pendiente');
-        SET rta = v_nroCarnet;
-
+             INSERT INTO Cuota (idClientes, Monto, fechaVencimiento, Estado)
+			 VALUES(v_idClientes,40000,DATE_ADD(NOW(), INTERVAL 1 MONTH),'Pendiente');
+             
+             SET rta = v_nroCarnet;
+	    ELSE
+            INSERT INTO NoSocios (idClientes, idActividades, fechaActividad)
+			VALUES (v_idClientes, idActividad, NOW());
+        
+			SET rta = v_idClientes;
+		END IF;
+        
     ELSE
-        INSERT INTO NoSocios(idClientes, idActividades, fechaActividad)
-        VALUES(v_idClientes, idActividad, NOW());
-        SET rta = v_idClientes;
+        SET rta = 1;
     END IF;
-
-ELSE
-    SET rta = 1;
-END IF;
 END //
-
 DELIMITER ;
-
 
 --
 -- PROCEDURE LOGIN
@@ -189,43 +182,21 @@ DELIMITER ;
 
 
 DELIMITER //
-
 CREATE PROCEDURE ObtenerSocios(
     IN p_dni VARCHAR(30)
 )
 BEGIN
-
-    SELECT
-        c.idClientes AS idCliente,
-        c.nombre AS Nombre,
-        c.apellido AS Apellido,
-        c.dni AS Documento,
-        a.nombreActividad AS Actividad,
-        ia.fechaInscripcion AS FechaInscripcion,
-	
-		CASE
-			WHEN s.idClientes IS NOT NULL THEN 'Socio'
-			ELSE 'No Socio'
-		END AS TipoCliente
-        
+    SELECT c.idClientes, c.nombre, c.apellido, c.dni, a.idActividades, a.nombreActividad, ia.fechaInscripcion
     FROM Clientes c
-
     LEFT JOIN inscripcion_actividad ia
         ON ia.idClientes = c.idClientes
-
     LEFT JOIN Actividades a
         ON a.idActividades = ia.idActividad
-        
-	LEFT JOIN Socios s
-		ON s.idClientes = c.idClientes
-        
     WHERE (p_dni IS NULL OR c.dni = p_dni)
-
     ORDER BY c.idClientes, a.nombreActividad;
-
 END //
-
 DELIMITER ;
+
 --
 -- TEST
 --
@@ -233,47 +204,12 @@ DELIMITER ;
 INSERT INTO Usuarios (Usuario, Password) VALUES 
 ('admin', '1234');
 
-INSERT INTO Clientes (Nombre, Apellido, tipoDoc, Dni, aptoFisico) VALUES 
-('Maria', 'Gomez', 'DNI', '32456741', TRUE),
-('Jose', 'Perez', 'DNI', '32554124', TRUE),
-('Camila', 'Sanchez', 'DNI', '29445114', TRUE),
-('Federico', 'Gimenez', 'DNI', '30125998', TRUE);
-
-INSERT INTO Socios (idClientes, nroCarnet, fecha_vencimiento_cuota) VALUES 
-(1,'0001', '2026-04-30 14:30:00'),
-(2, '0002', '2025-05-31 10:00:00');
-
 INSERT INTO Actividades (nombreActividad, costo_pase_diario) VALUES 
 ('Spinnig', '10000'),
 ('Natacion', '15000'),
 ('Yoga', '12000'),
 ('Zumba', '8000');
 
-INSERT INTO NoSocios (idClientes, idActividades, fechaActividad) VALUES 
-(3, 1, '2026-04-11 14:00:00'),
-(4, 2, '2025-05-15 10:00:00');
-
-INSERT INTO Inscripcion (idClientes, Fecha) VALUES
-(1,'2026-04-10 14:30:00'),
-(2,'2025-05-10 10:00:00');
-
-INSERT INTO Cuota (idClientes, Monto, fechaVencimiento, Estado) VALUES
-(1, 40000, '2026-04-30 14:30:00', 'Pendiente'),
-(2, 25000, '2025-05-31 10:00:00', 'Pendiente');
-
-INSERT INTO Pagos (idCuota, idClientes, Monto, fechaPago, nroComprobante) VALUES
-(1, 1, 40000, '2026-04-10 14:40:00', 1),
-(2, 2, 25000, '2025-05-10 10:10:00', 2);
-
-INSERT INTO Carnet (nroCarnet, fechaEmision, idClientes) VALUES
-(0001, '2026-04-10 14:45:00',1),
-(0002, '2025-05-10 10:15:00',2);
-
 UPDATE Inscripcion
 SET IdClientes = 1
 WHERE IdInscripcion = 1;
-
-SELECT c.IdCuota, c.Monto, c.Estado, c.FechaVencimiento, c.IdClientes
-FROM cuota c
-INNER JOIN clientes p ON p.IdClientes = c.IdClientes
-WHERE p.dni = '32456741';
