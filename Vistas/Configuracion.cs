@@ -15,6 +15,8 @@ namespace Club_Deportivo.Vistas
         public Configuracion()
         {
             InitializeComponent();
+
+            textBox3.UseSystemPasswordChar = true;
         }
 
         private void label1_Click(object sender, EventArgs e)

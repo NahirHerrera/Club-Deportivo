@@ -10,6 +10,8 @@ namespace Club_Deportivo
         public Login()
         {
             InitializeComponent();
+
+            contraseniaBox.UseSystemPasswordChar = true;
         }
 
         private void Form1_Load(object sender, EventArgs e)
