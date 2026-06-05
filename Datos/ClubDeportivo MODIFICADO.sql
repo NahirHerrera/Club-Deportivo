@@ -180,16 +180,21 @@ DELIMITER ;
 --
 
 DELIMITER //
-CREATE PROCEDURE ObtenerSocios(
+CREATE PROCEDURE ObtenerClientes(
     IN p_dni VARCHAR(30)
 )
 BEGIN
-    SELECT c.idClientes, c.nombre, c.apellido, c.dni, a.idActividades, a.nombreActividad, ia.fechaInscripcion
+    SELECT c.idClientes, c.nombre, c.apellido, c.dni, a.nombreActividad, ia.fechaInscripcion,
+	CASE
+    WHEN s.idClientes IS NOT NULL THEN 'Socio'
+    ELSE 'No Socio'
+    END AS tipoCliente
     FROM Clientes c
     LEFT JOIN inscripcion_actividad ia
         ON ia.idClientes = c.idClientes
     LEFT JOIN Actividades a
         ON a.idActividades = ia.idActividad
+	LEFT JOIN Socios s ON s.idClientes = c.idClientes
     WHERE (p_dni IS NULL OR c.dni = p_dni)
     ORDER BY c.idClientes, a.nombreActividad;
 END //
