@@ -175,11 +175,9 @@ BEGIN
 END //
 DELIMITER ;
 
-
 --
--- OBTENER LISTADO CLIENTES
+-- PROCEDURE OBTENER LISTADO CLIENTES
 --
-
 
 DELIMITER //
 CREATE PROCEDURE ObtenerSocios(
@@ -194,6 +192,22 @@ BEGIN
         ON a.idActividades = ia.idActividad
     WHERE (p_dni IS NULL OR c.dni = p_dni)
     ORDER BY c.idClientes, a.nombreActividad;
+END //
+DELIMITER ;
+
+--
+-- TRIGGER PARA CONFIRMAR INSCRIPCION LUEGO DEL REGISTRO
+--
+
+USE club_deportivo_modif;
+
+DELIMITER //
+CREATE TRIGGER trg_inscripcion
+AFTER INSERT ON Clientes
+FOR EACH ROW
+BEGIN
+INSERT INTO Inscripcion (idClientes, Fecha)
+VALUES (NEW.idClientes, NOW());
 END //
 DELIMITER ;
 
