@@ -90,7 +90,7 @@
             textBox1.Location = new Point(474, 144);
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(184, 27);
-            textBox1.TabIndex = 2;
+            textBox1.TabIndex = 0;
             textBox1.Text = "3306";
             textBox1.TextChanged += textBox1_TextChanged;
             // 
@@ -109,7 +109,7 @@
             txtPass.Location = new Point(474, 235);
             txtPass.Name = "txtPass";
             txtPass.Size = new Size(184, 27);
-            txtPass.TabIndex = 0;
+            txtPass.TabIndex = 2;
             txtPass.TextChanged += textBox3_TextChanged;
             // 
             // button1

@@ -5,9 +5,9 @@ namespace Club_Deportivo.Datos
     internal class Conexion
     {
         private string servidor = "localhost";
-        private string puerto;
-        private string usuario;
-        private string password;
+        private string? puerto;
+        private string? usuario;
+        private string? password;
         private string baseDatos = "club_deportivo_modif";
 
         private static Conexion? instancia = null;
