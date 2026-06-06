@@ -60,7 +60,7 @@ namespace Club_Deportivo.Vistas
         // insertando un registro en la tabla de inscripciones para cada actividad marcada.
         private bool RegistrarInscripcion(string formaPago, bool socio)
         {
-            MySqlConnection cadena = null; 
+            MySqlConnection? cadena = null; 
             bool seInserto = false;
 
             try
@@ -143,7 +143,7 @@ namespace Club_Deportivo.Vistas
         // y las carga en el DataGridView.
         private void CargarActividades()
         {
-            MySqlConnection cadena = null;
+            MySqlConnection? cadena = null;
 
             try
             {
@@ -187,7 +187,7 @@ namespace Club_Deportivo.Vistas
         // Busca un cliente por DNI y valida si puede inscribirse a actividades según su condición.
         private void btn_Buscar_Click(object sender, EventArgs e)
         {
-            MySqlConnection cadena = null;
+            MySqlConnection? cadena = null;
 
             try
             {
@@ -409,24 +409,19 @@ namespace Club_Deportivo.Vistas
             bool resultado = RegistrarInscripcion(formaPago, false);
             if (resultado)
             {
-                if (rbEfectivo.Checked)
+                if (resultado)
                 {
-                    MessageBox.Show(
-                        $"Forma de pago: {formaPago}\n" +
-                        $"Total abonado: ${total * 0.90m:F2}");
+                    MessageBox.Show("Inscripción realizada correctamente.",
+                                    "Éxito",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Information);
                 }
-                else if (rbTarjeta3.Checked)
+                else
                 {
-                    MessageBox.Show(
-                        $"Forma de pago: {formaPago}\n" +
-                        $"3 cuotas de ${(total / 3):F2}");
-                }
-                else if (rbTarjeta6.Checked)
-                {
-                    MessageBox.Show(
-                        $"Forma de pago: {formaPago}\n" +
-                        $"6 cuotas de ${(total / 6):F2}");
-
+                    MessageBox.Show("No se pudo confirmar la inscripción.",
+                                    "Error",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Error);
                 }
             }
         }
