@@ -90,7 +90,7 @@
             textBox1.Location = new Point(474, 144);
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(184, 27);
-            textBox1.TabIndex = 4;
+            textBox1.TabIndex = 2;
             textBox1.Text = "3306";
             textBox1.TextChanged += textBox1_TextChanged;
             // 
@@ -100,7 +100,7 @@
             textBox2.Location = new Point(474, 189);
             textBox2.Name = "textBox2";
             textBox2.Size = new Size(184, 27);
-            textBox2.TabIndex = 5;
+            textBox2.TabIndex = 1;
             textBox2.Text = "root";
             textBox2.TextChanged += textBox2_TextChanged;
             // 
@@ -109,12 +109,12 @@
             txtPass.Location = new Point(474, 235);
             txtPass.Name = "txtPass";
             txtPass.Size = new Size(184, 27);
-            txtPass.TabIndex = 6;
+            txtPass.TabIndex = 0;
             txtPass.TextChanged += textBox3_TextChanged;
             // 
             // button1
             // 
-            button1.Location = new Point(421, 365);
+            button1.Location = new Point(237, 367);
             button1.Name = "button1";
             button1.Size = new Size(137, 45);
             button1.TabIndex = 7;
@@ -124,7 +124,7 @@
             // 
             // button2
             // 
-            button2.Location = new Point(236, 365);
+            button2.Location = new Point(426, 367);
             button2.Name = "button2";
             button2.Size = new Size(142, 45);
             button2.TabIndex = 8;

@@ -187,13 +187,13 @@ namespace Club_Deportivo
                         doc.apellido = lectorSocio.GetString("apellido");
                         btn_Carnet.Enabled = true;
 
-                        MessageBox.Show( "El socio no posee cuotas pendientes. Puede emitir su carnet.", "AVISO DEL SISTEMA",
+                        MessageBox.Show("El socio NO posee cuotas pendientes. Puede emitir su carnet.", "AVISO DEL SISTEMA",
                             MessageBoxButtons.OK,
                             MessageBoxIcon.Information);
                     }
                     else
                     {
-                        MessageBox.Show( "No existe ningún socio con ese DNI.", "AVISO DEL SISTEMA",
+                        MessageBox.Show("NO existe ningún socio registrado con ese DNI", "AVISO DEL SISTEMA",
                             MessageBoxButtons.OK,
                             MessageBoxIcon.Error);
                     }
@@ -203,7 +203,7 @@ namespace Club_Deportivo
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "MENSAJE DEL CATCH", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message,"MENSAJE DEL CATCH", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {

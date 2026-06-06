@@ -47,14 +47,21 @@ namespace Club_Deportivo.Vistas
 
         private void LineasImpresion(object sender, PrintPageEventArgs e)
         {
-            this.Refresh();
-            Application.DoEvents();
+            Graphics g = e.Graphics;
+
+          //Capturar el fondo (imagen del carnet)
 
             Bitmap bmp = new Bitmap(this.Width, this.Height);
-
             this.DrawToBitmap(bmp, new Rectangle(0, 0, this.Width, this.Height));
+            g.DrawImage(bmp, 0, 0);
 
-            e.Graphics.DrawImage(bmp, 0, 0);
+            //Mostrar los datos del socio en los labels
+            Font fuente = new Font("Arial", 8, FontStyle.Regular);
+            Brush pincel = Brushes.Black;
+
+            //Coordenadas para los labels en el formulario
+            g.DrawString(_nombreSocio, fuente, pincel, new PointF(300, 263));
+            g.DrawString(_numeroSocio.ToString(), fuente, pincel, new RectangleF(335, 305, 200, 20));
         }
 
         private void btnImprimirCarnet_Click(object sender, EventArgs e)

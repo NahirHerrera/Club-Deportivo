@@ -190,18 +190,18 @@ DELIMITER ;
 
 DELIMITER //
 
-CREATE PROCEDURE ObtenerSocios(
+CREATE PROCEDURE ObtenerClientes(
     IN p_dni VARCHAR(30)
 )
 BEGIN
 
     SELECT
-        c.idClientes AS idCliente,
-        c.nombre AS Nombre,
-        c.apellido AS Apellido,
-        c.dni AS Documento,
-        a.nombreActividad AS Actividad,
-        ia.fechaInscripcion AS FechaInscripcion,
+        c.idClientes,
+        c.nombre,
+        c.apellido,
+        c.dni,
+        a.nombreActividad,
+        ia.fechaInscripcion,
 	
 		CASE
 			WHEN s.idClientes IS NOT NULL THEN 'Socio'
@@ -210,17 +210,10 @@ BEGIN
         
     FROM Clientes c
 
-    LEFT JOIN inscripcion_actividad ia
-        ON ia.idClientes = c.idClientes
-
-    LEFT JOIN Actividades a
-        ON a.idActividades = ia.idActividad
-        
-	LEFT JOIN Socios s
-		ON s.idClientes = c.idClientes
-        
+    LEFT JOIN inscripcion_actividad ia ON ia.idClientes = c.idClientes
+    LEFT JOIN Actividades a ON a.idActividades = ia.idActividad
+	LEFT JOIN Socios s ON s.idClientes = c.idClientes
     WHERE (p_dni IS NULL OR c.dni = p_dni)
-
     ORDER BY c.idClientes, a.nombreActividad;
 
 END //
