@@ -252,4 +252,4 @@ INSERT INTO Actividades (nombreActividad, costo_pase_diario) VALUES
 
 UPDATE Inscripcion
 SET IdClientes = 1
-WHERE IdInscripcion = 1;
+WHERE IdInscripcion = 1; 

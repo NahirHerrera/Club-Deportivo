@@ -113,7 +113,7 @@
             // cmbTipoDoc
             // 
             cmbTipoDoc.FormattingEnabled = true;
-            cmbTipoDoc.Items.AddRange(new object[] { "DNI", "CUIT", "CUIL" });
+            cmbTipoDoc.Items.AddRange(new object[] { "DNI" });
             cmbTipoDoc.Location = new Point(476, 216);
             cmbTipoDoc.Name = "cmbTipoDoc";
             cmbTipoDoc.Size = new Size(208, 28);
