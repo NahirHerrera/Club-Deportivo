@@ -59,7 +59,7 @@ namespace Club_Deportivo
                 }
                 else
                 {
-                    MessageBox.Show("No hay datos para la carga de la grilla", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("No se registran socios con deuda al dia de la fecha", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)

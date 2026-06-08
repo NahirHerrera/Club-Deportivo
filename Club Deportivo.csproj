@@ -11,14 +11,17 @@
 
   <ItemGroup>
     <None Remove="Datos\ClubDeportivo.sql" />
+    <None Remove="Recursos\exito.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Recursos\exito.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="MySql.Data" Version="9.7.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Recursos\" />
   </ItemGroup>
 
   <ItemGroup>
