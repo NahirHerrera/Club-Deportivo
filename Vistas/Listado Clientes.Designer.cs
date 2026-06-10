@@ -44,7 +44,6 @@
             label1.Size = new Size(35, 20);
             label1.TabIndex = 0;
             label1.Text = "DNI";
-            label1.Click += label1_Click;
             // 
             // textBox1
             // 
@@ -52,7 +51,6 @@
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(161, 27);
             textBox1.TabIndex = 1;
-            textBox1.TextChanged += textBox1_TextChanged;
             // 
             // button1
             // 
@@ -72,7 +70,6 @@
             dataGridView2.RowHeadersWidth = 51;
             dataGridView2.Size = new Size(661, 253);
             dataGridView2.TabIndex = 3;
-            dataGridView2.CellContentClick += dataGridView2_CellContentClick;
             // 
             // button2
             // 

@@ -52,7 +52,6 @@
             Titulo.Size = new Size(295, 35);
             Titulo.TabIndex = 0;
             Titulo.Text = "Configuración conexión";
-            Titulo.Click += label1_Click;
             // 
             // label2
             // 
@@ -62,7 +61,6 @@
             label2.Size = new Size(52, 20);
             label2.TabIndex = 1;
             label2.Text = "Puerto";
-            label2.Click += label2_Click;
             // 
             // label3
             // 
@@ -72,7 +70,6 @@
             label3.Size = new Size(59, 20);
             label3.TabIndex = 2;
             label3.Text = "Usuario";
-            label3.Click += label3_Click;
             // 
             // label4
             // 
@@ -82,7 +79,6 @@
             label4.Size = new Size(83, 20);
             label4.TabIndex = 3;
             label4.Text = "Contraseña";
-            label4.Click += label4_Click;
             // 
             // textBox1
             // 
@@ -92,7 +88,6 @@
             textBox1.Size = new Size(184, 27);
             textBox1.TabIndex = 0;
             textBox1.Text = "3306";
-            textBox1.TextChanged += textBox1_TextChanged;
             // 
             // textBox2
             // 
@@ -102,7 +97,6 @@
             textBox2.Size = new Size(184, 27);
             textBox2.TabIndex = 1;
             textBox2.Text = "root";
-            textBox2.TextChanged += textBox2_TextChanged;
             // 
             // txtPass
             // 
@@ -110,7 +104,6 @@
             txtPass.Name = "txtPass";
             txtPass.Size = new Size(184, 27);
             txtPass.TabIndex = 2;
-            txtPass.TextChanged += textBox3_TextChanged;
             // 
             // button1
             // 
