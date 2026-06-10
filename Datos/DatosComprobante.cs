@@ -4,6 +4,7 @@ using System.Text;
 
 namespace Club_Deportivo.Datos
 {
+    // Clase para el comprobante de pago de los socios del club
     public class DatosComprobante
     {
         public int NSocio;

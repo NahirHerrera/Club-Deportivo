@@ -6,7 +6,7 @@ namespace Club_Deportivo.Entidades
 {
     public class E_InscripcionActividad
     {
-        //Identificador único de la inscripcion
+        // Identificador único de la inscripcion
         public int idInscripcion { get; set; }
 
         // Relaciona la inscripcion en la actividad con un cliente

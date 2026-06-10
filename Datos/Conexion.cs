@@ -2,18 +2,22 @@
 
 namespace Club_Deportivo.Datos
 {
+    // Clase encargada de gestionar la conexion con la base de datos
     internal class Conexion
     {
+        // Variables de configuracion de la base de datos
         private string servidor = "localhost";
         private string? puerto;
         private string? usuario;
         private string? password;
         private string baseDatos = "club_deportivo_modif";
 
+        // Variable estática de la clase Conexión
         private static Conexion? instancia = null;
 
         private Conexion() { }
 
+        // Método estático de la clase Conexión
         public static Conexion getInstancia()
         {
             if (instancia == null)

@@ -20,12 +20,6 @@ namespace Club_Deportivo
         {
             InitializeComponent();
         }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
 
@@ -34,17 +28,6 @@ namespace Club_Deportivo
             inscripcion.Show();
             this.Hide();
         }
-
-        private void btnSalir_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
-        private void label1_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
         private void btn_CobrarCuota_Click(object sender, EventArgs e)
         {
 
@@ -53,7 +36,6 @@ namespace Club_Deportivo
             cuota.Show();
             this.Hide();
         }
-
         private void btn_ListadoDeudores_Click(object sender, EventArgs e)
         {
 
@@ -62,19 +44,16 @@ namespace Club_Deportivo
             listado.Show();
             this.Hide();
         }
-
         private void btn_Actividad_Click(object sender, EventArgs e)
         {
             Actividad actividad = new Actividad();
             actividad.Show();
             this.Hide();
         }
-
         private void button1_Click_1(object sender, EventArgs e)
         {
             Application.Exit();
         }
-
         private void button2_Click(object sender, EventArgs e)
         {
             ListadoClientes listadoSocios = new ListadoClientes();

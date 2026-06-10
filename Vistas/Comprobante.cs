@@ -14,7 +14,7 @@ namespace Club_Deportivo;
 
 public partial class Comprobante : Form
 {
-    // Método para exportar el formulario a PDF utilizando la impresora "Microsoft Print to PDF"
+    //Método para exportar el formulario a PDF utilizando la impresora "Microsoft Print to PDF"
     private void ExportarFormularioAPdf()
     {
         PrintDocument pd = new PrintDocument();
@@ -29,7 +29,16 @@ public partial class Comprobante : Form
         }
     }
 
-    // Método para dibujar el formulario en la página de impresión
+    //Método exportar el comprobante a PDF
+    private void btnImprimir_Click(object sender, EventArgs e)
+    {
+        btnImprimir.Visible = false;
+        this.Refresh();
+        ExportarFormularioAPdf();
+        btnImprimir.Visible = true;
+    }
+
+    //Método para dibujar el formulario en la página de impresión
     private void LineasImpresion(object sender, PrintPageEventArgs e)
     {
         Bitmap bmp = new Bitmap(this.Width, this.Height);
@@ -37,7 +46,7 @@ public partial class Comprobante : Form
         e.Graphics.DrawImage(bmp, 0, 0);
     }
 
-    //  Constructor que recibe un objeto DatosComprobante para mostrar la información en el formulario
+    //Constructor que recibe un objeto DatosComprobante para mostrar la información en el formulario
     public Comprobante(DatosComprobante doc)
     {
         InitializeComponent();
@@ -47,13 +56,5 @@ public partial class Comprobante : Form
         lbl_Monto.Text = doc.monto.ToString();
         lbl_FormaPago.Text = doc.forma_pago;
         lbl_Periodo.Text = doc.fechaPago.ToString("dd/MM/yyyy");
-    }
-
-    private void btnImprimir_Click(object sender, EventArgs e)
-    {
-        btnImprimir.Visible = false;
-        this.Refresh();
-        ExportarFormularioAPdf();
-        btnImprimir.Visible = true;
     }
 }

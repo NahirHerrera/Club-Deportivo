@@ -128,16 +128,12 @@ namespace Club_Deportivo.Vistas
         // ***************************************************************************************************
 
 
-
-
         // Al iniciar el formulario se ocultan las actividades
         // y se deshabilita la inscripción hasta validar un cliente.
         private void Actividad_Load(object sender, EventArgs e)
         {
             OcultarControles();
         }
-
-
 
         // Obtiene las actividades registradas en la base de datos
         // y las carga en el DataGridView.
@@ -317,14 +313,12 @@ namespace Club_Deportivo.Vistas
                     MessageBoxIcon.Information);
             }
         }
-
         private void btn_Volver_Click(object sender, EventArgs e)
         {
             Home home = new Home();
             home.Show();
             this.Hide();
         }
-
         private void dgvActividades_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             dgvActividades.CommitEdit(DataGridViewDataErrorContexts.Commit);
@@ -342,7 +336,6 @@ namespace Club_Deportivo.Vistas
                     total += Convert.ToDecimal(fila.Cells["costo_pase_diario"].Value);
                 }
             }
-
             return total;
         }
 
@@ -350,19 +343,24 @@ namespace Club_Deportivo.Vistas
         // habilita el grupo de opciones de pago para que el cliente pueda elegir su forma de pago.
         private void btn_PagarInscribir_Click(object sender, EventArgs e)
         {
-             total = CalcularTotal();
+            // Llama al método CalcularTotal () para obtener el monto acumulado de las actividades seleccionadas 
+            total = CalcularTotal();
 
+            // Validación: Si el total es 0, significa que el no socio no selecciono ninguna actividad
             if (total == 0)
             {
+                //Muestra un mensaje de advertencia en pantalla
                 MessageBox.Show("Seleccione al menos una actividad.",
                     "AVISO DEL SISTEMA",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning);
                 return;
             }
-
+            
+            // Si hay un total > 0, hace visible las opciones de pago
             groupBox1.Visible = true;
 
+            // Variable para almacenar al monto final
             decimal totalfinal = total;
 
             if (rbEfectivo.Checked)
@@ -388,6 +386,7 @@ namespace Club_Deportivo.Vistas
                                    "Monto", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
+            // Una vez procesada la forma de pago, hace visible el boton para confirmar la inscripción
             btn_Inscripcion.Visible = true;
         }
 
@@ -405,8 +404,13 @@ namespace Club_Deportivo.Vistas
                 return;
             }
 
+            // Variable para la forma de pago seleccionada
             string formaPago = ObtenerFormaPago();
+
+            // Llama a la función que guarda la inscripción, pasandole la forma de pago. Devuelve un valor booleano
             bool resultado = RegistrarInscripcion(formaPago, false);
+
+            // Evalua si la inscripción se proceso de forma correcta
             if (resultado)
             {
                 if (resultado)
@@ -416,6 +420,7 @@ namespace Club_Deportivo.Vistas
                                     MessageBoxButtons.OK,
                                     MessageBoxIcon.Information);
                 }
+                // Si la variable "resultado" es falsa
                 else
                 {
                     MessageBox.Show("No se pudo confirmar la inscripción.",

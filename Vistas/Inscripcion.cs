@@ -26,10 +26,9 @@ namespace Club_Deportivo.Vistas
             cmbTipoCliente.Text = "";
             nombreInput.Focus();
         }
-
         private void btnRegistrarCliente_Click(object sender, EventArgs e)
         {
-            //VALIDACION DE CAMPOS REQUERIDOS
+            // Validación de campos requeridos
             if (string.IsNullOrWhiteSpace(nombreInput.Text) ||
                 string.IsNullOrWhiteSpace(apellidoInput.Text) ||
                 string.IsNullOrWhiteSpace(documentoInput.Text) ||
@@ -43,7 +42,7 @@ namespace Club_Deportivo.Vistas
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Error);
             }
-            //Validar que presente apto físico antes del registro
+            // Validar que presente apto físico antes del registro
             else if (!chkAF.Checked)
             {
                 MessageBox.Show("No se puede acceder al registro. El apto físico es un requisito excluyente.", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);

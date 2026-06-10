@@ -33,8 +33,6 @@ namespace Club_Deportivo.Vistas
             dataGridView2.Columns.Add(new DataGridViewTextBoxColumn { Name = "FechaInscripcion", HeaderText = "Fecha Inscripción", DataPropertyName = "fechaInscripcion" });
             dataGridView2.Columns.Add(new DataGridViewTextBoxColumn { Name = "TipoCliente", HeaderText = "Tipo Cliente", DataPropertyName = "TipoCliente" });
         }
-
-
         private void ListadoClientes_Load(object sender, EventArgs e)
         {
             ConfigurarGrilla();
@@ -75,27 +73,6 @@ namespace Club_Deportivo.Vistas
 
             CargaGrilla(dni);
         }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
         private void button2_Click(object sender, EventArgs e)
         {
             Home home = new Home();

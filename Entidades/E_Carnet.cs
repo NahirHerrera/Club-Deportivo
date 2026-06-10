@@ -6,7 +6,7 @@ namespace Club_Deportivo.Entidades
 {
     public class E_Carnet
     {
-        //Identificador único del carnet
+        // Identificador único del carnet
         public int idCarnet { get; set; }
 
         // Atributos del carnet

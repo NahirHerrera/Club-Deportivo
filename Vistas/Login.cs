@@ -41,6 +41,8 @@ namespace Club_Deportivo
                 MessageBox.Show("Usuario y/o password incorrecto");
             }
         }
+
+        // Métodos para ocultar la contraseña
         private void contraseniaBox_Enter(object sender, EventArgs e)
         {
             if (contraseniaBox.Text == "CONTRASEÑA")

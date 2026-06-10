@@ -6,7 +6,7 @@ namespace Club_Deportivo.Entidades
 {
     public class E_Actividades
     {
-        //Identificador único de la actividad
+        // Identificador único de la actividad
         public int idActividades { get; set; }
 
         // Atributos de la actividad
