@@ -1,4 +1,4 @@
-DROP DATABASE club_deportivo_modif;
+DROP DATABASE IF EXISTS club_deportivo_modif;
 CREATE DATABASE club_deportivo_modif;
 USE club_deportivo_modif;
 
